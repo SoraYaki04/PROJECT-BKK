@@ -1,0 +1,165 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f0f0f5;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Header Top Bar */
+header {
+    background-color: #f8f8f8;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #002366;
+}
+
+.logo-header {
+    display: flex;
+    align-items: center;
+}
+
+.logo-header img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.contact-info {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    color: #333;
+}
+
+.contact-item i {
+    margin-right: 8px;
+    color: #002366;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #1b1b2f;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    color: #f0a500;
+}
+
+/* Hero Section */
+.hero {
+    background-image: url("Background BKK 1.png");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 50px 20px;
+}
+
+.hero-content {
+    max-width: 300px;
+    text-align: left;
+}
+
+.hero-content h1 {
+    font-family: 'Franklin Gothic Medium', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.tagline {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-family: 'Ponnala', cursive;
+}
+
+.video-button {
+    background-color: #f0a500;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+.video-button:hover {
+    background-color: #e09c00;
+}
+
+/* Login Options */
+.login-options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.login-card {
+    background-color: #4e4e50;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    width: 100%;
+    max-width: 300px;
+}
+
+.login-card:hover {
+    background-color: #6c757d;
+}
+
+/* Footer */
+footer {
+    background-color: #1b1b2f;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 30px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .login-options {
+        align-items: center;
+    }
+
+    .contact-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
