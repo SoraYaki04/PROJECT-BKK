@@ -58,6 +58,10 @@ header {
     color: #002366;
 }
 
+.contact-item span {
+    font-size: 1.1rem;
+}
+
 
 /* BACKGROUND */
 .container {
@@ -69,6 +73,9 @@ header {
 
 
 /* Navbar */
+
+
+
 .navbar {
     background-color: rgba(81, 53, 250, 0.8); /* Warna ungu dengan transparansi 80% */
     padding: 10px 20px;
@@ -76,6 +83,8 @@ header {
     justify-content: space-around;
     justify-content: center;
     align-items: center;
+    position: relative;
+    
 }
 
 .nav-links {
@@ -85,9 +94,17 @@ header {
 }
 
 .nav-links a {
-    color: white;
     text-decoration: none;
     font-weight: 600;
+    text-decoration: none;
+    position: relative;
+    padding: 0 10px;
+}
+
+.navbar p {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
 }
 
 .nav-links a:hover {
@@ -145,14 +162,16 @@ header {
     align-items: flex-start;
     gap: 10px;
     margin-top: 20px;
-
 }
 
 .login-card {
+    display: flex;
     background-color: #4e4e50;
     color: white;
     padding: 15px;
     text-align: center;
+    justify-content: center;
+    align-items: center;
     border-radius: 10px;
     text-decoration: none;
     font-weight: bold;
