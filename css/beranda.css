@@ -15,8 +15,6 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-
-/* Header Top Bar */
 header {
     padding-top: 20px;
     display: flex;
@@ -33,11 +31,17 @@ header {
 
 .logo-header img {
     height: 100px;
+    margin-bottom: 15px;
 }
 
-.logo-header pre {
-    margin-top: 10px;
-    font-size: 0.8rem;
+.header-text {
+    flex: 2;
+    text-align: center;
+}
+
+#text-img {
+    width: 250px; /* Sesuaikan ukuran gambar teks */
+    height: auto;
 }
 
 .contact-info {
@@ -70,11 +74,6 @@ header {
     background-position: center;
     width: 100vw;
 }
-
-
-/* Navbar */
-
-
 
 .navbar {
     background-color: rgba(81, 53, 250, 0.8); /* Warna ungu dengan transparansi 80% */
@@ -111,7 +110,6 @@ header {
     color: #f0a500;
 }
 
-/* Hero Section */
 .hero {
     background-image: url("Background BKK 1.png");
     background-size: cover;
