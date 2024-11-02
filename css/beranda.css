@@ -16,21 +16,36 @@ body::-webkit-scrollbar {
 }
 
 header {
-    padding-top: 20px;
+    padding-top: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #002366;
 }
 
+header .rectangle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 78vw;
+    min-height: 25px;
+    background-color: #134CBC;
+    border-bottom-left-radius: 54px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
 .logo-header {
     display: flex;
     align-items: center;
-    margin-left: 50px;
+    margin-left: 20px;
 }
 
 .logo-header img {
-    height: 100px;
+    height: 75px;
     margin-bottom: 15px;
 }
 
@@ -40,7 +55,7 @@ header {
 }
 
 #text-img {
-    width: 250px; /* Sesuaikan ukuran gambar teks */
+    width: 160px; /* Sesuaikan ukuran gambar teks */
     height: auto;
 }
 
@@ -49,12 +64,35 @@ header {
     display: flex;
     gap: 40px;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.contact-ket i {
+    font-size: 16px;
+    align-items: center;
+}
+
+.contact-ket p{
+    font-size: 14px;
+}
+
+.contact-phone , .contact-email , .contact-map  {
+    display: flex;
+    align-items: center;
+    color: #134CBC;
+}
+
+.contact-phone i, .contact-email i, .contact-map i {
+    margin-right: 10px;
+    font-size: 23px;
 }
 
 .contact-item {
     display: flex;
     align-items: center;
     color: #333;
+    width: 100%;
 }
 
 .contact-item i {
@@ -75,42 +113,148 @@ header {
     width: 100vw;
 }
 
+/* NAVBAR START */
+
 .navbar {
-    background-color: rgba(81, 53, 250, 0.8); /* Warna ungu dengan transparansi 80% */
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-around;
-    justify-content: center;
-    align-items: center;
+    background: rgba(81, 53, 250, 0.8);
     position: relative;
-    
 }
 
-.nav-links {
+.navbar ul {
+    display: flex;
+    position: relative;
     list-style: none;
-    display: flex;
-    gap: 60px;
+    width: 100%;
 }
 
-.nav-links a {
-    text-decoration: none;
-    font-weight: 600;
-    text-decoration: none;
+.navbar ul li {
+    display: inline-block;
     position: relative;
-    padding: 0 10px;
 }
 
-.navbar p {
+.navbar ul li a {
+    display: block;
+    position: relative;
+    padding: 10px 25px;
+    color: #FFF;
+    text-decoration: none;
+    text-align: center;
     font-size: 20px;
-    color: white;
-    font-weight: bold;
+    font-weight: 600;
+    z-index: 1;
+}
+
+.navbar ul li i {
+    margin-left: 10px;
+    font-size: 13px;
+}
+
+
+.navbar .animation {
+    position: absolute;
+    height: 3px;
+    bottom: 0;
+    z-index: 0;
+    background-color: white;
+    border-radius: 8px;
+    transition: all 0.7s ease 0s;
+    width: 10px;
+}
+
+ul li:nth-child(1) {
+    width: 13vw;
+}
+
+.navbar .start-index , ul li:nth-child(1):hover~.animation {
+    width: 100px;
+    right: 90vw;  
+}
+
+ul li:nth-child(2) {
+    width: 17vw;
+}
+
+.navbar .start-tentang , ul li:nth-child(2):hover~.animation {
+    width: 180px;
+    right: 72vw;  
+}
+
+ul li:nth-child(3) {
+    width: 12vw;
+}
+
+.navbar .start-login , ul li:nth-child(3):hover~.animation {
+    width: 90px;
+    right: 60.9vw;  
+}
+
+ul li:nth-child(4) {
+    width: 20vw;
+}
+
+.navbar .start-jurusan , ul li:nth-child(4):hover~.animation {
+    width: 220px;
+    right: 39.8vw;  
+}
+
+ul li:nth-child(5) {
+    width: 18vw;
+}
+
+.navbar .start-perusahaan , ul li:nth-child(5):hover~.animation {
+    width: 140px;
+    right: 23.7vw;  
+}
+
+ul li:nth-child(6) {
+    width: 18vw;
+}
+
+.navbar .start-loker , ul li:nth-child(6):hover~.animation {
+    width: 198px;
+    right: 3.6vw;  
 }
 
 .nav-links a:hover {
     color: #f0a500;
+} 
+
+
+
+
+.navbar ul li ul.dropdown li {
+    display: block;
 }
 
+.navbar ul li ul.dropdown li a{
+    text-align: left;
+    color: black;
+    font-size: 17px;
+    transition: color 0.3s ease;
+}
+
+.navbar ul li ul.dropdown li a:hover{
+    color: #3376F9;
+
+}
+
+.navbar ul li ul.dropdown {
+    margin-top: 3px;
+    width: 260px;
+    background: #FFFFFF;
+    position: absolute;
+    z-index: 999;
+    display: none;
+}
+
+.navbar ul li:hover ul.dropdown {
+    display: block;
+}
+
+/* NAVBAR END */
+
 .hero {
+    background-image: url("Background BKK 1.png");
     background-size: cover;
     background-position: center;
     color: white;
@@ -131,11 +275,16 @@ header {
     text-transform: uppercase;
 }
 
+.hero hr {
+    width: 25vw;
+}
+
 .tagline {
     font-size: 1.5rem;
     margin-bottom: 20px;
     font-family: 'Ponnala', cursive;
 }
+
 
 .video-button {
     background-color: #f0a500;
@@ -145,7 +294,16 @@ header {
     text-decoration: none;
     font-weight: 600;
     margin-bottom: 30px;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    width: 15vw;
+    border-radius: 7px;
+}
+
+.video-button i {
+    font-size: 25px;
+    margin-left: 10px;
+
 }
 
 .video-button:hover {
@@ -155,26 +313,30 @@ header {
 /* Login Options */
 .login-options {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: flex-start;
-    gap: 10px;
-    margin-top: 20px;
-}
+    gap: 20px;
+    margin-top: 50px;
+    width: 60vw;
+    height: 30vh;
 
+}
 .login-card {
     display: flex;
     background-color: #4e4e50;
-    color: white;
     padding: 15px;
     text-align: center;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    text-decoration: none;
     font-weight: bold;
     width: 25vw;
-    height: 10vh;
-    max-width: 300px;
+    height: 13vh;
+}
+
+.login-card a {
+    text-decoration: none;
+    color: white;
 }
 
 .login-card:hover {
@@ -207,14 +369,27 @@ footer {
 
     .contact-info {
         flex-direction: column;
-        gap: 15px;
+        gap: 8px;
+        margin-left: 20px;
     }
 
-    .nav-links {
+    .contact-phone p, .contact-email p, .contact-map p {
+        font-size: 11px;
+    }
+    
+
+    #text-img {
+        width: 200px; /* Sesuaikan ukuran gambar teks */
+        height: auto;
+    }
+
+    .navbar {
+        padding: 5px 5px;
+        position: relative;
         gap: 10px;
     }
 
-    .nav-links a {
-        font-size: 1rem;
+    .navbar p {
+        font-size: 10px;
     }
 }
