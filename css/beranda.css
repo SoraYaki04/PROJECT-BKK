@@ -310,37 +310,41 @@ ul li:nth-child(6) {
     background-color: #e09c00;
 }
 
-/* Login Options */
 .login-options {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 20px;
-    margin-top: 50px;
-    width: 60vw;
-    height: 30vh;
-
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-row-gap: 20px; 
+    grid-column-gap: 10px; 
+    justify-content: center;
+    width: 50%; 
+    margin-top: 20px;
 }
+
 .login-card {
     display: flex;
-    background-color: #4e4e50;
-    padding: 15px;
-    text-align: center;
-    justify-content: center;
     align-items: center;
-    border-radius: 10px;
-    font-weight: bold;
-    width: 25vw;
-    height: 13vh;
-}
-
-.login-card a {
-    text-decoration: none;
+    background-color: #4e4e50;
     color: white;
+    padding: 15px;
+    text-align: left;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    width: 100%;
+    max-width: 300px;
+    height: 15vh;
+    transition: background-color 0.3s;
 }
 
 .login-card:hover {
     background-color: #6c757d;
+}
+
+.icon {
+    width: 110px;
+    height: 110px;
+    margin-right: 25px;
+    margin-left: -10px;
 }
 
 /* Footer */
