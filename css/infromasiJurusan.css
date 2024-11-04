@@ -252,6 +252,7 @@ display: block;
 }
 
 .card-content .deskripsi hr {
+    margin-bottom: 5px;
     border: none;
     height: 1px;  /* atau bisa gunakan border-width */
     background-color: #000;  /* warna garis */
