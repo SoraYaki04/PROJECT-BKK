@@ -279,7 +279,7 @@ header .rectangle {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 40vw;
-    height: 40vh;
+    height: 300px;
     margin: 10px 15px;
 
   }
