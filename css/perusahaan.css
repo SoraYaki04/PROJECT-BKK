@@ -271,7 +271,7 @@ header .rectangle {
     justify-content: center;
     height: 400px;
     margin: 0 auto;
-    max-width: 1000px;
+    width: 100%;
 }
 
 
@@ -292,7 +292,7 @@ header .rectangle {
     display: none;
     position: absolute;
     left: 50%;
-    bottom: 100%;
+    bottom: 60%;
     transform: translateX(-50%);
     z-index: 3;
     width: 230px;
@@ -301,10 +301,7 @@ header .rectangle {
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
     padding: 15px;
-    margin-bottom: 45px;
-    
 }
-
 
 .company-detail h2 {
     height: 48px;
@@ -312,11 +309,9 @@ header .rectangle {
     line-height: 24px; 
 }
 
-.company-item-3 + .company-detail {
-    display: block;
-    opacity: 1;
-    transition: all 0.3s ease;
-    transform: translate(-50%, 10px);
+.company-detail {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .detail-btn {
@@ -344,17 +339,22 @@ header .rectangle {
 /* COMPANY ITEM */
 
 .company-item {
-    object-fit: cover;
-    height: 310px;
     position: absolute;
     transition: all 0.3s ease-in-out;
-    width: 220px;
     z-index: 0;
-    border-radius: 15px;
     background-size: contain;
 }
 
+.company-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
 .company-item-1 {
+    height: 310px;
+    width: 220px;
     left: 15%;
     filter: brightness(0.5);
     transform: translateX(-50%);
@@ -388,6 +388,8 @@ header .rectangle {
 }
 
 .company-item-5 {
+    height: 310px;
+    width: 220px;
     filter: brightness(0.5);
     left: 85%;
     transform: translateX(-50%);
