@@ -13,9 +13,25 @@ class Carousel {
 
     updateCompany() {
 
+        this.carouselArray.forEach((el, index) => {
+            const detailElement = el.querySelector('.company-detail');
+
+            // Sembunyikan semua detail perusahaan
+            if (detailElement) {
+                if (index !== 2) {
+                    detailElement.style.opacity = '0';
+                    detailElement.style.transition = 'opacity 0.5s ease-in-out';
+                    setTimeout(() => {
+                        detailElement.style.display = 'none';
+                    }, 500);
+
+                 }
+
+            }
+        });
+
 
         this.carouselArray.forEach(el => {
-            el.parentElement.querySelector('.company-detail').style.display = 'none';
             el.classList.remove('company-item-1');
             el.classList.remove('company-item-2');
             el.classList.remove('company-item-3');
@@ -25,11 +41,20 @@ class Carousel {
 
         this.carouselArray.slice(0, 5).forEach((el , i) => {
             el.classList.add(`company-item-${i+1}`);
-            if (i === 2) {
-                el.parentElement.querySelector('.company-detail').style.display = 'block';
-            }
+            if (i === 2) { // Index ke-2 berarti item ke-3
+                const detailElement = el.querySelector('.company-detail');
+                if (detailElement) {
+                    detailElement.style.display = 'block';
+                    setTimeout(() => {
+                        detailElement.style.opacity = '1';
+                    }, 0);
+            } }
         })
     }
+
+
+
+
 
     setCurrentState(direction) {
         if (direction.className == 'company-controls-previous') {
@@ -60,3 +85,4 @@ class Carousel {
 const exampleCarousel = new Carousel(companyContainer, companyItems, companyControls);
 exampleCarousel.setControls();
 exampleCarousel.useControls();
+exampleCarousel.updateCompany(); 
