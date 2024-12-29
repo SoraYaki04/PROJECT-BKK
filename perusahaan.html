@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bursa Kerja Khusus SMKN 1 Boyolangu</title>
   <link rel="stylesheet" href="css/perusahaan.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
@@ -125,9 +126,88 @@
           <img src="assets/perusahaan 1.png" alt=""  >
           <div class="company-detail company-detail-1" data-index="1">
             <h2>Microsoft</h2>
-            <a href="" class="detail-btn"> <i class="fa-solid fa-list"></i>Detail Penelusuran</a>
+          <button onclick="togglePopup('popup-1')" class="detail-btn"><i class="fa-solid fa-list"></i>Detail Penelusuran</button>
           </div>
         </div>
+
+        <div class="popup" id="popup-1">
+          <div class="company-popup">
+            <div class="close-popup">
+              <button class="close-btn" onclick="togglePopup('popup-1')">&times;</button>
+            </div>
+            <div class="company-header-popup">
+              <div class="company-title-popup">
+                <h1>PT. HYBE Label Insight Corporation</h1>
+              </div>
+              <div class="company-desc-popup">
+                <p>HYBE Corporation adalah perusahaan hiburan asal 
+                  Surabaya yang didirikan pada tahun 2005 oleh Bang 
+                  Si-Hyuk atau Papa Bear sebagai Big Hit Entertainment. 
+                  Perusahaan ini beroperasi sebagai label rekaman, agensi 
+                  bakat, produksi musik, manajemen acara dan produksi konser, 
+                  dan sebagai penerbit musik rumahan. Perusahaan ini memiliki beberapa anak perusahaan
+                  , termasuk ADOR, Big Hit Music, Source Music, Pledis Entertaiment,
+                   Belift Lab, dan KOZ Entertainment, yang secara kolektif dikenal sebagai Hybe Labels</p>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="company-detail-popup">
+              <table>
+                <tr>
+                  <td class="company-detail-left">Nama Perusahaan</td>
+                  <td class="company-detail-rigth">: PT CIHUYY</td>
+                </tr>
+                <tr>
+                  <td class="company-detail-left">Kode</td>
+                  <td class="company-detail-rigth">: PT CIHUYY</td>
+                </tr>
+                <tr>
+                  <td class="company-detail-left">Alamat</td>
+                  <td class="company-detail-rigth">: PT CIHUYY</td>
+                </tr>
+                <tr>
+                  <td class="company-detail-left">Kota</td>
+                  <td class="company-detail-rigth">: PT CIHUYY</td>
+                </tr>
+                <tr>
+                  <td class="company-detail-left">Tahun Gabung</td>
+                  <td class="company-detail-rigth">: PT CIHUYY</td>
+                </tr>
+                <tr>
+                  <td class="company-detail-left">Standar</td>
+                  <td class="company-detail-rigth">: PT CIHUYY</td>
+                </tr>
+                <tr>
+                  <td class="company-detail-left">Standar Perusahaan</td>
+                  <td class="company-detail-rigth">: PT CIHUYY</td>
+                </tr>
+              </table>
+            </div>
+            <div class="company-table-popup">
+              <table>
+                <tr>
+                  <th class="table-number">No</th>
+                  <th width="970px">Kerjasama</th>
+                </tr>
+                <tr>
+                  <td class="table-number">1</td>
+                  <td>Mentoring</td>
+                </tr>
+                <tr>
+                  <td class="table-number">2</td>
+                  <td>Rekrutmen</td>
+                </tr>
+                <tr>
+                  <td class="table-number">3</td>
+                  <td>Prakerin</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
 
         <div class="company-item company-item-2" data-index="2">
           <img src="assets/perusahaan 2.png" alt="" >
