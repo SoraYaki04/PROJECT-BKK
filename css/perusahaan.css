@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Franklin Gothic Book';
+    src: url('../fonts/Franklin\ Gothic\ Book\ Regular.ttf') format('truetype');
+  }
+
 * {
     margin: 0;
     padding: 0;
@@ -263,6 +268,7 @@ header .rectangle {
 .company-container {
     width: 100%;
     position: relative;
+    padding-bottom: 50px;
 }
 
 .company-list {
@@ -315,6 +321,7 @@ header .rectangle {
 }
 
 .detail-btn {
+    border: none;
     background: #007bff;
     border-radius: 10px;
     color: white;
@@ -324,6 +331,7 @@ header .rectangle {
     text-decoration: none;
     transition: background 0.3s;
     font-size: 14px;
+    cursor: pointer;
 }
 
 .detail-btn i {
@@ -394,6 +402,117 @@ header .rectangle {
     left: 85%;
     transform: translateX(-50%);
 }
+
+
+/* COMPANY POPUP */
+
+.popup {
+    display: none;
+}
+
+.popup.active {
+    display: block;
+}
+
+.popup.active .company-popup {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+
+.company-popup {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    transform: translate(-50%);
+    width: 80vw;
+    min-height: 490px;
+    background: #ECF3F6;
+    border: 2px solid #999999;
+    z-index: 4;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.company-popup .close-popup button {
+    position: absolute;
+    right: 10px;
+    border: none;
+    background: none;
+    color: black;
+    font-size: 45px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.company-popup .company-header-popup {
+    padding: 20px;
+}
+
+.company-desc-popup {
+    margin-top: 5px;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300; /* Extra Light */
+}
+
+.company-detail-popup {
+    display: flex;
+    font-size: 20px;
+    padding: 15px 0 15px;
+    margin-left: 25px;
+}
+
+.company-detail-popup td {
+    border-bottom: 1px solid #ddd;
+    font-family: 'Franklin Gothic Book';
+    font-size: 21px;
+}
+
+.company-detail-popup  .company-detail-left {
+    width: 250px;
+}
+
+.company-detail-popup  .company-detail-rigth {
+    width: 750px;
+}
+
+.company-table-popup {
+    padding: 20px;  
+}
+
+.company-table-popup table {
+    text-align: left;
+    width: 100%;
+    border: 2px solid #999999;
+    border-collapse: collapse;
+}
+
+.company-table-popup th {
+    color: #ffffff;
+    background: #093679;
+    padding: 5px;
+}
+
+.company-table-popup td {
+    padding: 2px 0 2px 5px;
+}
+
+.company-table-popup .table-number {
+    text-align: center;
+}
+
+.company-table-popup table tr:nth-child(even) td {
+    background-color: #e0e0e0; /* Warna abu-abu untuk baris genap */
+}
+  
+.company-table-popup table tr:nth-child(odd) td {
+    background-color: #ffffff; /* Warna putih untuk baris ganjil */
+}
+  
+
 
 
 /* COMPANY CONTROLS */
