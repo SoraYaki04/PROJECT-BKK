@@ -20,7 +20,7 @@ class Carousel {
             if (detailElement) {
                 if (index !== 2) {
                     detailElement.style.opacity = '0';
-                    detailElement.style.transition = 'opacity 0.5s ease-in-out';
+                    detailElement.style.transition = 'opacity 0.3s ease-in-out';
                     setTimeout(() => {
                         detailElement.style.display = 'none';
                     }, 500);
@@ -86,3 +86,8 @@ const exampleCarousel = new Carousel(companyContainer, companyItems, companyCont
 exampleCarousel.setControls();
 exampleCarousel.useControls();
 exampleCarousel.updateCompany(); 
+
+
+function togglePopup(popupId) {
+    document.getElementById(popupId).classList.toggle("active");
+  }
