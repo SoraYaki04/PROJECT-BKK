@@ -118,8 +118,10 @@ header .rectangle {
 }
 
 /* Navbar items and layout */
-.navbar ul {
+.navbar-container {
     display: flex;
+    align-items: center;
+    height: 43px;
     justify-content: space-around; /* Membuat jarak otomatis sama */
     list-style: none;
     padding: 0;
@@ -139,7 +141,6 @@ header .rectangle {
     color: #FFF;
     text-decoration: none;
     font-size: 20px;
-    font-weight: 350;
     font-family: 'Poppins', sans-serif;
     position: relative;
     z-index: 1;
@@ -196,16 +197,19 @@ header .rectangle {
     display: block;
 }
 
-.kotak-teks {
-    background-color: #caf0fc;
-    height: 30px;
+.header-bar {
+    background-color: #d1f0ff; /* Ubah ke warna biru muda yang diinginkan */
+    padding: 10px 20px; /* Tambahkan padding untuk ruang di sekitar teks */
+    text-align: left; /* Rata kanan teks */
+    font-size: 14px; /* Sesuaikan ukuran font */
+    font-weight: 500; /* Buat teks lebih tebal */
 }
 
-.kotak-teks p {
-    margin-left: 20px;
-    color: #333;
+.header-bar a {
+    color: #002366; /* Warna teks agar terlihat jelas di atas background biru muda */
+    text-decoration: none; /* Hilangkan garis bawah pada link */
+    margin-right: 40px;
 }
-
 .search-container {
     display: flex;
     justify-content: center;
@@ -280,7 +284,7 @@ header .rectangle {
     text-align: center;
     width: 40vw;
     height: 300px;
-    margin: 10px 15px;
+    margin: 20px 15px;
 
   }
 
@@ -360,7 +364,7 @@ header .rectangle {
     justify-content: flex-end;
     align-items: center;
     background-color: #D9D9D9;
-    height: 100%;
+    height: 100px;
   }
   
   .job-footer .detail-button {
