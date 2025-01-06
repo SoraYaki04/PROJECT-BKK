@@ -121,8 +121,10 @@ header .rectangle {
 }
 
 /* Navbar items and layout */
-.navbar ul {
+.navbar-container {
     display: flex;
+    align-items: center;
+    height: 43px;
     justify-content: space-around; /* Membuat jarak otomatis sama */
     list-style: none;
     padding: 0;
@@ -208,7 +210,7 @@ header .rectangle {
 .header-bar {
     background-color: #d1f0ff; /* Ubah ke warna biru muda yang diinginkan */
     padding: 10px 20px; /* Tambahkan padding untuk ruang di sekitar teks */
-    text-align: right; /* Rata kanan teks */
+    text-align: left; /* Rata kanan teks */
     font-size: 14px; /* Sesuaikan ukuran font */
     font-weight: 500; /* Buat teks lebih tebal */
 }
@@ -266,10 +268,10 @@ header .rectangle {
 
         <div class="logo">
             <div class="logo-header">
-              <img src="foto logo.png" alt="BKK SMKN 1 Boyolangu Logo">
+              <img src="assets/foto logo.png" alt="BKK SMKN 1 Boyolangu Logo">
             </div>
             <div class="header-text">
-                <img src="tulisan logo.png" alt="Bursa Kerja Khusus SMKN 1 Boyolangu" id="text-img">
+                <img src="assets/tulisan logo.png" alt="Bursa Kerja Khusus SMKN 1 Boyolangu" id="text-img">
             </div>
         </div>
 
@@ -303,12 +305,12 @@ header .rectangle {
     <div class="container"> 
         <nav class="navbar">
           <!-- data-feather="chevron-down"> -->
-           <ul>
+           <ul class="navbar-container">
             <li>
               <a href="#" >HOME<i class="fa-solid fa-chevron-down"></i></a>
               <ul class="dropdown">
-                <li><a href="">Halaman Utama</a></li>
-                <li><a href="">Pengantar</a></li>
+                <li><a href="index.html">Halaman Utama</a></li>
+                <li><a href="pengantar.html">Pengantar</a></li>
                 <li><a href="">Informasi Kegiatan BKK</a></li>
                 <li><a href="">Rekapitulasi</a></li>
               </ul>
@@ -316,26 +318,25 @@ header .rectangle {
     
             <li><a href="#" class="active">TENTANG KAMI<i class="fa-solid fa-chevron-down"></i></a>
             <ul class="dropdown">
-              <li><a href="">Visi Misi</a></li>
-              <li><a href="">Progam Kerja</a></li>
-              <li><a href="" class="active" >Tujuan</a></li>
-              <li><a href="">Struktur Organisasi</a></li>
+              <li><a href="visimisi.html">Visi Misi</a></li>
+              <li><a href="proker.html">Progam Kerja</a></li>
+              <li><a href="#" class="active" >Tujuan</a></li>
+              <li><a href="strukturorganisasi.html">Struktur Organisasi</a></li>
             </ul>
             </li>
             
             <li><a href="#">LOGIN<i class="fa-solid fa-chevron-down"></i></a>
             <ul class="dropdown">
-              <li><a href="">Admin BKK</a></li>
-              <li><a href="">Management</a></li>
-              <li><a href="">Siswa / Alumni</a></li>
-              <li><a href="">Partisipan Lain</a></li>
+              <li><a href="admin-login.html">Admin BKK</a></li>
+              <li><a href="daftar-login.html">Management</a></li>
+              <li><a href="siswa-alumni-login.html">Siswa / Alumni</a></li>
+              <li><a href="pengguna-lain-login.html">Partisipan Lain</a></li>
             </ul>
             </li>
     
-            <li><a href="#">INFORMASI JURUSAN</a></li>
-            <li><a href="#">PERUSAHAAN</a></li>
-            <li><a href="#">LOWONGAN KERJA</a></li>
-            <div class = "animation start-index"></div>
+            <li><a href="informasiJurusan.html">INFORMASI JURUSAN</a></li>
+            <li><a href="perusahaan.html">PERUSAHAAN</a></li>
+            <li><a href="loker.html">LOWONGAN KERJA</a></li>
            </ul>
     
             
