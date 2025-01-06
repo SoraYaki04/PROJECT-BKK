@@ -121,8 +121,10 @@ header .rectangle {
 }
 
 /* Navbar items and layout */
-.navbar ul {
+.navbar-container {
     display: flex;
+    align-items: center;
+    height: 43px;
     justify-content: space-around; /* Membuat jarak otomatis sama */
     list-style: none;
     padding: 0;
@@ -208,7 +210,7 @@ header .rectangle {
 .header-bar {
     background-color: #d1f0ff; /* Ubah ke warna biru muda yang diinginkan */
     padding: 10px 20px; /* Tambahkan padding untuk ruang di sekitar teks */
-    text-align: right; /* Rata kanan teks */
+    text-align: left; /* Rata kanan teks */
     font-size: 14px; /* Sesuaikan ukuran font */
     font-weight: 500; /* Buat teks lebih tebal */
 }
@@ -302,7 +304,7 @@ header .rectangle {
     <div class="container"> 
         <nav class="navbar">
           <!-- data-feather="chevron-down"> -->
-           <ul>
+           <ul class="navbar-container">
             <li>
               <a href="#" >HOME<i class="fa-solid fa-chevron-down"></i></a>
               <ul class="dropdown">
@@ -316,7 +318,7 @@ header .rectangle {
             <li><a href="#" class="active">TENTANG KAMI<i class="fa-solid fa-chevron-down"></i></a>
             <ul class="dropdown">
               <li><a href="visimisi.html" class="active" >Visi Misi</a></li>
-              <li><a href="">Progam Kerja BKK</a></li>
+              <li><a href="proker.html">Progam Kerja BKK</a></li>
               <li><a href="">Tujuan</a></li>
               <li><a href="">Struktur Organisasi</a></li>
             </ul>
@@ -332,9 +334,8 @@ header .rectangle {
             </li>
     
             <li><a href="informasiJurusan.html">INFORMASI JURUSAN</a></li>
-            <li><a href="#">PERUSAHAAN</a></li>
+            <li><a href="perusahaan.html">PERUSAHAAN</a></li>
             <li><a href="loker.html">LOWONGAN KERJA</a></li>
-            <div class = "animation start-index"></div>
            </ul>
     
             
