@@ -53,7 +53,7 @@
     <div class="container"> 
         <nav class="navbar">
           <!-- data-feather="chevron-down"> -->
-           <ul>
+           <ul class="navbar-container">
             <li>
               <a href="#">HOME<i class="fa-solid fa-chevron-down"></i></a>
               <ul class="dropdown">
@@ -83,16 +83,15 @@
             </li>
     
             <li><a href="informasiJurusan.html"  class="active">INFORMASI JURUSAN</a></li>
-            <li><a href="#">PERUSAHAAN</a></li>
+            <li><a href="perusahaan.html">PERUSAHAAN</a></li>
             <li><a href="loker.html">LOWONGAN KERJA</a></li>
-            <div class = "animation start-index"></div>
            </ul>
     
             
         </nav>
 
         <div class="header-bar">
-            <p>Informasi Jurusan</p>
+            <a href="#">Informasi Jurusan</a>
         </div>
         
           <div class="card-container">
@@ -107,7 +106,7 @@
                     <div class="deskripsi">
                       <hr> 
                       <p>Jurusan Teknik Kimia Industri adalah salah satu bidang studi yang menggabungkan ilmu teknik dan ilmu kimia untuk mempelajari proses-proses industri yang melibatkan bahan kimia. Secara umum, teknik kimia industri memfokuskan pada pengembangan, perancangan, dan pengoperasian sistem industri yang dapat mengubah bahan mentah menjadi produk jadi melalui proses kimia dan fisik yang efisien.</p>
-                      <button onclick="togglePopup()" class="read-more-btn">Baca Selengkapnya...</button>
+                      <button onclick="togglePopup('popup-1')" class="read-more-btn">Baca Selengkapnya...</button>
                     </div>
                   </div>
                 </div>
@@ -145,7 +144,7 @@
                         </div>
                       </div>
                       <div class="close-popup">
-                        <button class="close-btn" onclick="togglePopup()">&times;</button>
+                        <button class="close-btn" onclick="togglePopup('popup-1')">&times;</button>
                       </div>
                     </div>
                 </div>
@@ -304,14 +303,11 @@
 
 
 <script>
-  function togglePopup() {
-    document.getElementById("popup-1").classList.toggle("active");
+  function togglePopup(popupId) {
+    document.getElementById(popupId).classList.toggle("active");
   }
 
 </script>
 
 </body>
 </html>
-
-
-
