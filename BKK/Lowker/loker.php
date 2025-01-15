@@ -125,7 +125,8 @@
             <ul>
               <li><i class="fa-solid fa-building"></i>UD. BINTANG</li>
               <li><i class="fa-solid fa-location-dot"></i>Malang</li>
-              <li><i class="fa-regular fa-clock"></i>Tanggal Berakhir: 25 Desember 2023</li>
+              <li><i class="fa-regular fa-clock"></i>Kamis, 18 nov 2021 14.00</li>
+              <li style="color: red;">exp date : sabtu, 18 des 2021</li>
             </ul>
 
             <p class="job-role">BACK END DEVELOPER (PHP/Laravel)</p>
@@ -140,7 +141,7 @@
           </div>
 
           <div class="job-footer">
-            <button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button>
+            <a href="detail.html"><button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button></a>
           </div>
         </div>
       
@@ -153,7 +154,8 @@
             <ul>
               <li><i class="fa-solid fa-building"></i>PT. SARINAH</li>
               <li><i class="fa-solid fa-location-dot"></i>Jakarta</li>
-              <li><i class="fa-regular fa-clock"></i>Tanggal Berakhir: 20 Desember 2023</li>
+              <li><i class="fa-regular fa-clock"></i>Kamis, 18 nov 2021 14.00</li>
+              <li style="color: red;">exp date : sabtu, 18 des 2021</li>
             </ul>
 
             <p class="job-role">DESAIN WEB, KONTEN CREATOR</p>
@@ -168,7 +170,7 @@
           </div>
 
           <div class="job-footer">
-            <button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button>
+            <a href="detail.html"><button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button></a>
           </div>
         </div>
         <div class="job-card">
@@ -180,7 +182,8 @@
             <ul>
               <li><i class="fa-solid fa-building"></i>PT. SARINAH</li>
               <li><i class="fa-solid fa-location-dot"></i>Jakarta</li>
-              <li><i class="fa-regular fa-clock"></i>Tanggal Berakhir: 20 Desember 2023</li>
+              <li><i class="fa-regular fa-clock"></i>Kamis, 18 nov 2021 14.00</li>
+              <li style="color: red;">exp date : sabtu, 18 des 2021</li>
             </ul>
 
             <p class="job-role">DESAIN WEB, KONTEN CREATOR</p>
@@ -195,7 +198,7 @@
           </div>
 
           <div class="job-footer">
-            <button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button>
+            <a href="detail.html"><button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button></a>
           </div>
         </div>
         <div class="job-card">
@@ -207,7 +210,8 @@
             <ul>
               <li><i class="fa-solid fa-building"></i>PT. SARINAH</li>
               <li><i class="fa-solid fa-location-dot"></i>Jakarta</li>
-              <li><i class="fa-regular fa-clock"></i>Tanggal Berakhir: 20 Desember 2023</li>
+              <li><i class="fa-regular fa-clock"></i>Kamis, 18 nov 2021 14.00</li>
+              <li style="color: red;">exp date : sabtu, 18 des 2021</li>
             </ul>
 
             <p class="job-role">DESAIN WEB, KONTEN CREATOR</p>
@@ -222,7 +226,7 @@
           </div>
 
           <div class="job-footer">
-            <button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button>
+            <a href="detail.html"><button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button></a>
           </div>
         </div>
         <div class="job-card">
@@ -234,7 +238,8 @@
             <ul>
               <li><i class="fa-solid fa-building"></i>PT. SARINAH</li>
               <li><i class="fa-solid fa-location-dot"></i>Jakarta</li>
-              <li><i class="fa-regular fa-clock"></i>Tanggal Berakhir: 20 Desember 2023</li>
+              <li><i class="fa-regular fa-clock"></i>Kamis, 18 nov 2021 14.00</li>
+              <li style="color: red;">exp date : sabtu, 18 des 2021</li>
             </ul>
 
             <p class="job-role">DESAIN WEB, KONTEN CREATOR</p>
@@ -249,7 +254,7 @@
           </div>
 
           <div class="job-footer">
-            <button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button>
+            <a href="detail.html"><button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button></a>
           </div>
         </div>
         <div class="job-card">
@@ -261,7 +266,8 @@
             <ul>
               <li><i class="fa-solid fa-building"></i>PT. SARINAH</li>
               <li><i class="fa-solid fa-location-dot"></i>Jakarta</li>
-              <li><i class="fa-regular fa-clock"></i>Tanggal Berakhir: 20 Desember 2023</li>
+              <li><i class="fa-regular fa-clock"></i>Kamis, 18 nov 2021 14.00</li>
+              <li style="color: red;">exp date : sabtu, 18 des 2021</li>
             </ul>
 
             <p class="job-role">DESAIN WEB, KONTEN CREATOR</p>
@@ -276,11 +282,9 @@
           </div>
 
           <div class="job-footer">
-            <button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button>
+            <a href="detail.html"><button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button></a>
           </div>
         </div>
-
-
 
       </div>
     </div>
