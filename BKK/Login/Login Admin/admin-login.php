@@ -30,5 +30,31 @@
             <p class="footer-text">Bursa Kerja Khusus SMKN 1 Boyolangu</p>
         </div>
     </div>
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        $conn = new mysqli("localhost", "your_username", "your_password", "bkk");
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT * FROM users WHERE username = ? AND password = ? AND role = 'admin'";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss", $username, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+        } else {    
+            echo "Invalid username or password.";
+        }
+
+        $stmt->close();
+        $conn->close();
+    }
+    ?>
 </body>
 </html>
