@@ -9,7 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ponnala&family=Franklin+Demi+Cond&display=swap"
         rel="stylesheet">
-    <link href="../../homeafterlogin.css?v=<?php echo time(); ?>" rel="stylesheet">
+    <link href="homesiswa.css?v=<?php echo time(); ?>" rel="stylesheet">
 </head>
 
 <body>
