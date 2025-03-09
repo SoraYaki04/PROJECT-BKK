@@ -7,9 +7,11 @@ if (isset($_POST['add'])) {
     $deskripsi_lowker = $_POST['deskripsi_lowker'];
     $tgl_ditutup = $_POST['tgl_ditutup'];
     $persyaratan = $_POST['persyaratan'];
+    $id_perusahaan = $_POST['id_perusahaan'];
+    $tgl_posting = date('Y-m-d'); // Tambahkan tanggal posting otomatis
 
-    $sql = $koneksi->prepare("INSERT INTO lowker (deskripsi_lowker, tgl_ditutup, persyaratan) VALUES (?, ?, ?)");
-    $sql->bind_param("sss", $deskripsi_lowker, $tgl_ditutup, $persyaratan);
+    $sql = $koneksi->prepare("INSERT INTO lowker (deskripsi_lowker, tgl_ditutup, persyaratan, tgl_posting, id_perusahaan) VALUES (?, ?, ?, ?, ?)");
+    $sql->bind_param("ssssi", $deskripsi_lowker, $tgl_ditutup, $persyaratan, $tgl_posting, $id_perusahaan);
     $sql->execute();
 
     header("Location: crud.php");
@@ -33,6 +35,7 @@ $edit_id = "";
 $edit_deskripsi = "";
 $edit_tgl_ditutup = "";
 $edit_persyaratan = "";
+$edit_id_perusahaan = "";
 
 if (isset($_GET['edit'])) {
     $edit = true;
@@ -47,6 +50,7 @@ if (isset($_GET['edit'])) {
     $edit_deskripsi = $data['deskripsi_lowker'];
     $edit_tgl_ditutup = $data['tgl_ditutup'];
     $edit_persyaratan = $data['persyaratan'];
+    $edit_id_perusahaan = $data['id_perusahaan'];
 }
 
 // Update lowker
@@ -55,21 +59,29 @@ if (isset($_POST['update'])) {
     $deskripsi_lowker = $_POST['deskripsi_lowker'];
     $tgl_ditutup = $_POST['tgl_ditutup'];
     $persyaratan = $_POST['persyaratan'];
+    $id_perusahaan = $_POST['id_perusahaan'];
 
-    $sql = $koneksi->prepare("UPDATE lowker SET deskripsi_lowker = ?, tgl_ditutup = ?, persyaratan = ? WHERE id_lowker = ?");
-    $sql->bind_param("sssi", $deskripsi_lowker, $tgl_ditutup, $persyaratan, $id_lowker);
+    $sql = $koneksi->prepare("UPDATE lowker SET deskripsi_lowker = ?, tgl_ditutup = ?, persyaratan = ?, id_perusahaan = ? WHERE id_lowker = ?");
+    $sql->bind_param("sssii", $deskripsi_lowker, $tgl_ditutup, $persyaratan, $id_perusahaan, $id_lowker);
     $sql->execute();
 
     header("Location: crud.php");
     exit;
 }
 
-// Mendapatkan semua lowker
-$result = $koneksi->query("SELECT * FROM lowker");
+// Fetch companies for the dropdown
+$companies = $koneksi->query("SELECT id_perusahaan, nama FROM perusahaan");
+
+// Mendapatkan semua lowker dengan nama perusahaan
+$result = $koneksi->query("
+    SELECT lowker.*, perusahaan.nama AS nama_perusahaan 
+    FROM lowker 
+    JOIN perusahaan ON lowker.id_perusahaan = perusahaan.id_perusahaan
+");
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <title>CRUD Lowker</title>
 </head>
@@ -86,6 +98,14 @@ $result = $koneksi->query("SELECT * FROM lowker");
         <input type="date" name="tgl_ditutup" value="<?= $edit_tgl_ditutup ?>" required><br>
         <label>Persyaratan:</label><br>
         <textarea name="persyaratan" required><?= $edit_persyaratan ?></textarea><br><br>
+        <label>Perusahaan:</label><br>
+        <select name="id_perusahaan" required>
+            <?php while ($company = $companies->fetch_assoc()): ?>
+                <option value="<?= $company['id_perusahaan'] ?>" <?= $edit && $edit_id_perusahaan == $company['id_perusahaan'] ? 'selected' : '' ?>>
+                    <?= $company['nama'] ?>
+                </option>
+            <?php endwhile; ?>
+        </select><br><br>
         <?php if ($edit): ?>
             <button type="submit" name="update">Update</button>
             <a href="crud.php"><button type="button">Batal</button></a>
@@ -104,6 +124,7 @@ $result = $koneksi->query("SELECT * FROM lowker");
                 <th>Tanggal Ditutup</th>
                 <th>Persyaratan</th>
                 <th>Tanggal Posting</th>
+                <th>Perusahaan</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -115,9 +136,10 @@ $result = $koneksi->query("SELECT * FROM lowker");
                     <td><?= $row['tgl_ditutup'] ?></td>
                     <td><?= $row['persyaratan'] ?></td>
                     <td><?= $row['tgl_posting'] ?></td>
+                    <td><?= $row['nama_perusahaan'] ?></td>
                     <td>
                         <a href="?edit=<?= $row['id_lowker'] ?>">Edit</a> |
-                        <a href="?delete=<?= $row['id_lowker'] ?>" onclick="return confirm('Apakah Anda yakin?')">Hapus</a>
+                        <a href="?delete=<?= $row['id_lowker'] ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</a>
                     </td>
                 </tr>
             <?php endwhile; ?>
