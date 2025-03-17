@@ -147,10 +147,10 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
         <input type="input" name="email" value="<?= $edit_email ?>" required><br>
 
         <label>Logo :</label><br>
-        <input type="file" name="logo" value="<?= $edit_logo ?>" required><br>
+        <input type="file" name="logo" accept="image/*" value="<?= $edit_logo ?>" ><br>
         
         <label>Gambar :</label><br>
-        <input type="file" name="gambar" value="<?= $edit_gambar ?>" required><br>
+        <input type="file" name="gambar" accept="image/*" value="<?= $edit_gambar ?>" ><br>
 
         <?php if ($edit): ?>
             <button type="submit" name="update">Update</button>
