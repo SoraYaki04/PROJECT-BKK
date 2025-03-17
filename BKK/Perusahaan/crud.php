@@ -2,7 +2,7 @@
 // Koneksi ke database
 include '../koneksi.php';
 
-// Tambah lowker
+// Tambah Perusahaan
 if (isset($_POST['add'])) {
     $nama = $_POST['nama'];
     $alamat = $_POST['alamat'];
@@ -15,16 +15,16 @@ if (isset($_POST['add'])) {
     
 
     $sql = $koneksi->prepare("INSERT INTO perusahaan (nama, alamat, kota, deskripsi_perusahaan, kontak, email, logo, gambar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $sql->bind_param("ssssssss", $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $logo, $gambar );
+    $sql->bind_param("ssssssssi", $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $logo, $gambar );
     $sql->execute();
 
     header("Location: crud.php");
     exit;
 }
 
-// Hapus lowker
+// Hapus Perusahaan
 if (isset($_GET['delete'])) {
-    $id_lowker = $_GET['delete'];
+    $id_perusahaan = $_GET['delete'];
     $sql = $koneksi->prepare("DELETE FROM perusahaan WHERE id_perusahaan = ?");
     $sql->bind_param("i", $id_perusahaan);
     $sql->execute();
@@ -55,7 +55,7 @@ if (isset($_GET['edit'])) {
     $data = $result->fetch_assoc();
 
     $edit_id = $data['id_perusahaan'];
-    $edi_nama = $data['nama'];
+    $edit_nama = $data['nama'];
     $edit_alamat = $data['alamat'];
     $edit_kota = $data['kota'];
     $edit_deskripsi_perusahaan = $data['deskripsi_perusahaan'];
@@ -65,25 +65,48 @@ if (isset($_GET['edit'])) {
     $edit_gambar= $data['gambar'];
 }
 
-// Update lowker
+// Update Perusahaan
 if (isset($_POST['update'])) {
     $id_perusahaan = $_POST['id_perusahaan'];
     $nama = $_POST['nama'];
     $alamat = $_POST['alamat'];
     $kota = $_POST['kota'];
-    $deskripsi_perusahaan  = $_POST['deskripsi_perusahaan'];
+    $deskripsi_perusahaan = $_POST['deskripsi_perusahaan'];
     $kontak = $_POST['kontak'];
     $email = $_POST['email'];
-    $logo = $_POST['logo'];
-    $gambar = $_POST['gambar'];
+    
 
-    $sql = $koneksi->prepare("UPDATE perusahaan SET nama = ?, alamat = ?, kota = ?, deskripsi_perusahaan = ?, kontak = ?, email = ?, logo = ?, gambar = ?  WHERE id_perusahaan = ?");
-    $sql->bind_param("issssssss", $id_perusahaan,  $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $logo, $gambar);
+    if(isset($_FILES['logo']['tmp_name']) && !empty($_FILES['logo']['tmp_name'])) {
+        $logo = file_get_contents($_FILES['logo']['tmp_name']);
+    } else {
+        $query = $koneksi->prepare("SELECT logo FROM perusahaan WHERE id_perusahaan = ?");
+        $query->bind_param("i", $id_perusahaan);
+        $query->execute();
+        $result = $query->get_result();
+        $data = $result->fetch_assoc();
+        $logo = $data['logo'];
+    }
+    
+
+    if(isset($_FILES['gambar']['tmp_name']) && !empty($_FILES['gambar']['tmp_name'])) {
+        $gambar = file_get_contents($_FILES['gambar']['tmp_name']);
+    } else {
+        $query = $koneksi->prepare("SELECT gambar FROM perusahaan WHERE id_perusahaan = ?");
+        $query->bind_param("i", $id_perusahaan);
+        $query->execute();
+        $result = $query->get_result();
+        $data = $result->fetch_assoc();
+        $gambar = $data['gambar'];
+    }
+
+    $sql = $koneksi->prepare("UPDATE perusahaan SET nama = ?, alamat = ?, kota = ?, deskripsi_perusahaan = ?, kontak = ?, email = ?, logo = ?, gambar = ? WHERE id_perusahaan = ?");
+    $sql->bind_param("ssssssssi", $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $logo, $gambar, $id_perusahaan);
     $sql->execute();
 
     header("Location: crud.php");
     exit;
 }
+
 
 // Mendapatkan semua Perusahaan
 $result = $koneksi->query("SELECT * FROM perusahaan");
@@ -101,12 +124,12 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
     <h1>CRUD Perusahaan</h1>
 
     <!-- Form Tambah / Edit Lowker -->
-    <form method="POST" action="">
+    <form method="POST" action="" enctype="multipart/form-data">
         <h3><?php echo $edit ? "Edit" : "Tambah"; ?> Lowker</h3>
         <input type="hidden" name="id_perusahaan" value="<?= $edit_id ?>">
 
         <label>Nama :</label><br>
-        <input name="nama" required><?= $edit_nama ?></input><br>
+        <input name="nama" value="<?= $edit_nama ?>" required></input><br>
 
         <label>Alamat :</label><br>
         <input type="input" name="alamat" value="<?= $edit_alamat ?>" required><br>
