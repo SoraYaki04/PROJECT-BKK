@@ -123,7 +123,7 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
 <body>
     <h1>CRUD Perusahaan</h1>
 
-    <!-- Form Tambah / Edit Lowker -->
+    <!-- Form Tambah / Edit Perusahaan -->
     <form method="POST" action="" enctype="multipart/form-data">
         <h3><?php echo $edit ? "Edit" : "Tambah"; ?> Lowker</h3>
         <input type="hidden" name="id_perusahaan" value="<?= $edit_id ?>">
@@ -160,7 +160,7 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
         <?php endif; ?>
     </form>
 
-    <!-- Tabel Data Lowker -->
+    <!-- Tabel Data Perusahaan -->
     <h3>Daftar Perusahaan</h3>
     
     <table border="1" cellpadding="5" cellspacing="0">
