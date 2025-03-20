@@ -10,17 +10,27 @@ if (isset($_POST['add'])) {
     $deskripsi_perusahaan  = $_POST['deskripsi_perusahaan'];
     $kontak = $_POST['kontak'];
     $email = $_POST['email'];
-    $logo = $_POST['logo'];
-    $gambar = $_POST['gambar'];
     
+    // Perbaikan untuk upload logo
+    if(isset($_FILES['logo']['tmp_name']) && !empty($_FILES['logo']['tmp_name'])) {
+        $logo = file_get_contents($_FILES['logo']['tmp_name']);
+    } else {
+        $logo = null;
+    }
+    
+    // Perbaikan untuk upload gambar
+    if(isset($_FILES['gambar']['tmp_name']) && !empty($_FILES['gambar']['tmp_name'])) {
+        $gambar = file_get_contents($_FILES['gambar']['tmp_name']);
+    } else {
+        $gambar = null;
+    }
 
     $sql = $koneksi->prepare("INSERT INTO perusahaan (nama, alamat, kota, deskripsi_perusahaan, kontak, email, logo, gambar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $sql->bind_param("ssssssii", $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $logo, $gambar );
+    $sql->bind_param("ssssssss", $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $logo, $gambar);
     $sql->execute();
-
-    header("Location: crud.php");
-    exit;
 }
+
+// ... existing code ...
 
 // Hapus Perusahaan
 if (isset($_GET['delete'])) {
@@ -100,7 +110,7 @@ if (isset($_POST['update'])) {
     }
 
     $sql = $koneksi->prepare("UPDATE perusahaan SET nama = ?, alamat = ?, kota = ?, deskripsi_perusahaan = ?, kontak = ?, email = ?, logo = ?, gambar = ? WHERE id_perusahaan = ?");
-    $sql->bind_param("ssssssiis", $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $logo, $gambar, $id_perusahaan);
+    $sql->bind_param("ssssssssi", $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $logo, $gambar, $id_perusahaan);
     $sql->execute();
 
     header("Location: crud.php");
@@ -147,10 +157,10 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
         <input type="input" name="email" value="<?= $edit_email ?>" required><br>
 
         <label>Logo :</label><br>
-        <input type="file" name="logo" accept="image/*" value="<?= $edit_logo ?>" ><br>
+        <input type="file" name="logo"><br>
         
         <label>Gambar :</label><br>
-        <input type="file" name="gambar" accept="image/*" value="<?= $edit_gambar ?>" ><br>
+        <input type="file" name="gambar"><br>
 
         <?php if ($edit): ?>
             <button type="submit" name="update">Update</button>
@@ -199,7 +209,7 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
             </td>
             <td>
                 <?php
-                if (!empty($row['logo'])) {
+                if (!empty($row['gambar'])) {
                         echo '<img src="data:image/jpeg;base64,' . base64_encode($row['gambar']) . '" alt="Logo Perusahaan" width="100">';
                     } else {
                         echo 'Tidak ada logo';
