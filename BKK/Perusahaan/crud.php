@@ -15,7 +15,7 @@ if (isset($_POST['add'])) {
     
 
     $sql = $koneksi->prepare("INSERT INTO perusahaan (nama, alamat, kota, deskripsi_perusahaan, kontak, email, logo, gambar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $sql->bind_param("ssssssssi", $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $logo, $gambar );
+    $sql->bind_param("ssssssii", $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $logo, $gambar );
     $sql->execute();
 
     header("Location: crud.php");
@@ -100,7 +100,7 @@ if (isset($_POST['update'])) {
     }
 
     $sql = $koneksi->prepare("UPDATE perusahaan SET nama = ?, alamat = ?, kota = ?, deskripsi_perusahaan = ?, kontak = ?, email = ?, logo = ?, gambar = ? WHERE id_perusahaan = ?");
-    $sql->bind_param("ssssssssi", $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $logo, $gambar, $id_perusahaan);
+    $sql->bind_param("ssssssiis", $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $logo, $gambar, $id_perusahaan);
     $sql->execute();
 
     header("Location: crud.php");
