@@ -1,3 +1,12 @@
+<?php
+include '../koneksi.php';
+
+$result = $koneksi->query("SELECT * FROM perusahaan");
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,26 +101,30 @@
     </nav>
     
     <div class="header-bar">
-        <a href="#">Lowongan Kerja</a>
+        <a href="#">Perusahaan</a>
     </div>
     <div class="search-container">
+
       <div class="search">
         <label for="category">Pencarian:</label>
+        <input type="input" name="search">
+        <button class="search-button">Cari</button>
+
+        <label for="category">Kategori:</label>
         <select id="category" class="search-select">
-            <option value="">SEMUA KATEGORI</option>
             <option value="UMKN">UMKM</option>
             <option value="MOU">MOU</option>
             <option value="START-UP">START UP</option>
             <option value="PERSEROAN-TERBATAS">PERSEROAN TERBATAS</option>
         </select>
 
-        <select name="" id="" class="search-select">
+        <!-- <select name="" id="" class="search-select">
           <option value="">SEMUA STANDAR</option>
           <option value="">LOKAL</option>
           <option value="">PROVINSI</option>
           <option value="">NASIONAL</option>
           <option value="">INTERNASIONAL</option>
-        </select>
+        </select> -->
 
         <button class="search-button">Cari</button>
       </div>
@@ -121,124 +134,84 @@
 
       <div class="company-list">
 
-        <div class="company-item company-item-1" data-index="1">
-          <img src="assets/perusahaan 1.png" alt=""  >
-          <div class="company-detail company-detail-1" data-index="1">
-            <h2>Microsoft</h2>
-          <button onclick="togglePopup('popup-1')" class="detail-btn"><i class="fa-solid fa-list"></i>Detail Penelusuran</button>
+      <?php 
+      $no = 1;
+      while($row = $result->fetch_assoc()):
+        $imgData = base64_encode($row['gambar']);
+        $popup_id = "popup-" . $no;
+      ?>
+
+      <div class="company-item company-item-<?= $no ?>" data-index="<?= $no ?>">
+          <img src="data:image/png;base64,<?= $imgData ?>" alt="<?= htmlspecialchars($row['nama']) ?>" />
+
+          <div class="company-detail company-detail-<?= $no ?>" data-index="<?= $no ?>">
+              <h2><?= htmlspecialchars($row['nama']) ?></h2>
+              <button onclick="togglePopup('<?= $popup_id ?>')" class="detail-btn">
+                  <i class="fa-solid fa-list"></i> Detail Penelusuran
+              </button>
           </div>
-        </div>
+      </div>
 
-        <div class="popup" id="popup-1">
-          <div class="company-popup">
-            <div class="close-popup">
-              <button class="close-btn" onclick="togglePopup('popup-1')">&times;</button>
-            </div>
-            <div class="company-header-popup">
-              <div class="company-title-popup">
-                <h1>PT. HYBE Label Insight Corporation</h1>
-              </div>
-              <div class="company-desc-popup">
-                <p>HYBE Corporation adalah perusahaan hiburan asal 
-                  Surabaya yang didirikan pada tahun 2005 oleh Bang 
-                  Si-Hyuk atau Papa Bear sebagai Big Hit Entertainment. 
-                  Perusahaan ini beroperasi sebagai label rekaman, agensi 
-                  bakat, produksi musik, manajemen acara dan produksi konser, 
-                  dan sebagai penerbit musik rumahan. Perusahaan ini memiliki beberapa anak perusahaan
-                  , termasuk ADOR, Big Hit Music, Source Music, Pledis Entertaiment,
-                   Belift Lab, dan KOZ Entertainment, yang secara kolektif dikenal sebagai Hybe Labels</p>
-              </div>
-            </div>
 
-            <hr>
-
-            <div class="company-detail-popup">
-              <table>
-                <tr>
-                  <td class="company-detail-left">Nama Perusahaan</td>
-                  <td class="company-detail-rigth">: PT CIHUYY</td>
-                </tr>
-                <tr>
-                  <td class="company-detail-left">Kode</td>
-                  <td class="company-detail-rigth">: PT CIHUYY</td>
-                </tr>
-                <tr>
-                  <td class="company-detail-left">Alamat</td>
-                  <td class="company-detail-rigth">: PT CIHUYY</td>
-                </tr>
-                <tr>
-                  <td class="company-detail-left">Kota</td>
-                  <td class="company-detail-rigth">: PT CIHUYY</td>
-                </tr>
-                <tr>
-                  <td class="company-detail-left">Tahun Gabung</td>
-                  <td class="company-detail-rigth">: PT CIHUYY</td>
-                </tr>
-                <tr>
-                  <td class="company-detail-left">Standar</td>
-                  <td class="company-detail-rigth">: PT CIHUYY</td>
-                </tr>
-                <tr>
-                  <td class="company-detail-left">Standar Perusahaan</td>
-                  <td class="company-detail-rigth">: PT CIHUYY</td>
-                </tr>
-              </table>
+      <!-- POPUP -->
+      <div class="popup" id="<?php echo $popup_id; ?>">
+        <div class="company-popup">
+          <div class="close-popup">
+            <button class="close-btn" onclick="togglePopup('<?php echo $popup_id; ?>')">&times;</button>
+          </div>
+          <div class="company-header-popup">
+            <div class="company-title-popup">
+              <h1><?php echo $row['nama']; ?></h1>
             </div>
-            <div class="company-table-popup">
-              <table>
-                <tr>
-                  <th class="table-number">No</th>
-                  <th width="970px">Kerjasama</th>
-                </tr>
-                <tr>
-                  <td class="table-number">1</td>
-                  <td>Mentoring</td>
-                </tr>
-                <tr>
-                  <td class="table-number">2</td>
-                  <td>Rekrutmen</td>
-                </tr>
-                <tr>
-                  <td class="table-number">3</td>
-                  <td>Prakerin</td>
-                </tr>
-              </table>
+            <div class="company-desc-popup">
+              <p><?php echo $row['deskripsi_perusahaan']; ?></p>
             </div>
           </div>
-        </div>
 
+          <hr>
 
-        <div class="company-item company-item-2" data-index="2">
-          <img src="assets/perusahaan 2.png" alt="" >
-          <div class="company-detail company-detail-2" data-index="2">
-            <h2>A1-Pictures</h2>
-            <a href="" class="detail-btn"> <i class="fa-solid fa-list"></i>Detail Penelusuran</a>
+          <div class="company-detail-popup">
+            <table>
+              <tr><td class="company-detail-left">Nama Perusahaan</td><td class="company-detail-rigth">: <?php echo $row['nama']; ?></td></tr>
+              <tr><td class="company-detail-left">Alamat</td><td class="company-detail-rigth">: <?php echo $row['alamat']; ?></td></tr>
+              <tr><td class="company-detail-left">Kota</td><td class="company-detail-rigth">: <?php echo $row['kota']; ?></td></tr>
+              <tr><td class="company-detail-left">Kontak</td><td class="company-detail-rigth">: <?php echo $row['kontak']; ?></td></tr>
+              <tr><td class="company-detail-left">Email</td><td class="company-detail-rigth">: <?php echo $row['email']; ?></td></tr>
+              <tr><td class="company-detail-left">Kategori</td><td class="company-detail-rigth">: <?php echo $row['kategori']; ?></td></tr>
+              <tr><td class="company-detail-left">Standar</td><td class="company-detail-rigth">: <?php echo $row['standar']; ?></td></tr>
+            </table>
+          </div>
+
+          <div class="company-table-popup">
+          <table>
+            <tr>
+              <th class="table-number">No</th>
+              <th width="970px">Kerjasama</th>
+            </tr>
+
+            <?php
+            $kerjaList = preg_split("/[\r\n]+/", $row['kerja_sama']); 
+            $kerjaNo = 1;
+            foreach ($kerjaList as $item) {
+                $item = trim($item);
+                if (!empty($item)) {
+                    echo "<tr>
+                            <td class='table-number'>{$kerjaNo}</td>
+                            <td>{$item}</td>
+                          </tr>";
+                    $kerjaNo++;
+                }
+            }
+            ?>
+          </table>
           </div>
         </div>
-        
-        <div class="company-item company-item-3" data-index="3">
-          <img src="assets/perusahaan 3.jpg" alt="" >
-          <div class="company-detail company-detail-3" data-index="3">
-            <h2>Hybe Insight</h2>
-            <a href="" class="detail-btn"> <i class="fa-solid fa-list"></i>Detail Penelusuran</a>
-          </div>
-        </div>
+      </div>
 
-        <div class="company-item company-item-4" data-index="4">
-          <img src="assets/perusahaan 4.png" alt="" >
-          <div class="company-detail company-detail-4" data-index="4">
-            <h2>PT. Entertaiment</h2>
-            <a href="" class="detail-btn"> <i class="fa-solid fa-list"></i>Detail Penelusuran</a>
-          </div>
-        </div>
-
-        <div class="company-item company-item-5" data-index="5">
-          <img src="assets/perusahaan 5.jpg" alt="" >
-          <div class="company-detail company-detail-5" data-index="5">
-            <h2>Google</h2>
-            <a href="" class="detail-btn"> <i class="fa-solid fa-list"></i>Detail Penelusuran</a>
-          </div>
-        </div>
+    <?php 
+    $no++;
+    endwhile; 
+?>
 
       </div>
 
@@ -249,7 +222,7 @@
       </div>
     </div>
 
-    <script src="js/perusahaan.js"></script>
+    <script src="perusahaan.js"></script>
 
 </body>
 </html>
