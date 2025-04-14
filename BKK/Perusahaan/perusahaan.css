@@ -232,6 +232,10 @@ header .rectangle {
     border: 1px solid #B0A8A8;
 }
 
+.search input {
+    height: 30px;
+}
+
 .search select, .search option {
     display: flex;
     align-items: center;
@@ -405,6 +409,12 @@ header .rectangle {
     filter: brightness(0.5);
     left: 85%;
     transform: translateX(-50%);
+}
+
+.company-item-hidden {
+    /* opacity: 0;
+    transition: opacity 0.5s ease; */
+    display: none;
 }
 
 
