@@ -10,27 +10,30 @@ if (isset($_POST['add'])) {
     $deskripsi_perusahaan  = $_POST['deskripsi_perusahaan'];
     $kontak = $_POST['kontak'];
     $email = $_POST['email'];
-    
-    // Perbaikan untuk upload logo
-    if(isset($_FILES['logo']['tmp_name']) && !empty($_FILES['logo']['tmp_name'])) {
+
+
+    $logo = null;
+    if (isset($_FILES['logo']['tmp_name']) && is_uploaded_file($_FILES['logo']['tmp_name'])) {
         $logo = file_get_contents($_FILES['logo']['tmp_name']);
-    } else {
-        $logo = null;
     }
-    
-    // Perbaikan untuk upload gambar
-    if(isset($_FILES['gambar']['tmp_name']) && !empty($_FILES['gambar']['tmp_name'])) {
+
+    $gambar = null;
+    if (isset($_FILES['gambar']['tmp_name']) && is_uploaded_file($_FILES['gambar']['tmp_name'])) {
         $gambar = file_get_contents($_FILES['gambar']['tmp_name']);
-    } else {
-        $gambar = null;
     }
 
-    $sql = $koneksi->prepare("INSERT INTO perusahaan (nama, alamat, kota, deskripsi_perusahaan, kontak, email, logo, gambar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $sql->bind_param("ssssssss", $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $logo, $gambar);
-    $sql->execute();
-}
+    $kategori = $_POST['kategori'];
+    $standar = $_POST['standar'];
+    $kerja_sama = $_POST['kerja_sama'];
+    
 
-// ... existing code ...
+    $sql = $koneksi->prepare("INSERT INTO perusahaan (nama, alamat, kota, deskripsi_perusahaan, kontak, email, logo, gambar, kategori, standar, kerja_sama) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $sql->bind_param("sssssssssss", $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $logo, $gambar, $kategori, $standar, $kerja_sama );
+    $sql->execute();
+
+    header("Location: crud.php");
+    exit;
+}
 
 // Hapus Perusahaan
 if (isset($_GET['delete'])) {
@@ -54,6 +57,9 @@ $edit_kontak = "";
 $edit_email = "";
 $edit_logo = "";
 $edit_gambar= "";
+$edit_kategori= "";
+$edit_standar= "";
+$edit_kerja_sama= "";
 
 if (isset($_GET['edit'])) {
     $edit = true;
@@ -73,6 +79,9 @@ if (isset($_GET['edit'])) {
     $edit_email = $data['email'];
     $edit_logo = $data['logo'];
     $edit_gambar= $data['gambar'];
+    $edit_kategori= $data['kategori'];
+    $edit_standar= $data['standar'];
+    $edit_kerja_sama= $data['kerja_sama'];
 }
 
 // Update Perusahaan
@@ -84,7 +93,7 @@ if (isset($_POST['update'])) {
     $deskripsi_perusahaan = $_POST['deskripsi_perusahaan'];
     $kontak = $_POST['kontak'];
     $email = $_POST['email'];
-    
+
 
     if(isset($_FILES['logo']['tmp_name']) && !empty($_FILES['logo']['tmp_name'])) {
         $logo = file_get_contents($_FILES['logo']['tmp_name']);
@@ -109,8 +118,13 @@ if (isset($_POST['update'])) {
         $gambar = $data['gambar'];
     }
 
-    $sql = $koneksi->prepare("UPDATE perusahaan SET nama = ?, alamat = ?, kota = ?, deskripsi_perusahaan = ?, kontak = ?, email = ?, logo = ?, gambar = ? WHERE id_perusahaan = ?");
-    $sql->bind_param("ssssssssi", $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $logo, $gambar, $id_perusahaan);
+    $kategori = isset($_POST['kategori']) && !empty($_POST['kategori']) ? $_POST['kategori'] : $edit_kategori;
+    $standar  = isset($_POST['standar']) && !empty($_POST['standar']) ? $_POST['standar'] : $edit_standar;
+    $kerja_sama = $_POST['kerja_sama'];
+    
+
+    $sql = $koneksi->prepare("UPDATE perusahaan SET nama = ?, alamat = ?, kota = ?, deskripsi_perusahaan = ?, kontak = ?, email = ?, logo = ?, gambar = ?, kategori = ?, standar = ?, kerja_sama = ?  WHERE id_perusahaan = ?");
+    $sql->bind_param("sssssssssssi", $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $logo, $gambar, $kategori, $standar, $kerja_sama, $id_perusahaan);
     $sql->execute();
 
     header("Location: crud.php");
@@ -120,8 +134,6 @@ if (isset($_POST['update'])) {
 
 // Mendapatkan semua Perusahaan
 $result = $koneksi->query("SELECT * FROM perusahaan");
-
-
 ?>
 
 
@@ -133,7 +145,7 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
 <body>
     <h1>CRUD Perusahaan</h1>
 
-    <!-- Form Tambah / Edit Perusahaan -->
+    <!-- Form Tambah / Edit Lowker -->
     <form method="POST" action="" enctype="multipart/form-data">
         <h3><?php echo $edit ? "Edit" : "Tambah"; ?> Lowker</h3>
         <input type="hidden" name="id_perusahaan" value="<?= $edit_id ?>">
@@ -157,10 +169,28 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
         <input type="input" name="email" value="<?= $edit_email ?>" required><br>
 
         <label>Logo :</label><br>
-        <input type="file" name="logo"><br>
+        <input type="file" name="logo" accept="image/*" value="" ><br>
         
         <label>Gambar :</label><br>
-        <input type="file" name="gambar"><br>
+        <input type="file" name="gambar" accept="image/*" value="" ><br><br>
+
+        <label>Standar</label><br>
+        <input type="radio" name="standar" value="umkm" <?= $edit_standar == 'umkm' ? 'checked' : '' ?>>UMKM
+        <input type="radio" name="standar" value="mou" <?= $edit_standar == 'mou' ? 'checked' : '' ?>>MOU
+        <input type="radio" name="standar" value="startup" <?= $edit_standar == 'startup' ? 'checked' : '' ?>>STARTUP
+        <input type="radio" name="standar" value="perseroan" <?= $edit_standar == 'perseroan' ? 'checked' : '' ?>>PERSEROAN
+        <br><br>
+
+        <label>Kategori</label><br>
+        <input type="radio" name="kategori" value="lokal" <?= $edit_kategori == 'lokal' ? 'checked' : '' ?>>LOKAL
+        <input type="radio" name="kategori" value="provinsi" <?= $edit_kategori == 'provinsi' ? 'checked' : '' ?>>PROVINSI
+        <input type="radio" name="kategori" value="nasional" <?= $edit_kategori == 'nasional' ? 'checked' : '' ?>>NASIONAL
+        <input type="radio" name="kategori" value="internasional" <?= $edit_kategori == 'internasional' ? 'checked' : '' ?>>INTERNASIONAL
+        <br><br>
+
+        <label>Kerja Sama:</label><br>
+        <textarea name="kerja_sama" placeholder="Tekan enter untuk baris selanjutnya"><?= $edit_kerja_sama ?></textarea><br><br>
+
 
         <?php if ($edit): ?>
             <button type="submit" name="update">Update</button>
@@ -170,7 +200,7 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
         <?php endif; ?>
     </form>
 
-    <!-- Tabel Data Perusahaan -->
+    <!-- Tabel Data Lowker -->
     <h3>Daftar Perusahaan</h3>
     
     <table border="1" cellpadding="5" cellspacing="0">
@@ -185,6 +215,9 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
                 <th>Email</th>
                 <th>Logo</th>
                 <th>Gambar</th>
+                <th>Standar</th>
+                <th>Kategori</th>
+                <th>Kerja Sama</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -201,21 +234,39 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
             <td>
                 <?php 
                 if (!empty($row['logo'])) {
-                    echo '<img src="data:image/jpeg;base64,' . base64_encode($row['logo']) . '" alt="Logo Perusahaan" width="100">';
+                    echo '<img src="data:image/png;base64,' . base64_encode($row['logo']) . '" alt="Logo Perusahaan" width="100">';
                 } else {
                     echo 'Tidak ada logo';
                 }
                 ?>
             </td>
             <td>
-                <?php
+                <?php 
                 if (!empty($row['gambar'])) {
-                        echo '<img src="data:image/jpeg;base64,' . base64_encode($row['gambar']) . '" alt="Logo Perusahaan" width="100">';
-                    } else {
-                        echo 'Tidak ada logo';
-                    }
+                    echo '<img src="data:image/png;base64,' . base64_encode($row['gambar']) . '" alt="Gambar Perusahaan" width="100">';
+                } else {
+                    echo 'Tidak ada gambar';
+                }
                 ?>
             </td>
+
+            <td><?php echo $row['kategori']; ?></td>
+            <td><?php echo $row['standar']; ?></td>
+            <td>
+                <ol>
+                    <?php
+                    $kerjaList = preg_split("/[\r\n]+/", $row['kerja_sama']); 
+                    foreach ($kerjaList as $item) {
+                        $item = trim($item);
+                        if (!empty($item)) {
+                            echo "<li>{$item}</li>";
+                        }
+                    }
+                    ?>
+                </ol>
+            </td>
+
+
             <td>
                 <a href="?edit=<?= $row['id_perusahaan'] ?>">Edit</a> |
                 <a href="?delete=<?= $row['id_perusahaan'] ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</a>
