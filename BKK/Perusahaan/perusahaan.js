@@ -15,46 +15,44 @@ class Carousel {
 
         this.carouselArray.forEach((el, index) => {
             const detailElement = el.querySelector('.company-detail');
+        
 
-            // Sembunyikan semua detail perusahaan
+            el.classList.forEach(cls => {
+                if (cls.startsWith('company-item-')) {
+                    el.classList.remove(cls);
+                }
+            });
+        
+            if (index < 5) {
+                el.classList.remove('company-item-hidden');
+                el.classList.add(`company-item-${index + 1}`);
+            } else {
+                el.classList.remove(`company-item-${index + 1}`);
+                el.classList.add('company-item-hidden');
+            }
+        
+
             if (detailElement) {
-                if (index !== 2) {
+                if (index === 2) {
+                    detailElement.style.display = 'block';
+                    requestAnimationFrame(() => {
+                        detailElement.style.transition = 'opacity 0.5s ease-in-out';
+                        detailElement.style.opacity = '1';
+                    });
+                } else {
                     detailElement.style.opacity = '0';
                     detailElement.style.transition = 'opacity 0.3s ease-in-out';
                     setTimeout(() => {
-                        detailElement.style.display = 'none';
+                        if (detailElement.style.opacity === '0') {
+                            detailElement.style.display = 'none';
+                        }
                     }, 500);
-
-                 }
-
+                }
             }
         });
-
-
-        this.carouselArray.forEach(el => {
-            el.classList.remove('company-item-1');
-            el.classList.remove('company-item-2');
-            el.classList.remove('company-item-3');
-            el.classList.remove('company-item-4');
-            el.classList.remove('company-item-5');
-        });
-
-        this.carouselArray.slice(0, 5).forEach((el , i) => {
-            el.classList.add(`company-item-${i+1}`);
-            if (i === 2) { // Index ke-2 berarti item ke-3
-                const detailElement = el.querySelector('.company-detail');
-                if (detailElement) {
-                    detailElement.style.display = 'block';
-                    setTimeout(() => {
-                        detailElement.style.opacity = '1';
-                    }, 0);
-            } }
-        })
+        
     }
-
-
-
-
+    
 
     setCurrentState(direction) {
         if (direction.className == 'company-controls-previous') {
@@ -79,6 +77,7 @@ class Carousel {
                 this.setCurrentState(control);
             });
         });
+        
     }
 }
 
@@ -90,4 +89,4 @@ exampleCarousel.updateCompany();
 
 function togglePopup(popupId) {
     document.getElementById(popupId).classList.toggle("active");
-  }
+}
