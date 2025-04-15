@@ -115,178 +115,68 @@
 
     </div>
     <div class="job-list">
-        <div class="job-card">
+      <table class="job-list-table">
+        <tr>
+          <td>
+            <div class="job-card">
+              <div class="job-header">
+                <h3>PT. Maju Sejahtera</h3>
+              </div>
+              <div class="job-detail">
+                <ul>
+                  <li><i class="fa-solid fa-building"></i>UD. BINTANG</li>
+                  <li><i class="fa-solid fa-location-dot"></i>Malang</li>
+                  <li><i class="fa-regular fa-clock"></i>Kamis, 18 nov 2021 14.00</li>
+                  <li style="color: red;">exp date : sabtu, 18 des 2021</li>
+                </ul>
+    
+                <p class="job-role">BACK END DEVELOPER (PHP/Laravel)</p>
+                <div class="line"></div>
 
-          <div class="job-header">
-            <h3>LOWONGAN KERJA UD. BINTANG</h3>
-          </div>
-          
-          <div class="job-detail">
-            <ul>
-              <li><i class="fa-solid fa-building"></i>UD. BINTANG</li>
-              <li><i class="fa-solid fa-location-dot"></i>Malang</li>
-              <li><i class="fa-regular fa-clock"></i>Kamis, 18 nov 2021 14.00</li>
-              <li style="color: red;">exp date : sabtu, 18 des 2021</li>
-            </ul>
-
-            <p class="job-role">BACK END DEVELOPER (PHP/Laravel)</p>
-
-            <div class="line"></div>
-
-            <div class="job-tags">
-              <p>Programmer</p>
-              <p>PHP</p>
-              <p>Laravel</p>
+                <div class="job-tags">
+                  <p>Programmer</p>
+                  <p>PHP</p>
+                  <p>Laravel</p>
+                </div>
+              </div>
+              
+              <div class="job-footer">
+                <a href="detail.html"><button class="detail-button"><i class="fas fa-info-circle"></i>DETAIL</button></a>
+              </div>
             </div>
-          </div>
-
-          <div class="job-footer">
-            <a href="detail.html"><button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button></a>
-          </div>
-        </div>
+          </td>
       
-        <div class="job-card">
-          <div class="job-header">
-            <h3>LOWONGAN KERJA PT. SARINAH</h3>
-          </div>
-          
-          <div class="job-detail">
-            <ul>
-              <li><i class="fa-solid fa-building"></i>PT. SARINAH</li>
-              <li><i class="fa-solid fa-location-dot"></i>Jakarta</li>
-              <li><i class="fa-regular fa-clock"></i>Kamis, 18 nov 2021 14.00</li>
-              <li style="color: red;">exp date : sabtu, 18 des 2021</li>
-            </ul>
+          <td>
+            <div class="job-card">
+              <div class="job-header">
+                <h3>PT. Maju Sejahtera</h3>
+              </div>
+              <div class="job-detail">
+                <ul>
+                  <li><i class="fa-solid fa-building"></i>UD. BINTANG</li>
+                  <li><i class="fa-solid fa-location-dot"></i>Malang</li>
+                  <li><i class="fa-regular fa-clock"></i>Kamis, 18 nov 2021 14.00</li>
+                  <li style="color: red;">exp date : sabtu, 18 des 2021</li>
+                </ul>
+    
+                <p class="job-role">BACK END DEVELOPER (PHP/Laravel)</p>
+                <div class="line"></div>
 
-            <p class="job-role">DESAIN WEB, KONTEN CREATOR</p>
-
-            <div class="line"></div>
-
-            <div class="job-tags">
-              <p>Desain</p>
-              <p>Web</p>
-              <p>Konten Creator</p>
+                <div class="job-tags">
+                  <p>Programmer</p>
+                  <p>PHP</p>
+                  <p>Laravel</p>
+                </div>
+              </div>
+              
+              <div class="job-footer">
+                <a href="detail.html"><button class="detail-button"><i class="fas fa-info-circle"></i>DETAIL</button></a>
+              </div>
             </div>
-          </div>
-
-          <div class="job-footer">
-            <a href="detail.html"><button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button></a>
-          </div>
-        </div>
-        <div class="job-card">
-          <div class="job-header">
-            <h3>LOWONGAN KERJA PT. SARINAH</h3>
-          </div>
-          
-          <div class="job-detail">
-            <ul>
-              <li><i class="fa-solid fa-building"></i>PT. SARINAH</li>
-              <li><i class="fa-solid fa-location-dot"></i>Jakarta</li>
-              <li><i class="fa-regular fa-clock"></i>Kamis, 18 nov 2021 14.00</li>
-              <li style="color: red;">exp date : sabtu, 18 des 2021</li>
-            </ul>
-
-            <p class="job-role">DESAIN WEB, KONTEN CREATOR</p>
-
-            <div class="line"></div>
-
-            <div class="job-tags">
-              <p>Desain</p>
-              <p>Web</p>
-              <p>Konten Creator</p>
-            </div>
-          </div>
-
-          <div class="job-footer">
-            <a href="detail.html"><button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button></a>
-          </div>
-        </div>
-        <div class="job-card">
-          <div class="job-header">
-            <h3>LOWONGAN KERJA PT. SARINAH</h3>
-          </div>
-          
-          <div class="job-detail">
-            <ul>
-              <li><i class="fa-solid fa-building"></i>PT. SARINAH</li>
-              <li><i class="fa-solid fa-location-dot"></i>Jakarta</li>
-              <li><i class="fa-regular fa-clock"></i>Kamis, 18 nov 2021 14.00</li>
-              <li style="color: red;">exp date : sabtu, 18 des 2021</li>
-            </ul>
-
-            <p class="job-role">DESAIN WEB, KONTEN CREATOR</p>
-
-            <div class="line"></div>
-
-            <div class="job-tags">
-              <p>Desain</p>
-              <p>Web</p>
-              <p>Konten Creator</p>
-            </div>
-          </div>
-
-          <div class="job-footer">
-            <a href="detail.html"><button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button></a>
-          </div>
-        </div>
-        <div class="job-card">
-          <div class="job-header">
-            <h3>LOWONGAN KERJA PT. SARINAH</h3>
-          </div>
-          
-          <div class="job-detail">
-            <ul>
-              <li><i class="fa-solid fa-building"></i>PT. SARINAH</li>
-              <li><i class="fa-solid fa-location-dot"></i>Jakarta</li>
-              <li><i class="fa-regular fa-clock"></i>Kamis, 18 nov 2021 14.00</li>
-              <li style="color: red;">exp date : sabtu, 18 des 2021</li>
-            </ul>
-
-            <p class="job-role">DESAIN WEB, KONTEN CREATOR</p>
-
-            <div class="line"></div>
-
-            <div class="job-tags">
-              <p>Desain</p>
-              <p>Web</p>
-              <p>Konten Creator</p>
-            </div>
-          </div>
-
-          <div class="job-footer">
-            <a href="detail.html"><button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button></a>
-          </div>
-        </div>
-        <div class="job-card">
-          <div class="job-header">
-            <h3>LOWONGAN KERJA PT. SARINAH</h3>
-          </div>
-          
-          <div class="job-detail">
-            <ul>
-              <li><i class="fa-solid fa-building"></i>PT. SARINAH</li>
-              <li><i class="fa-solid fa-location-dot"></i>Jakarta</li>
-              <li><i class="fa-regular fa-clock"></i>Kamis, 18 nov 2021 14.00</li>
-              <li style="color: red;">exp date : sabtu, 18 des 2021</li>
-            </ul>
-
-            <p class="job-role">DESAIN WEB, KONTEN CREATOR</p>
-
-            <div class="line"></div>
-
-            <div class="job-tags">
-              <p>Desain</p>
-              <p>Web</p>
-              <p>Konten Creator</p>
-            </div>
-          </div>
-
-          <div class="job-footer">
-            <a href="detail.html"><button class="detail-button"><i class="fa-solid fa-list"></i>DETAIL</button></a>
-          </div>
-        </div>
-
-      </div>
+          </td>
+        </tr>
+      </table>
+      
     </div>
 
 </body>
