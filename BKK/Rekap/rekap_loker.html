@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bursa Kerja Khusus SMKN 1 Boyolangu</title>
+  <link rel="stylesheet" href="rekap_loker.css?v=<?php echo time(); ?>">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="rectangle">
+    </div>
+
+    <div class="logo">
+      <div class="logo-header">
+        <img src="../logo.png" alt="BKK SMKN 1 Boyolangu Logo">
+      </div>
+      <div class="header-text">
+          <img src="../tulisan logo.png" alt="Bursa Kerja Khusus SMKN 1 Boyolangu" id="text-img">
+      </div>
+    </div>
+
+    <div class="contact-info">
+      <div class="contact-phone">
+        <i class="fas fa-phone-alt"></i>
+        <div class="contact-ket">
+          <p>Call Us</p>
+          <p>+6281-xxx-xxx-xxx</p>
+        </div>
+      </div>
+      <div class="contact-email">
+        <i class="fas fa-envelope"></i>
+        <div class="contact-ket">
+          <p>Email Us</p>
+          <p>bkk@smkn1boyolangu@gmail.com</p>
+        </div>
+
+      </div>
+      <div class="contact-map">
+        <i class="fas fa-map-marker-alt"></i>
+        <div class="contact-ket">
+          <p>Located Us</p>
+          <p>Jl. Ki Mangun Sarkoro No.VI/3, Beji, Boyolangu</p>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <div class="container"> 
+    <nav class="navbar">
+      <!-- data-feather="chevron-down"> -->
+       <ul class="navbar-container">
+          <li>
+            <a href="index.html">HOME<i class="fa-solid fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="index.html">Halaman Utama</a></li>
+              <li><a href="pengantar.html">Pengantar</a></li>
+              <li><a href="">Informasi Kegiatan BKK</a></li>
+              <li><a href="">Rekapitulasi</a></li>
+            </ul>
+          </li>
+
+        <li><a href="#">TENTANG KAMI<i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="dropdown">
+          <li><a href="visimisi.html">Visi Misi</a></li>
+          <li><a href="proker.html">Progam Kerja BKK</a></li>
+          <li><a href="tujuan.html">Tujuan</a></li>
+          <li><a href="strukturorganisasi.html">Struktur Organisasi</a></li>
+        </ul>
+        </li>
+
+        <li><a href="informasiJurusan.html">INFORMASI JURUSAN</a></li>
+        <li><a href="rekap_alumni.html">REKAP ALUMNI</a></li>
+        <li><a href="rekap_loker.html" class="active">REKAP LOWONGAN KERJA</a></li>
+       </ul>
+
+        
+    </nav>
+
+
+
+    <div class="rekap-container">
+        <div class="filter-container">
+            <h2>REKAPITULASI DATA LOWONGAN KERJA</h2>
+            <div class="filter-box">
+              <select name="jurusan">
+                <option disabled selected>jurusan</option>
+                <option>TKI</option>
+                <option>RPL</option>
+                <option>TKJ</option>
+                <option>PM</option>
+                <option>MP</option>
+                <option>AK</option>
+                <option>ULW</option>
+                <option>DKV</option>
+                <option>BP</option>
+                <option>ANM</option>
+              </select>
+              
+              <select name="perusahaan">
+                <option disabled selected>perusahaan</option>
+                <option>UD. Bintang</option>
+                <option>PT. Maju Jaya</option>
+                <option>CV. Karya Abadi</option>
+                <option>PT. Sejahtera</option>
+              </select>
+              
+              <select name="lokasi">
+                <option disabled selected>lokasi</option>
+                <option>Tulungagung</option>
+                <option>Blitar</option>
+                <option>Malang</option>
+                <option>Surabaya</option>
+              </select>
+              
+              <select name="jenis">
+                <option disabled selected>jenis</option>
+                <option>Kontrak</option>
+                <option>Full Time</option>
+                <option>Part Time</option>
+                <option>Magang</option>
+              </select>
+              
+              <select name="waktu">
+                <option disabled selected>terdaftar kapan saja</option>
+                <option>Hari ini</option>
+                <option>3 hari lalu</option>
+                <option>1 minggu lalu</option>
+                <option>1 bulan lalu</option>
+              </select>
+              
+              <button>Cari</button>
+            </div>
+          </div>
+          
+        <h2>REKAPITULASI</h2>
+        <div class="rekap-grid">
+          <div class="rekap-item"><span class="jurusan">TKI</span><br><span class="rekap">100 lowongan</span></div>
+          <div class="rekap-item"><span class="jurusan">RPL</span><br><span class="rekap">100 lowongan</span></div>
+          <div class="rekap-item"><span class="jurusan">TKJ</span><br><span class="rekap">100 lowongan</span></div>
+          <div class="rekap-item"><span class="jurusan">BD</span><br><span class="rekap">100 lowongan</span></div>
+          <div class="rekap-item"><span class="jurusan">MP</span><br><span class="rekap">100 lowongan</span></div>
+          <div class="rekap-item"><span class="jurusan">AK</span><br><span class="rekap">100 lowongan</span></div>
+          <div class="rekap-item"><span class="jurusan">ULW</span><br><span class="rekap">100 lowongan</span></div>
+          <div class="rekap-item"><span class="jurusan">DKV</span><br><span class="rekap">100 lowongan</span></div>
+          <div class="rekap-item"><span class="jurusan">PSPT</span><br><span class="rekap">100 lowongan</span></div>
+          <div class="rekap-item"><span class="jurusan">ANM</span><br><span class="rekap">100 lowongan</span></div>
+        </div>
+        <div class="rekap-total">
+          <p>Jumlah lowongan terdaftar : <strong>1000</strong></p>
+          <p>Jumlah perusahaan terdaftar : <strong>500</strong></p>
+        </div>
+      </div>
+      
+
+</body>
+</html>
