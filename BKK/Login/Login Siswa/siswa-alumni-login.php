@@ -16,42 +16,49 @@
                 <h2>Login</h2>
                 <p>Akun Siswa/Alumni</p>
             </div>
-            <form action="#">
+            <form action="" method="POST">
                 <div class="input-group">
                     <label for="username">Username</label>
-                    <input type="text" id="username" placeholder="Masukkan Username..." required>
+                    <input type="text" name="username" id="username" placeholder="Masukkan Username..." required>
                 </div>
                 <div class="input-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Masukkan Password..." required>
+                    <input type="password" name="password" id="password" placeholder="Masukkan Password..." required>
                 </div>
                 <button type="submit" class="login-button">MASUK</button>
+                <div class="reset-link">
+                    <a href="reset-pw-siswa.php">Reset Password</a>
+                </div>
             </form>
             <p class="footer-text">Bursa Kerja Khusus SMKN 1 Boyolangu</p>
         </div>
     </div>
     <?php
+    session_start();
+    include '../../koneksi.php';
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $conn = new mysqli("localhost", "your_username", "your_password", "bkk");
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
 
         $sql = "SELECT * FROM users WHERE username = ? AND password = ? AND role = 'siswa'";
-        $stmt = $conn->prepare($sql);
+        $stmt = $koneksi->prepare($sql);
         $stmt->bind_param("ss", $username, $password);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['role'];
+            header("Location: ../../dashboard-siswa.php");
+            exit();
         } else {
-            echo "Invalid username or password.";
+            echo "<script>alert('Username atau password salah!');</script>";
         }
 
         $stmt->close();
-        $conn->close();
     }
     ?>
 </body>
