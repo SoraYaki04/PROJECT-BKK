@@ -128,38 +128,48 @@ header .rectangle {
     padding: 40px;
 }
 
-.tracer-container h2 {
+.container h2 {
     text-align: center;
-    font-weight: 600;
-    font-size: 20px;
-    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
 }
 
+/* Tombol Jurusan */
 .jurusan-buttons {
     text-align: center;
     margin-bottom: 30px;
 }
 
 .btn {
-    padding: 6px 14px;
+    padding: 10px 20px;
     border: none;
-    border-radius: 25px;
+    border-radius: 20px;
     color: white;
-    margin: 5px;
+    margin: 8px 5px;
     cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.green {
-    background-color: #6dc24b;
-}
-
-.blue {
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
     background-color: #2799ea;
 }
 
-.tracer-container h3 {
+.btn:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn.active {
+    background-color: #6dc24b!important;
+    color: #fff;
+    box-shadow: 0 0 0 3px rgba(11, 42, 93, 0.2);
+    transform: none;
+}
+
+.container h3 {
     font-weight: bold;
     margin-bottom: 10px;
 }
