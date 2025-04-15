@@ -263,6 +263,17 @@ header .rectangle {
     background-color: #0056b3;
 }
 
+.job-list-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .job-list-table td {
+    vertical-align: top;
+    padding: 15px;
+    border: none;
+  }  
+
 .job-list {
     display: flex;
     flex-wrap: wrap;
