@@ -1,3 +1,24 @@
+<?php
+session_start();
+include '../koneksi.php';
+
+// Cek apakah user sudah login
+if (!isset($_SESSION['id'])) {
+    header("Location: login.php");
+    echo "ANDA BELUM LOGIN";
+    exit();
+}
+
+// Ambil ID dari session
+$id = $_SESSION['id'];
+
+// Ambil data lengkap dari database
+$query = $koneksi->query("SELECT * FROM siswa WHERE id = '$id'");
+$data = $query->fetch_assoc();
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,7 +113,7 @@
           <li><a href="../Informasi Jurusan/informasiJurusan.php">INFORMASI JURUSAN</a></li>
           <li><a href="../Perusahaan/perusahaan.php">PERUSAHAAN</a></li>
           <li><a href="../Lowker/loker.php">LOWONGAN KERJA</a></li>
-         </ul>
+        </ul>
       </nav>
     <div class="header-bar">
         <a href="#">Profil</a>
@@ -103,43 +124,43 @@
             <div class="profile-image">
                 <img src="smile.png" alt="">
                 <div class="profile-image-camera">
-                    <img src="camera.png" alt="">
+                    <img onclick="" src="camera.png" alt="">
                 </div>
             </div>
             <div class="profile-name">
-                <h2>SMILE TERSENYUM CIHUYYY</h2>
-                <p class="profile-title-nisn">00711325666</p>
+                <h2><?php echo $data['nama']; ?></h2>
+                <p class="profile-title-nisn"><?php echo $data['nisn']; ?></p>
                 <p class="profile-title-status">Siswa / Alumni Tahun 2022/2023</p>
             </div>
         </div>
         <div class="profile-description">
             <div class="profile-details">
                 <P class="profile-details-1">Nama Lengkap</P>
-                <p>SMILE TERSENYUM CIHUYYY</p>
+                <p><?php echo $data['nama']; ?></p>
 
                 <P class="profile-details-1">NISN</P>
-                <P>00711325666</P>
+                <p><?php echo $data['nisn']; ?></p>
 
                 <p class="profile-details-1">Tempat Tanggal Lahir</p>
-                <p>Tulungagung, 07 Jumli 2007</p>
+                <p><?php echo $data['tempat_lahir'] . ", " . $data['tanggal_lahir'] ; ?>  </p>
 
                 <p class="profile-details-1">Alamat</p>
-                <p>RT 02/ RW 02, LK 02, Jl. Kembang Kates no. 14, Dusun Kembang, Kecamatan Kates, Kabupaten Tulungagung, Provinsi Jawa Timur</p>
+                <p> <?php echo "RT " . $data['rt'] . ", RW " . $data['rw'] . ", " . $data['dusun'] . ", " . $data['kelurahan'] . ", " . $data['kecamatan'];  ?> </p>
 
                 <p class="profile-details-1">Kode Pos</p>
-                <p>66629</p>
+                <p><?php echo $data['kode_pos'] ?></p>
 
                 <p class="profile-details-1">Jenis Kelamin</p>
-                <p>Laki-Laki</p>
+                <p><?php echo ($data['jenis_kelamin'] ?? '') === 'L' ? 'Laki-Laki' : 'Perempuan' ?></p>
 
                 <p class="profile-details-1">Agama</p>
-                <p>Islam</p>
+                <p><?php echo $data['agama'] ?></p>
 
                 <p class="profile-details-1">No Tlp / Hp</p>
-                <p>+6222 1111 3333</p>
+                <p><?php echo $data['no_wa'] ?></p>
 
                 <p class="profile-details-1">NIK</p>
-                <p>0034576821900256</p>
+                <p><?php echo $data['nik'] ?></p>
             </div>
         
             <div class="profile-notification">
