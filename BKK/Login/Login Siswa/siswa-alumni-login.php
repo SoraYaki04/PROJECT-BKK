@@ -18,8 +18,8 @@
             </div>
             <form action="" method="POST">
                 <div class="input-group">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username" placeholder="Masukkan Username..." required>
+                    <label for="nama">Username</label>
+                    <input type="text" name="nama" id="username" placeholder="Masukkan Username..." required>
                 </div>
                 <div class="input-group">
                     <label for="password">Password</label>
@@ -38,21 +38,23 @@
     include '../../koneksi.php';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $username = $_POST['username'];
+        $nama = $_POST['nama'];
         $password = $_POST['password'];
 
-        $sql = "SELECT * FROM users WHERE username = ? AND password = ? AND role = 'siswa'";
+        $sql = "SELECT * FROM siswa WHERE nama = ? AND password = ? ";
         $stmt = $koneksi->prepare($sql);
-        $stmt->bind_param("ss", $username, $password);
+        $stmt->bind_param("ss", $nama, $password);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['role'] = $user['role'];
-            header("Location: ../../dashboard-siswa.php");
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['nama'] = $user['nama'];
+
+            // echo "<script>alert('Berhasil');</script>";
+
+            header("Location: Home Siswa/homesiswa.php");
             exit();
         } else {
             echo "<script>alert('Username atau password salah!');</script>";
