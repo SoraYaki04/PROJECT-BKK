@@ -1,3 +1,41 @@
+<?php
+session_start();
+include '../../koneksi.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nama = $_POST['nama'];
+    $password = $_POST['password'];
+
+    // Ambil user berdasarkan nama saja
+    $sql = "SELECT * FROM alumni WHERE nama = ?";
+    $stmt = $koneksi->prepare($sql);
+    $stmt->bind_param("s", $nama);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        $stored_password = $user['password'];
+
+        // Cek apakah password cocok (plaintext atau hash)
+        if ($password === $stored_password || password_verify($password, $stored_password)) {
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['nama'] = $user['nama'];
+
+            header("Location: Home Siswa/homesiswa.php");
+            exit();
+        } else {
+            echo "<script>alert('Password salah!');</script>";
+        }
+    } else {
+        echo "<script>alert('Username tidak ditemukan!');</script>";
+    }
+
+    $stmt->close();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,35 +71,3 @@
             <p class="footer-text">Bursa Kerja Khusus SMKN 1 Boyolangu</p>
         </div>
     </div>
-    <?php
-    session_start();
-    include '../../koneksi.php';
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $nama = $_POST['nama'];
-        $password = $_POST['password'];
-
-        $sql = "SELECT * FROM siswa WHERE nama = ? AND password = ? ";
-        $stmt = $koneksi->prepare($sql);
-        $stmt->bind_param("ss", $nama, $password);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) {
-            $user = $result->fetch_assoc();
-            $_SESSION['id'] = $user['id'];
-            $_SESSION['nama'] = $user['nama'];
-
-            // echo "<script>alert('Berhasil');</script>";
-
-            header("Location: Home Siswa/homesiswa.php");
-            exit();
-        } else {
-            echo "<script>alert('Username atau password salah!');</script>";
-        }
-
-        $stmt->close();
-    }
-    ?>
-</body>
-</html>
