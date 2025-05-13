@@ -7,34 +7,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $old_password = $_POST['old_password'];
     $new_password = $_POST['new_password'];
 
-    // Cek kredensial lama
-    $sql = "SELECT * FROM users WHERE username = ? AND password = ? AND role = 'siswa'";
+    // Ambil data user berdasarkan nama
+    $sql = "SELECT * FROM alumni WHERE nama = ?";
     $stmt = $koneksi->prepare($sql);
-    $stmt->bind_param("ss", $username, $old_password);
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        // Update password
-        $update_sql = "UPDATE users SET password = ? WHERE username = ? AND role = 'siswa'";
-        $update_stmt = $koneksi->prepare($update_sql);
-        $update_stmt->bind_param("ss", $new_password, $username);
-        
-        if ($update_stmt->execute()) {
-            echo "<script>
-                alert('Password berhasil diubah!');
-                window.location.href='siswa-alumni-login.php';
-            </script>";
+        $row = $result->fetch_assoc();
+
+        // Cek password lama (plaintext)
+        if ($old_password === $row['password']) {
+            // Hash password baru
+            $hashed_new_password = password_hash($new_password, PASSWORD_DEFAULT);
+
+            // Update password baru ke database
+            $update_sql = "UPDATE alumni SET password = ? WHERE nama = ?";
+            $update_stmt = $koneksi->prepare($update_sql);
+            $update_stmt->bind_param("ss", $hashed_new_password, $username);
+
+            if ($update_stmt->execute()) {
+                echo "<script>
+                    alert('Password berhasil diubah!');
+                    window.location.href='siswa-alumni-login.php';
+                </script>";
+            } else {
+                echo "<script>alert('Gagal mengubah password!');</script>";
+            }
+
+            $update_stmt->close();
         } else {
-            echo "<script>alert('Gagal mengubah password!');</script>";
+            echo "<script>alert('Password lama salah!');</script>";
         }
-        $update_stmt->close();
     } else {
-        echo "<script>alert('Username atau password lama tidak valid!');</script>";
+        echo "<script>alert('Username tidak ditemukan!');</script>";
     }
     $stmt->close();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
