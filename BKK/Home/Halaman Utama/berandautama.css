@@ -1,3 +1,5 @@
+/* BERANDA */
+
 * {
     margin: 0;
     padding: 0;
@@ -27,7 +29,7 @@ header .rectangle {
     position: absolute;
     top: 0;
     right: 0;
-    width: 76vw;
+    width: 78vw;
     min-height: 25px;
     background-color: #134CBC;
     border-bottom-left-radius: 54px;
@@ -62,10 +64,10 @@ header .rectangle {
 }
 
 .contact-info {
-    margin-top: 15px;
-    margin-right: 10px;
+    margin-top: 10px;
+    margin-right: 50px;
     display: flex;
-    gap: 100px;
+    gap: 40px;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -91,9 +93,8 @@ header .rectangle {
 .contact-phone i,
 .contact-email i,
 .contact-map i {
-    margin-right: 20px;
-    font-size: 29px;
-    margin-left: 15px;
+    margin-right: 10px;
+    font-size: 23px;
 }
 
 .contact-item {
@@ -125,9 +126,10 @@ header .rectangle {
 }
 
 /* Navbar items and layout */
-.navbar ul {
+.navbar-container {
     display: flex;
     justify-content: space-around;
+    height: 50px;
     /* Membuat jarak otomatis sama */
     list-style: none;
     padding: 0;
@@ -147,7 +149,7 @@ header .rectangle {
     color: #FFF;
     text-decoration: none;
     font-size: 20px;
-    font-weight: 350;
+    font-weight: 400;
     font-family: 'Poppins', sans-serif;
     position: relative;
     z-index: 1;
