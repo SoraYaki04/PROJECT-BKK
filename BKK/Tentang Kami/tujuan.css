@@ -1,13 +1,14 @@
+/* TUJUAN CSS */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
     background-color: #f0f5f5;
-    color: #333;
     font-size: 16px;
 }
 
@@ -27,7 +28,7 @@ header .rectangle {
     position: absolute;
     top: 0;
     right: 0;
-    width: 76vw;
+    width: 78vw;
     min-height: 25px;
     background-color: #134CBC;
     border-bottom-left-radius: 54px;
@@ -61,10 +62,10 @@ header .rectangle {
 }
 
 .contact-info {
-    margin-top: 15px;
-    margin-right: 10px;
+    margin-top: 10px;
+    margin-right: 50px;
     display: flex;
-    gap: 100px;
+    gap: 40px;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -86,9 +87,8 @@ header .rectangle {
 }
 
 .contact-phone i, .contact-email i, .contact-map i {
-    margin-right: 20px;
-    font-size: 29px;
-    margin-left: 15px;
+    margin-right: 10px;
+    font-size: 23px;
 }
 
 .contact-item {
@@ -105,13 +105,14 @@ header .rectangle {
 
 /* Navbar container */
 .navbar {
-    background: rgba(33, 5, 196, 0.8);
+    background: #5135FA;
     position: relative;
 }
 
 /* Navbar items and layout */
-.navbar ul {
+.navbar-container {
     display: flex;
+    height: 50px;
     justify-content: space-around; /* Membuat jarak otomatis sama */
     list-style: none;
     padding: 0;
@@ -131,7 +132,7 @@ header .rectangle {
     color: #FFF;
     text-decoration: none;
     font-size: 20px;
-    font-weight: 350;
+    font-weight: 400;
     font-family: 'Poppins', sans-serif;
     position: relative;
     z-index: 1;
@@ -197,7 +198,7 @@ header .rectangle {
 .header-bar {
     background-color: #d1f0ff; /* Ubah ke warna biru muda yang diinginkan */
     padding: 10px 20px; /* Tambahkan padding untuk ruang di sekitar teks */
-    text-align: right; /* Rata kanan teks */
+    text-align: left; /* Rata kanan teks */
     font-size: 14px; /* Sesuaikan ukuran font */
     font-weight: 500; /* Buat teks lebih tebal */
 }
