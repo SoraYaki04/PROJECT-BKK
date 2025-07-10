@@ -1,3 +1,5 @@
+/* INFORMASI KEGIATAN CSS */
+
 * {
     margin: 0;
     padding: 0;
@@ -63,6 +65,7 @@ header .rectangle {
 
 .contact-info {
     margin-right: 50px;
+    margin-top: 10px;
     display: flex;
     gap: 40px;
     align-items: center;
@@ -102,9 +105,6 @@ header .rectangle {
     color: #002366;
 }
 
-.contact-item span {
-    font-size: 1.1rem;
-}
 
 
 /* BACKGROUND */
@@ -121,7 +121,7 @@ header .rectangle {
 .navbar-container {
     display: flex;
     align-items: center;
-    height: 43px;
+    height: 50px;
     justify-content: space-around; /* Membuat jarak otomatis sama */
     list-style: none;
     padding: 0;
