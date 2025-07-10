@@ -1,4 +1,6 @@
- * {
+/* PENGANTAR CSS */
+
+* {
      margin: 0;
      padding: 0;
      box-sizing: border-box;
@@ -63,6 +65,7 @@
 
  .contact-info {
      margin-right: 50px;
+     margin-top: 10px;
      display: flex;
      gap: 40px;
      align-items: center;
@@ -112,7 +115,7 @@
 
  /* Navbar container */
  .navbar {
-     background: rgba(33, 5, 196, 0.8);
+     background: #5135FA;
      position: relative;
  }
 
@@ -261,7 +264,3 @@
      font-size: 14px;
      font-weight: 500;
  }
-
-
-
- 
