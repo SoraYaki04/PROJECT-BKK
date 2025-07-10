@@ -65,36 +65,36 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
       <!-- data-feather="chevron-down"> -->
        <ul class="navbar-container">
           <li>
-            <a href="#" class="">HOME<i class="fa-solid fa-chevron-down"></i></a>
+            <a href="../Home/Halaman Utama/berandautama.html" class="">HOME<i class="fa-solid fa-chevron-down"></i></a>
             <ul class="dropdown">
-              <li><a href="index.html">Halaman Utama</a></li>
-              <li><a href="pengatar.html">Pengantar</a></li>
-              <li><a href="">Informasi Kegiatan BKK</a></li>
-              <li><a href="">Rekapitulasi</a></li>
+              <li><a href="../Home/Halaman Utama/berandautama.html">Halaman Utama</a></li>
+              <li><a href="../Home/Pengantar/pengantar.html">Pengantar</a></li>
+              <li><a href="../Home/Informasi Kegiatan BKK/informasikegiatanbkk.html">Informasi Kegiatan BKK</a></li>
+              <li><a href="../Home/Halaman Utama/rekapitulasi.html">Rekapitulasi</a></li>
             </ul>
           </li>
 
         <li><a href="#">TENTANG KAMI<i class="fa-solid fa-chevron-down"></i></a>
         <ul class="dropdown">
-          <li><a href="visimisi.html">Visi Misi</a></li>
-          <li><a href="proker.html">Progam Kerja BKK</a></li>
-          <li><a href="tujuan.html">Tujuan</a></li>
-          <li><a href="strukturorganisasi.html">Struktur Organisasi</a></li>
+          <li><a href="../Tentang Kami/visimisi.php">Visi Misi</a></li>
+          <li><a href="../Tentang Kami/proker.php">Progam Kerja BKK</a></li>
+          <li><a href="../Tentang Kami/tujuan.php">Tujuan</a></li>
+          <li><a href="../Tentang Kami/strukturorganisasi.php">Struktur Organisasi</a></li>
         </ul>
         </li>
         
         <li><a href="#">LOGIN<i class="fa-solid fa-chevron-down"></i></a>
         <ul class="dropdown">
-          <li><a href="admin-login.html">Admin BKK</a></li>
-          <li><a href="management-login.html">Management</a></li>
-          <li><a href="siswa-alumni-login.html">Siswa / Alumni</a></li>
-          <li><a href="pengguna-lain-login.html">Partisipan Lain</a></li>
+          <li><a href="../Login/admin-login.html">Admin BKK</a></li>
+          <li><a href="../Login/management-login.html">Management</a></li>
+          <li><a href="../Login/siswa-alumni-login.html">Siswa / Alumni</a></li>
+          <li><a href="../Login/pengguna-lain-login.html">Partisipan Lain</a></li>
         </ul>
         </li>
 
-        <li><a href="informasiJurusan.html">INFORMASI JURUSAN</a></li>
-        <li><a href="perusahaan.html" class="active">PERUSAHAAN</a></li>
-        <li><a href="loker.html" >LOWONGAN KERJA</a></li>
+        <li><a href="../Informasi Jurusan/informasiJurusan.php">INFORMASI JURUSAN</a></li>
+        <li><a href="#" class="active">PERUSAHAAN</a></li>
+        <li><a href="../Lowker/loker.php">LOWONGAN KERJA</a></li>
        </ul>
 
         
