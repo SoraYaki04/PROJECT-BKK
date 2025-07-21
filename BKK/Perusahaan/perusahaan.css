@@ -205,6 +205,10 @@ header .rectangle {
     display: block;
 }
 
+section {
+    min-height: 100vh;
+}
+
 .header-bar {
     background-color: #d1f0ff; /* Ubah ke warna biru muda yang diinginkan */
     padding: 10px 20px; /* Tambahkan padding untuk ruang di sekitar teks */
@@ -304,21 +308,21 @@ header .rectangle {
 /* COMPANY DETAIL */
 
 .company-detail {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%;
     background: rgba(0, 0, 0, 0.5);
     color: white;
-    display: none;
-    position: absolute;
-    left: 50%;
-    bottom: 60%;
-    transform: translateX(-50%);
-    z-index: 3;
-    width: 230px;
-    max-height: 150px;
-    height: auto;    
-    border-top-right-radius: 15px;
+    padding: 10px 15px;
+    box-sizing: border-box;
     border-top-left-radius: 15px;
-    padding: 15px;
+    border-top-right-radius: 15px;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 }
+
 
 .company-detail h2 {
     height: 48px;
@@ -357,12 +361,6 @@ header .rectangle {
 
 /* COMPANY ITEM */
 
-.company-item {
-    position: absolute;
-    transition: all 0.3s ease-in-out;
-    z-index: 0;
-    background-size: contain;
-}
 
 .company-item img {
     width: 100%;
@@ -371,48 +369,42 @@ header .rectangle {
     border-radius: 15px;
 }
 
-.company-item-1 {
-    height: 310px;
-    width: 220px;
-    left: 15%;
-    filter: brightness(0.5);
+.company-item {
+    position: absolute;
     transform: translateX(-50%);
+    background-size: contain;
+    transition: all 0.3s ease-in-out;
+    z-index: 0;
 }
 
-.company-item-2, .company-item-4 {
-    filter: brightness(0.5);
-    height: 323px;
-    width: 210px;
-    z-index: 1;
-}
-
-.company-item-2 {
-    left : 32%; 
-    transform: translateX(-50%);
-}
-
-.company-item-3 {
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
-    height: 343px;
-    width: 230px;
-    opacity: 1;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-}
-
-.company-item-4 {
-    left: 68%;
-    transform: translateX(-50%);
-}
-
+.company-item-1,
 .company-item-5 {
     height: 310px;
     width: 220px;
     filter: brightness(0.5);
-    left: 85%;
-    transform: translateX(-50%);
 }
+
+.company-item-2,
+.company-item-4 {
+    height: 323px;
+    width: 210px;
+    filter: brightness(0.5);
+    z-index: 1;
+}
+
+.company-item-2 { left: calc(50% - 16vw); }
+.company-item-3 {
+    height: 343px;
+    width: 230px;
+    left: 50%;
+    z-index: 2;
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+    opacity: 1;
+}
+.company-item-4 { left: calc(50% + 16vw); }
+.company-item-1 { left: calc(50% - 31vw); }
+.company-item-5 { left: calc(50% + 31vw); }
+
 
 .company-item-hidden {
     /* opacity: 0;
@@ -421,19 +413,27 @@ header .rectangle {
 }
 
 
+
 /* COMPANY POPUP */
 
-.popup {
-    display: none;
+.popup {    
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    z-index: 100000;
 }
 
+
 .popup.active {
-    display: block;
+    visibility: visible;
+    opacity: 1;
 }
 
 .popup.active .company-popup {
     opacity: 1;
-    transition: opacity 1s ease-in-out;
+    transition: opacity 0.4s ease-in-out;
+    pointer-events: auto;
+
 }
 
 
@@ -443,7 +443,7 @@ header .rectangle {
     position: absolute;
     left: 50%;
     bottom: 5%;
-    transform: translate(-50%);
+    transform: translate(-50%, 20px); /* Mulai dari bawah sedikit */
     width: 80vw;
     min-height: 490px;
     background: #ECF3F6;
@@ -451,6 +451,7 @@ header .rectangle {
     z-index: 4;
     opacity: 0;
     transition: opacity 1s ease-in-out;
+    pointer-events: none;
 }
 
 .company-popup .close-popup button {
@@ -552,6 +553,11 @@ header .rectangle {
     margin: 0 50px; 
     padding: 0 13px;
     text-transform: capitalize;
+}
+
+.company-controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .company-controls-button:focus {
