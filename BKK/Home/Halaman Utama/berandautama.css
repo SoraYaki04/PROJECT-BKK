@@ -87,7 +87,9 @@ header .rectangle {
 .contact-map {
     display: flex;
     align-items: center;
+    justify-content: center;
     color: #134CBC;
+    width: 250px;
 }
 
 .contact-phone i,
@@ -95,13 +97,6 @@ header .rectangle {
 .contact-map i {
     margin-right: 10px;
     font-size: 23px;
-}
-
-.contact-item {
-    display: flex;
-    align-items: center;
-    color: #333;
-    width: 100%;
 }
 
 .contact-item i {
@@ -113,7 +108,7 @@ header .rectangle {
 .container {
     background-image: url('../../bg utama.png');
     background-size: cover;
-    background-position: center;
+    background-position: 75% center;
     width: 100vw;
 }
 
@@ -219,6 +214,14 @@ header .rectangle {
     margin-top: 10px;
     max-width: 100%;
     text-align: left;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s ease-out, transform 0.6s ease-out;
+}
+
+.hero-content.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .hero-content h1 {
