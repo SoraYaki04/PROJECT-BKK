@@ -82,22 +82,18 @@ header .rectangle {
     font-size: 14px;
 }
 
-.contact-phone , .contact-email , .contact-map  {
+.contact-phone,
+.contact-email,
+.contact-map {
     display: flex;
     align-items: center;
+    justify-content: center;
     color: #134CBC;
+    width: 250px;
 }
-
 .contact-phone i, .contact-email i, .contact-map i {
     margin-right: 10px;
     font-size: 23px;
-}
-
-.contact-item {
-    display: flex;
-    align-items: center;
-    color: #333;
-    width: 100%;
 }
 
 .contact-item i {
