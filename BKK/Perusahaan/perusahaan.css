@@ -3,7 +3,7 @@
 @font-face {
     font-family: 'Franklin Gothic Book';
     src: url('../fonts/Franklin\ Gothic\ Book\ Regular.ttf') format('truetype');
-  }
+}
 
 * {
     margin: 0;
@@ -15,7 +15,7 @@
 body {
     background-color: #f0f0f5;
     font-size: 16px;
-   
+
 }
 
 body::-webkit-scrollbar {
@@ -62,7 +62,7 @@ header .rectangle {
 }
 
 #text-img {
-    width: 220px; /* Sesuaikan ukuran gambar teks */
+    width: 220px;
     height: auto;
     margin-left: 20px;
 }
@@ -83,17 +83,21 @@ header .rectangle {
     align-items: center;
 }
 
-.contact-ket p{
+.contact-ket p {
     font-size: 14px;
 }
 
-.contact-phone , .contact-email , .contact-map  {
+.contact-phone,
+.contact-email,
+.contact-map {
     display: flex;
     align-items: center;
     color: #134CBC;
 }
 
-.contact-phone i, .contact-email i, .contact-map i {
+.contact-phone i,
+.contact-email i,
+.contact-map i {
     margin-right: 10px;
     font-size: 23px;
 }
@@ -115,29 +119,25 @@ header .rectangle {
 }
 
 
-/* BACKGROUND */
-
-/* NAVBAR START */
-
-/* Navbar container */
+/* ! NAVBAR START */
 .navbar {
     background: #5135FA;
     position: relative;
 }
 
-/* Navbar items and layout */
+
 .navbar-container {
     display: flex;
     align-items: center;
     height: 50px;
-    justify-content: space-around; /* Membuat jarak otomatis sama */
+    justify-content: space-around;
     list-style: none;
     padding: 0;
     margin: 0;
     position: relative;
 }
 
-/* Navbar item */
+
 .navbar ul li {
     position: relative;
 }
@@ -155,26 +155,24 @@ header .rectangle {
     transition: color 0.3s ease;
 }
 
-/* Chevron icon style */
 .navbar ul li a i {
     margin-left: 10px;
     font-size: 13px;
 }
 
-/* Hover effect for links */
 .navbar ul li a:hover {
     color: #f0a500;
 }
 
 .navbar ul li a.active {
-    color: #f0a500; /* Optional active color */
+    color: #f0a500;
 }
 
 .navbar ul li ul.dropdown li {
     display: block;
 }
 
-.navbar ul li ul.dropdown li a{
+.navbar ul li ul.dropdown li a {
     text-align: left;
     color: black;
     font-size: 17px;
@@ -182,12 +180,12 @@ header .rectangle {
     transition: color 0.3s ease;
 }
 
-.navbar ul li ul.dropdown li a:hover{
+.navbar ul li ul.dropdown li a:hover {
     color: #3376F9;
 
 }
 
-.navbar ul li ul.dropdown li a.active{
+.navbar ul li ul.dropdown li a.active {
     color: #3376F9;
 
 }
@@ -210,16 +208,16 @@ section {
 }
 
 .header-bar {
-    background-color: #d1f0ff; /* Ubah ke warna biru muda yang diinginkan */
-    padding: 10px 20px; /* Tambahkan padding untuk ruang di sekitar teks */
-    text-align: left; /* Rata kanan teks */
-    font-size: 14px; /* Sesuaikan ukuran font */
-    font-weight: 500; /* Buat teks lebih tebal */
+    background-color: #d1f0ff;
+    padding: 10px 20px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .header-bar a {
-    color: #002366; /* Warna teks agar terlihat jelas di atas background biru muda */
-    text-decoration: none; /* Hilangkan garis bawah pada link */
+    color: #002366;
+    text-decoration: none;
     margin-right: 40px;
 }
 
@@ -230,6 +228,7 @@ section {
 }
 
 .search {
+    user-select: none;
     display: flex;
     align-items: center;
     height: 50px;
@@ -243,14 +242,16 @@ section {
     height: 30px;
 }
 
-.search select, .search option {
+.search select,
+.search option {
     display: flex;
     align-items: center;
     font-size: 13px;
     height: 35px;
 }
 
-.search-select, .search-input {
+.search-select,
+.search-input {
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -271,6 +272,7 @@ section {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
 }
 
 .search-button:hover {
@@ -278,8 +280,7 @@ section {
 }
 
 
-/* COMPANY START */
-
+/* ! COMPANY START */
 .company-container {
     width: 100%;
     position: relative;
@@ -305,11 +306,10 @@ section {
 }
 
 
-/* COMPANY DETAIL */
-
+/* ! COMPANY DETAIL */
 .company-detail {
     position: absolute;
-    top: 0; 
+    top: 0;
     left: 0;
     width: 100%;
     background: rgba(0, 0, 0, 0.5);
@@ -325,9 +325,10 @@ section {
 
 
 .company-detail h2 {
+    user-select: none;
     height: 48px;
     margin-bottom: 10px;
-    line-height: 24px; 
+    line-height: 24px;
 }
 
 .company-detail {
@@ -359,9 +360,7 @@ section {
 
 
 
-/* COMPANY ITEM */
-
-
+/* ! COMPANY ITEM */
 .company-item img {
     width: 100%;
     height: 100%;
@@ -392,31 +391,40 @@ section {
     z-index: 1;
 }
 
-.company-item-2 { left: calc(50% - 16vw); }
+.company-item-2 {
+    left: calc(50% - 16vw);
+}
+
 .company-item-3 {
     height: 343px;
     width: 230px;
     left: 50%;
     z-index: 2;
-    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     opacity: 1;
 }
-.company-item-4 { left: calc(50% + 16vw); }
-.company-item-1 { left: calc(50% - 31vw); }
-.company-item-5 { left: calc(50% + 31vw); }
+
+.company-item-4 {
+    left: calc(50% + 16vw);
+}
+
+.company-item-1 {
+    left: calc(50% - 31vw);
+}
+
+.company-item-5 {
+    left: calc(50% + 31vw);
+}
 
 
 .company-item-hidden {
-    /* opacity: 0;
-    transition: opacity 0.5s ease; */
     display: none;
 }
 
 
 
-/* COMPANY POPUP */
-
-.popup {    
+/* ! COMPANY POPUP */
+.popup {
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.4s ease, visibility 0.4s ease;
@@ -436,14 +444,13 @@ section {
 
 }
 
-
 .company-popup {
     display: flex;
     flex-direction: column;
     position: absolute;
     left: 50%;
     bottom: 5%;
-    transform: translate(-50%, 20px); /* Mulai dari bawah sedikit */
+    transform: translate(-50%, 20px);
     width: 80vw;
     min-height: 490px;
     background: #ECF3F6;
@@ -473,7 +480,7 @@ section {
     margin-top: 5px;
     font-size: 15px;
     font-family: 'Poppins', sans-serif;
-    font-weight: 300; /* Extra Light */
+    font-weight: 300;
 }
 
 .company-detail-popup {
@@ -489,16 +496,16 @@ section {
     font-size: 21px;
 }
 
-.company-detail-popup  .company-detail-left {
+.company-detail-popup .company-detail-left {
     width: 250px;
 }
 
-.company-detail-popup  .company-detail-rigth {
+.company-detail-popup .company-detail-rigth {
     width: 750px;
 }
 
 .company-table-popup {
-    padding: 20px;  
+    padding: 20px;
 }
 
 .company-table-popup table {
@@ -523,25 +530,24 @@ section {
 }
 
 .company-table-popup table tr:nth-child(even) td {
-    background-color: #e0e0e0; /* Warna abu-abu untuk baris genap */
+    background-color: #e0e0e0;
 }
-  
+
 .company-table-popup table tr:nth-child(odd) td {
-    background-color: #ffffff; /* Warna putih untuk baris ganjil */
+    background-color: #ffffff;
 }
-  
 
 
 
-/* COMPANY CONTROLS */
 
+/* ! COMPANY CONTROLS */
 .company-controls {
     display: flex;
     position: absolute;
     top: 24%;
     justify-content: space-between;
     width: 100%;
-    margin: 25px 0; 
+    margin: 25px 0;
     height: 100px;
 }
 
@@ -550,7 +556,7 @@ section {
     border: 0;
     cursor: pointer;
     font-size: 30px;
-    margin: 0 50px; 
+    margin: 0 50px;
     padding: 0 13px;
     text-transform: capitalize;
 }
@@ -624,7 +630,7 @@ section {
     background: #ccc;
     border: 50%;
     height: 10px;
-    margin: 0 16px; 
+    margin: 0 16px;
     width: 10px;
 }
 
