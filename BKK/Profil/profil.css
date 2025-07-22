@@ -8,7 +8,7 @@
 body {
     background-color: #f0f0f5;
     font-size: 16px;
-   
+
 }
 
 body::-webkit-scrollbar {
@@ -27,7 +27,7 @@ header .rectangle {
     position: absolute;
     top: 0;
     right: 0;
-    width: 76vw;
+    width: 78vw;
     min-height: 25px;
     background-color: #134CBC;
     border-bottom-left-radius: 54px;
@@ -55,16 +55,17 @@ header .rectangle {
 }
 
 #text-img {
-    width: 220px; /* Sesuaikan ukuran gambar teks */
+    width: 220px;
+    /* Sesuaikan ukuran gambar teks */
     height: auto;
     margin-left: 20px;
 }
 
 .contact-info {
-    margin-top: 15px;
+    margin-top: 10px;
     margin-right: 10px;
     display: flex;
-    gap: 100px;
+    gap: 40px;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -75,27 +76,26 @@ header .rectangle {
     align-items: center;
 }
 
-.contact-ket p{
+.contact-ket p {
     font-size: 14px;
 }
 
-.contact-phone , .contact-email , .contact-map  {
+.contact-phone,
+.contact-email,
+.contact-map {
     display: flex;
     align-items: center;
+    justify-content: center;
     color: #134CBC;
+    width: 250px;
 }
 
-.contact-phone i, .contact-email i, .contact-map i {
+.contact-phone i,
+.contact-email i,
+.contact-map i {
     margin-right: 20px;
     font-size: 29px;
     margin-left: 15px;
-}
-
-.contact-item {
-    display: flex;
-    align-items: center;
-    color: #333;
-    width: 100%;
 }
 
 .contact-item i {
@@ -119,10 +119,23 @@ header .rectangle {
     position: relative;
 }
 
+.navbar-container {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    justify-content: space-around;
+    /* Membuat jarak otomatis sama */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
 /* Navbar items and layout */
 .navbar ul {
     display: flex;
-    justify-content: space-around; /* Membuat jarak otomatis sama */
+    justify-content: space-around;
+    /* Membuat jarak otomatis sama */
     list-style: none;
     padding: 0;
     margin: 0;
@@ -160,14 +173,15 @@ header .rectangle {
 }
 
 .navbar ul li a.active {
-    color: #f0a500; /* Optional active color */
+    color: #f0a500;
+    /* Optional active color */
 }
 
 .navbar ul li ul.dropdown li {
     display: block;
 }
 
-.navbar ul li ul.dropdown li a{
+.navbar ul li ul.dropdown li a {
     text-align: left;
     color: black;
     font-size: 17px;
@@ -175,12 +189,12 @@ header .rectangle {
     transition: color 0.3s ease;
 }
 
-.navbar ul li ul.dropdown li a:hover{
+.navbar ul li ul.dropdown li a:hover {
     color: #3376F9;
 
 }
 
-.navbar ul li ul.dropdown li a.active{
+.navbar ul li ul.dropdown li a.active {
     color: #3376F9;
 
 }
@@ -213,16 +227,23 @@ header .rectangle {
 }
 
 .header-bar {
-    background-color: #d1f0ff; /* Ubah ke warna biru muda yang diinginkan */
-    padding: 10px 20px; /* Tambahkan padding untuk ruang di sekitar teks */
-    text-align: left; /* Rata kanan teks */
-    font-size: 14px; /* Sesuaikan ukuran font */
-    font-weight: 500; /* Buat teks lebih tebal */
+    background-color: #d1f0ff;
+    /* Ubah ke warna biru muda yang diinginkan */
+    padding: 10px 20px;
+    /* Tambahkan padding untuk ruang di sekitar teks */
+    text-align: left;
+    /* Rata kanan teks */
+    font-size: 14px;
+    /* Sesuaikan ukuran font */
+    font-weight: 500;
+    /* Buat teks lebih tebal */
 }
 
 .header-bar a {
-    color: #002366; /* Warna teks agar terlihat jelas di atas background biru muda */
-    text-decoration: none; /* Hilangkan garis bawah pada link */
+    color: #002366;
+    /* Warna teks agar terlihat jelas di atas background biru muda */
+    text-decoration: none;
+    /* Hilangkan garis bawah pada link */
     margin-right: 40px;
 }
 
@@ -272,8 +293,7 @@ header .rectangle {
     width: 45px;
     height: 45px;
     border-radius: 50px;
-    cursor: pointer
-    ;
+    cursor: pointer;
 }
 
 .profile-title .profile-image-camera img {
