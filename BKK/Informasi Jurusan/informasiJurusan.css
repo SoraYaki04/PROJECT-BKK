@@ -56,7 +56,7 @@ header .rectangle {
 }
 
 #text-img {
-  width: 220px; /* Sesuaikan ukuran gambar teks */
+  width: 220px; 
   height: auto;
   margin-left: 20px;
 }
@@ -108,24 +108,24 @@ header .rectangle {
   color: #002366;
 }
 
-/* Navbar container */
+
 .navbar {
   background: #5135FA;
   position: relative;
 }
 
-/* Navbar items and layout */
+
 .navbar-container {
     display: flex;
     height: 50px;
-    justify-content: space-around; /* Membuat jarak otomatis sama */
+    justify-content: space-around;
     list-style: none;
     padding: 0;
     margin: 0;
     position: relative;
 }
 
-/* Navbar item */
+
 .navbar ul li {
   position: relative;
 }
@@ -144,19 +144,19 @@ header .rectangle {
   transition: color 0.3s ease;
 }
 
-/* Chevron icon style */
+
 .navbar ul li a i {
   margin-left: 10px;
   font-size: 13px;
 }
 
-/* Hover effect for links */
+
 .navbar ul li a:hover {
   color: #f0a500;
 }
 
 .navbar ul li a.active {
-  color: #f0a500; /* Optional active color */
+  color: #f0a500; 
 }
 
 .navbar ul li ul.dropdown li {
@@ -193,16 +193,16 @@ header .rectangle {
 }
 
 .header-bar {
-    background-color: #d1f0ff; /* Ubah ke warna biru muda yang diinginkan */
-    padding: 10px 20px; /* Tambahkan padding untuk ruang di sekitar teks */
-    text-align: left; /* Rata kanan teks */
-    font-size: 14px; /* Sesuaikan ukuran font */
-    font-weight: 500; /* Buat teks lebih tebal */
+    background-color: #d1f0ff;
+    padding: 10px 20px; 
+    text-align: left; 
+    font-size: 14px; 
+    font-weight: 500; 
 }
 
 .header-bar a {
-    color: #002366; /* Warna teks agar terlihat jelas di atas background biru muda */
-    text-decoration: none; /* Hilangkan garis bawah pada link */
+    color: #002366; 
+    text-decoration: none; 
     margin-right: 40px;
 }
 
@@ -211,6 +211,7 @@ header .rectangle {
   justify-content: center;
   flex-wrap: wrap;
   padding: 20px;
+  min-height: 100vh;
 }
 
 .card {
@@ -218,8 +219,16 @@ header .rectangle {
   background-color: #f6f4f3;
   width: 385px;
   min-height: 363px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Menambahkan shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.card.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .title {
@@ -261,8 +270,8 @@ header .rectangle {
 .card-content .deskripsi hr {
   margin-bottom: 5px;
   border: none;
-  height: 1px; /* atau bisa gunakan border-width */
-  background-color: #000; /* warna garis */
+  height: 1px; 
+  background-color: #000;
 }
 
 .card-content .deskripsi {
@@ -276,10 +285,15 @@ header .rectangle {
   border: none;
   cursor: pointer;
   color: #3590fa;
+  transition: color 0.3s ease;
 }
 
-/* POP UP START */
+.deskripsi button:hover {
+  color: #002366;
+}
 
+
+/* ! POP UP START */
 .popup .overlay {
   position: fixed;
   top: 0;
@@ -292,16 +306,29 @@ header .rectangle {
 }
 
 .popup .card-popup {
-  position: absolute;
-  top: 50%;
+  position: fixed;
+  top: 30%;
   left: 50%;
-  transform: translate(-50%, -30%) scale(0);
   background: #fff;
   border-radius: 10px;
   width: 60vw;
   min-height: 70vh;
+  overflow: hidden; 
   z-index: 2;
   box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+  transform: translate(-50%, -30%) scale(0);
+  opacity: 0;
+}
+
+.popup.active .card-popup {
+  transform: translate(-50%, -30%) scale(1);
+  opacity: 1;
+}
+
+.popup.closing .card-popup {
+  transform: translate(-50%, -30%) scale(0);
+  opacity: 0;
 }
 
 .card-popup .deskripsi p,
@@ -319,6 +346,13 @@ header .rectangle {
   margin-top: 10px;
   justify-content: center;
   gap: 20px;
+}
+
+.popup-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  max-height: calc(90vh - 100px);
 }
 
 .card-content .foto-popup img {
@@ -344,13 +378,13 @@ header .rectangle {
   line-height: 40px;
   width: 100%;
   height: 50px;
-  margin-top: 20px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
 
 .popup .close-popup button {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
   border: none;
   background: none;
@@ -358,6 +392,11 @@ header .rectangle {
   font-size: 45px;
   margin-right: 10px;
   cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.popup .close-popup button:hover {
+  color: #bdbdbd;
 }
 
 .popup.active .overlay {
@@ -369,7 +408,7 @@ header .rectangle {
   transform: translate(-50%, -30%) scale(1);
 }
 
-/* POP UP END */
+/* ! POP UP END */
 
 .footer {
   text-align: left;
