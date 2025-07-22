@@ -88,7 +88,9 @@ header .rectangle {
 .contact-map {
     display: flex;
     align-items: center;
+    justify-content: center;
     color: #134CBC;
+    width: 250px;
 }
 
 .contact-phone i,
@@ -96,13 +98,6 @@ header .rectangle {
 .contact-map i {
     margin-right: 10px;
     font-size: 23px;
-}
-
-.contact-item {
-    display: flex;
-    align-items: center;
-    color: #333;
-    width: 100%;
 }
 
 .contact-item i {
