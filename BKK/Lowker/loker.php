@@ -84,7 +84,7 @@
 
         <li><a href="../Informasi Jurusan/informasiJurusan.php">INFORMASI JURUSAN</a></li>
         <li><a href="../Perusahaan/perusahaan.php">PERUSAHAAN</a></li>
-        <li><a href="#" class="active">LOWONGAN KERJA</a></li>
+        <li><a href="loker.php" class="active">LOWONGAN KERJA</a></li>
        </ul>
 
         
@@ -115,9 +115,7 @@
 
     </div>
     <div class="job-list">
-      <table class="job-list-table">
-        <tr>
-          <td>
+
             <div class="job-card">
               <div class="job-header">
                 <h3>PT. Maju Sejahtera</h3>
@@ -141,12 +139,10 @@
               </div>
               
               <div class="job-footer">
-                <a href="detail.html"><button class="detail-button"><i class="fas fa-info-circle"></i>DETAIL</button></a>
+                <a href="detail-lowker.html"><button class="detail-button"><i class="fas fa-info-circle"></i>DETAIL</button></a>
               </div>
             </div>
-          </td>
       
-          <td>
             <div class="job-card">
               <div class="job-header">
                 <h3>PT. Maju Sejahtera</h3>
@@ -170,14 +166,85 @@
               </div>
               
               <div class="job-footer">
-                <a href="detail.html"><button class="detail-button"><i class="fas fa-info-circle"></i>DETAIL</button></a>
+                <a href="detail-lowker.html"><button class="detail-button"><i class="fas fa-info-circle"></i>DETAIL</button></a>
               </div>
             </div>
-          </td>
-        </tr>
-      </table>
+          
+            <div class="job-card">
+              <div class="job-header">
+                <h3>PT. Maju Sejahtera</h3>
+              </div>
+              <div class="job-detail">
+                <ul>
+                  <li><i class="fa-solid fa-building"></i>UD. BINTANG</li>
+                  <li><i class="fa-solid fa-location-dot"></i>Malang</li>
+                  <li><i class="fa-regular fa-clock"></i>Kamis, 18 nov 2021 14.00</li>
+                  <li style="color: red;">exp date : sabtu, 18 des 2021</li>
+                </ul>
+    
+                <p class="job-role">BACK END DEVELOPER (PHP/Laravel)</p>
+                <div class="line"></div>
+
+                <div class="job-tags">
+                  <p>Programmer</p>
+                  <p>PHP</p>
+                  <p>Laravel</p>
+                </div>
+              </div>
+              
+              <div class="job-footer">
+                <a href="detail-lowker.html"><button class="detail-button"><i class="fas fa-info-circle"></i>DETAIL</button></a>
+              </div>
+            </div>
+
+            <div class="job-card">
+              <div class="job-header">
+                <h3>PT. Maju Sejahtera</h3>
+              </div>
+              <div class="job-detail">
+                <ul>
+                  <li><i class="fa-solid fa-building"></i>UD. BINTANG</li>
+                  <li><i class="fa-solid fa-location-dot"></i>Malang</li>
+                  <li><i class="fa-regular fa-clock"></i>Kamis, 18 nov 2021 14.00</li>
+                  <li style="color: red;">exp date : sabtu, 18 des 2021</li>
+                </ul>
+    
+                <p class="job-role">BACK END DEVELOPER (PHP/Laravel)</p>
+                <div class="line"></div>
+
+                <div class="job-tags">
+                  <p>Programmer</p>
+                  <p>PHP</p>
+                  <p>Laravel</p>
+                </div>
+              </div>
+              
+              <div class="job-footer">
+                <a href="detail-lowker.html"><button class="detail-button"><i class="fas fa-info-circle"></i>DETAIL</button></a>
+              </div>
+            </div>
+
+
       
     </div>
+
+<script>
+    const cards = document.querySelectorAll('.job-card');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    cards.forEach(card => {
+      observer.observe(card);
+    });
+</script>
 
 </body>
 </html>
