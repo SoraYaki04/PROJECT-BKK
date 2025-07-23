@@ -56,7 +56,8 @@ header .rectangle {
 }
 
 #text-img {
-    width: 220px; /* Sesuaikan ukuran gambar teks */
+    width: 220px;
+    /* Sesuaikan ukuran gambar teks */
     height: auto;
     margin-left: 20px;
 }
@@ -76,7 +77,7 @@ header .rectangle {
     align-items: center;
 }
 
-.contact-ket p{
+.contact-ket p {
     font-size: 14px;
 }
 
@@ -90,7 +91,9 @@ header .rectangle {
     width: 250px;
 }
 
-.contact-phone i, .contact-email i, .contact-map i {
+.contact-phone i,
+.contact-email i,
+.contact-map i {
     margin-right: 10px;
     font-size: 23px;
 }
@@ -110,7 +113,8 @@ header .rectangle {
 .navbar-container {
     display: flex;
     height: 50px;
-    justify-content: space-around; /* Membuat jarak otomatis sama */
+    justify-content: space-around;
+    /* Membuat jarak otomatis sama */
     list-style: none;
     padding: 0;
     margin: 0;
@@ -148,14 +152,15 @@ header .rectangle {
 }
 
 .navbar ul li a.active {
-    color: #f0a500; /* Optional active color */
+    color: #f0a500;
+    /* Optional active color */
 }
 
 .navbar ul li ul.dropdown li {
     display: block;
 }
 
-.navbar ul li ul.dropdown li a{
+.navbar ul li ul.dropdown li a {
     text-align: left;
     color: black;
     font-size: 17px;
@@ -163,12 +168,12 @@ header .rectangle {
     transition: color 0.3s ease;
 }
 
-.navbar ul li ul.dropdown li a:hover{
+.navbar ul li ul.dropdown li a:hover {
     color: #3376F9;
 
 }
 
-.navbar ul li ul.dropdown li a.active{
+.navbar ul li ul.dropdown li a.active {
     color: #3376F9;
 
 }
@@ -193,17 +198,39 @@ header .rectangle {
 }
 
 .header-bar {
-    background-color: #d1f0ff; /* Ubah ke warna biru muda yang diinginkan */
-    padding: 10px 20px; /* Tambahkan padding untuk ruang di sekitar teks */
-    text-align: left; /* Rata kanan teks */
-    font-size: 14px; /* Sesuaikan ukuran font */
-    font-weight: 500; /* Buat teks lebih tebal */
+    background-color: #d1f0ff;
+    /* Ubah ke warna biru muda yang diinginkan */
+    padding: 10px 20px;
+    /* Tambahkan padding untuk ruang di sekitar teks */
+    text-align: left;
+    /* Rata kanan teks */
+    font-size: 14px;
+    /* Sesuaikan ukuran font */
+    font-weight: 500;
+    /* Buat teks lebih tebal */
 }
 
 .header-bar a {
-    color: #002366; /* Warna teks agar terlihat jelas di atas background biru muda */
-    text-decoration: none; /* Hilangkan garis bawah pada link */
+    color: #002366;
+    /* Warna teks agar terlihat jelas di atas background biru muda */
+    text-decoration: none;
+    /* Hilangkan garis bawah pada link */
     margin-right: 40px;
+}
+
+.tujuan-title,
+.tujuan-list,
+.langkah img {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.tujuan-title.show,
+.tujuan-list.show,
+.langkah img.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .tujuan h2 {
