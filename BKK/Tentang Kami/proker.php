@@ -97,20 +97,39 @@
         </div>
 
         <section class="proker">
-            <h2>PROGRAM KERJA BKK SMKN 1 BOYOLANGU</h2>
+            <h2 class="proker-h2">PROGRAM KERJA BKK SMKN 1 BOYOLANGU</h2>
             <ol>
-                <li>Sosialisasi Program BKK Kepada siswa-siswi SMKN 1 Boyolangu bertujuan Agar siswa tingkat ankhir XII/XIII mengetahui tentang kegiatan pelatihan, open rekrutmen dan lain sebagainya.</li>
-                <li>Pendataan DUDI industri baik untuk penempatan kerja dalam negeri bertujuan Mengetahui perusahaan yang memungkinkan menjalin kerja sama.</li>
-                <li>Melakukan kunjungan ke pengguna tenaga kerja /perusahaan untuk melakukan penawaran mengenai ketersediaan tenaga kerja bertujuan Untuk menghimpun informasi tentang kebutuhan tenaga kerja di perusahaan dan dikhusukan untuk tingkat akhir / kelas XII dan Kelas XIII.</li>
-                <li>Pendataan dan Pembuatan data base canaker tamatan TA 2021-2022 Mengetahui canaker / tamatan yang belum bekerja.</li>
-                <li>Pelatihan “Basic Mentality Learning” bertujuan Pembekalan (kognitif dan afektif) untuk menyiapkan canaker menempuh proses rekruitment dan ketika bekerja pada DUDI.</li>
-                <li>Pelatihan Ketrampilan dan Uji sertifikasi bertujuan Calon tenaga kerja dan petugas BKK mendapatkan bekal pelatihan serta uji sertifikasi.</li>
-                <li>Pelatihan Kewirausahaan bertujuan Menambah kompetensi dan pengetahuan tentang kewirausahaan bidang makan & minum.</li>
-                <li>Proses rekruitmen kerja agar Alumni dapat terserap di DUDI.</li>
-                <li>Mengikuti seminar / workshop/ latihan petugas BKK dan program magang bagi guru produktif bertujuan Untuk meningkatkan ketrampilan dan pengetahuan petugas BKK.</li>
+                <li class="proker-list">Sosialisasi Program BKK Kepada siswa-siswi SMKN 1 Boyolangu bertujuan Agar siswa tingkat ankhir XII/XIII mengetahui tentang kegiatan pelatihan, open rekrutmen dan lain sebagainya.</li>
+                <li class="proker-list">Pendataan DUDI industri baik untuk penempatan kerja dalam negeri bertujuan Mengetahui perusahaan yang memungkinkan menjalin kerja sama.</li>
+                <li class="proker-list">Melakukan kunjungan ke pengguna tenaga kerja /perusahaan untuk melakukan penawaran mengenai ketersediaan tenaga kerja bertujuan Untuk menghimpun informasi tentang kebutuhan tenaga kerja di perusahaan dan dikhusukan untuk tingkat akhir / kelas XII dan Kelas XIII.</li>
+                <li class="proker-list">Pendataan dan Pembuatan data base canaker tamatan TA 2021-2022 Mengetahui canaker / tamatan yang belum bekerja.</li>
+                <li class="proker-list">Pelatihan “Basic Mentality Learning” bertujuan Pembekalan (kognitif dan afektif) untuk menyiapkan canaker menempuh proses rekruitment dan ketika bekerja pada DUDI.</li>
+                <li class="proker-list">Pelatihan Ketrampilan dan Uji sertifikasi bertujuan Calon tenaga kerja dan petugas BKK mendapatkan bekal pelatihan serta uji sertifikasi.</li>
+                <li class="proker-list">Pelatihan Kewirausahaan bertujuan Menambah kompetensi dan pengetahuan tentang kewirausahaan bidang makan & minum.</li>
+                <li class="proker-list">Proses rekruitmen kerja agar Alumni dapat terserap di DUDI.</li>
+                <li class="proker-list">Mengikuti seminar / workshop/ latihan petugas BKK dan program magang bagi guru produktif bertujuan Untuk meningkatkan ketrampilan dan pengetahuan petugas BKK.</li>
             </ol>
         </section>
     </div>
 </div>
+
+<script>
+    const proker = document.querySelectorAll('.proker-h2, .proker-list');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    proker.forEach(proker => {
+      observer.observe(proker);
+    });
+</script>
+
 </body>
 </html>
