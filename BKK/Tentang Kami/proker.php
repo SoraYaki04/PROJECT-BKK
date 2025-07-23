@@ -114,7 +114,7 @@
 </div>
 
 <script>
-    const proker = document.querySelectorAll('.proker-h2, .proker-list');
+    const cards = document.querySelectorAll('.proker-h2, .proker-list');
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -126,8 +126,8 @@
       threshold: 0.1
     });
 
-    proker.forEach(proker => {
-      observer.observe(proker);
+    cards.forEach(card => {
+      observer.observe(card);
     });
 </script>
 
