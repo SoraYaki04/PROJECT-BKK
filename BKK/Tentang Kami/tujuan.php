@@ -13,7 +13,6 @@
     <header>
         <div class="rectangle">
         </div>
-        </div>
 
         <div class="logo">
             <div class="logo-header">
@@ -93,16 +92,16 @@
 
     <div class="container">
         <div class="header-bar">
-            <a href="#">TENTANG KAMI / Program Kerja</a>
+            <a href="#">TENTANG KAMI / Tujuan</a>
         </div>
 
         <section class="tujuan">
-            <h2>TUJUAN BKK SMKN 1 BOYOLANGU</h2>
+            <h2 class="tujuan-title">TUJUAN BKK SMKN 1 BOYOLANGU</h2>
             <ol>
-                <li>Sebagai wadah dalam mempertemukan alumni maupun peserta lain dengan pencari kerja.</li>
-                <li>Memberikan layanan kepada tamatan sesuai dengan tugas dan fungsi masing-masing seksi yang ada dalam BKK.</li>
-                <li>Sebagai wadah dalam pelatihan tamatan yang sesuai dengan permintaan pencari kerja.</li>
-                <li>Sebagai wadah untuk menanamkan jiwa wirausaha bagi tamatan melalui pelatihan.</li>
+                <li  class="tujuan-list">Sebagai wadah dalam mempertemukan alumni maupun peserta lain dengan pencari kerja.</li>
+                <li class="tujuan-list">Memberikan layanan kepada tamatan sesuai dengan tugas dan fungsi masing-masing seksi yang ada dalam BKK.</li>
+                <li class="tujuan-list">Sebagai wadah dalam pelatihan tamatan yang sesuai dengan permintaan pencari kerja.</li>
+                <li class="tujuan-list">Sebagai wadah untuk menanamkan jiwa wirausaha bagi tamatan melalui pelatihan.</li>
             </ol>
         </section>
 
@@ -111,5 +110,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    const cards = document.querySelectorAll('.tujuan-title, .tujuan-list, .langkah img');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    cards.forEach(card => {
+      observer.observe(card);
+    });
+</script>
+
 </body>
 </html>
