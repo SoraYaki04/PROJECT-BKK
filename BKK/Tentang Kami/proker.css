@@ -83,12 +83,13 @@ header .rectangle {
 .contact-phone,
 .contact-email,
 .contact-map {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #134CBC;
-    width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #134CBC;
+  width: 250px;
 }
+
 .contact-phone i,
 .contact-email i,
 .contact-map i {
@@ -202,6 +203,18 @@ header .rectangle {
   color: #002366;
   text-decoration: none;
   margin-right: 40px;
+}
+
+.proker h2,
+.proker li {
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.4s ease-out;
+}
+
+.proker h2.show,
+.proker li.show {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .proker h2 {
