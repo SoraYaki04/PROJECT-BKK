@@ -213,6 +213,8 @@ header .rectangle {
     max-width: 100vw;
     margin-top: 15px;
     margin-bottom: 15px;
+    scale: 0.8;
+    user-select: none;
 }
 
 .strukturorg img {
