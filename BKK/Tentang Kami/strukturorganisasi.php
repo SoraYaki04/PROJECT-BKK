@@ -14,7 +14,6 @@
     <header>
         <div class="rectangle">
         </div>
-        </div>
 
         <div class="logo">
             <div class="logo-header">
@@ -94,7 +93,7 @@
 
     <div class="container">
         <div class="header-bar">
-            <a href="#">TENTANG KAMI / Struktur Organisasim BKK</a>
+            <a href="#">TENTANG KAMI / Struktur Organisasi BKK</a>
         </div>
 
         <div class="strukturorg" >
