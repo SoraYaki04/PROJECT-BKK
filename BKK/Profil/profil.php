@@ -5,16 +5,23 @@ include '../koneksi.php';
 // Cek apakah user sudah login
 if (!isset($_SESSION['id'])) {
     header("Location: login.php");
-    echo "ANDA BELUM LOGIN";
-    exit();
+    exit(); // Jangan tampilkan echo setelah header
 }
 
-// Ambil ID dari session
-$id = $_SESSION['id'];
+// Ambil ID dari session dan pastikan itu adalah angka
+$id = intval($_SESSION['id']);
 
-// Ambil data lengkap dari database
-$query = $koneksi->query("SELECT * FROM siswa WHERE id = '$id'");
-$data = $query->fetch_assoc();
+// Gunakan prepared statement agar aman dari SQL Injection
+$stmt = $koneksi->prepare("SELECT * FROM alumni WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Ambil data
+$data = $result->fetch_assoc();
+
+// Tutup statement
+$stmt->close();
 ?>
 
 
@@ -28,6 +35,7 @@ $data = $query->fetch_assoc();
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Ponnala&family=Franklin+Demi+Cond&display=swap" rel="stylesheet">
+  <link href="../css/navbar.css?v=<?php echo time(); ?>" rel="stylesheet">
   <link href="profil.css?v=<?php echo time(); ?>" rel="stylesheet">
 </head>
 <body>
@@ -76,7 +84,7 @@ $data = $query->fetch_assoc();
     <div class="container"> 
       <nav class="navbar">
         <!-- data-feather="chevron-down"> -->
-         <ul>
+         <ul class="navbar-container">
             <li>
                 <div onclick="" class="profile-icon"> 
                     <i class="fa-solid fa-user fa-sm student-profile" style="color: #5135FA;"></i>
