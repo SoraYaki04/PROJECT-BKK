@@ -5,7 +5,7 @@ const companyItems = document.querySelectorAll('.company-item');
 
 class Carousel {
 
-    constructor(container, items, controls){
+    constructor(container, items, controls) {
         this.carouselContainer = container;
         this.carouselControls = controls;
         this.carouselArray = [...items];
@@ -36,7 +36,7 @@ class Carousel {
             );
         });
 
-        this.carouselArray.slice(0, 5).forEach((el , i) => {
+        this.carouselArray.slice(0, 5).forEach((el, i) => {
             el.classList.add(`company-item-${i+1}`);
 
             if (i === 2) {
@@ -75,7 +75,7 @@ class Carousel {
         this.carouselControls.forEach(control => {
             const button = document.createElement('button');
             button.className = `company-controls-${control}`;
-            button.innerHTML = ''; // ❌ Tidak ada teks atau ikon
+            button.innerHTML = '';
             companyControlsContainer.appendChild(button);
         });
     }
