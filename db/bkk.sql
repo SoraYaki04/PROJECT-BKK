@@ -11,7 +11,7 @@
  Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 23/07/2025 14:15:25
+ Date: 24/07/2025 15:49:31
 */
 
 SET NAMES utf8mb4;
@@ -1011,11 +1011,12 @@ CREATE TABLE `lamaran`  (
 DROP TABLE IF EXISTS `lowker`;
 CREATE TABLE `lowker`  (
   `id_lowker` int NOT NULL AUTO_INCREMENT,
+  `id_jurusan` int NOT NULL,
+  `judul_lowker` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `deskripsi_lowker` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `gaji` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `pendidikan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `tipe_pekerjaan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `judul_lowker` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `tgl_ditutup` date NULL DEFAULT NULL,
   `tgl_posting` date NULL DEFAULT NULL,
   `keahlian` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
@@ -1025,14 +1026,17 @@ CREATE TABLE `lowker`  (
   `id_perusahaan` int NULL DEFAULT NULL,
   `lokasi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `jumlah_pelamar` int NULL DEFAULT NULL,
-  PRIMARY KEY (`id_lowker`) USING BTREE,
+  PRIMARY KEY (`id_lowker`, `id_jurusan`) USING BTREE,
   INDEX `id_perusahaan`(`id_perusahaan` ASC) USING BTREE,
-  CONSTRAINT `lowker_ibfk_1` FOREIGN KEY (`id_perusahaan`) REFERENCES `perusahaan` (`id_perusahaan`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+  INDEX `kategori_jurusan`(`id_jurusan` ASC) USING BTREE,
+  CONSTRAINT `lowker_ibfk_1` FOREIGN KEY (`id_perusahaan`) REFERENCES `perusahaan` (`id_perusahaan`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `kategori_jurusan` FOREIGN KEY (`id_jurusan`) REFERENCES `jurusan` (`id_jurusan`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lowker
 -- ----------------------------
+INSERT INTO `lowker` VALUES (2, 7, 'BACK END DEVELOPER (PHP/Laravel)', 'a', 'Rp 3-4 juta', 'Diploma D1/D2/D3, Sarjana S1, SMA/SMK', 'Full time, remote (work from anywhere)', '2025-07-10', '2025-07-24', 'PHP,MySQL/MariaDB/PostgreSQL,Backend framework: CodeIgniter/Laravel/Slim,REST API, JSON<,Familiar dengan layanan AWS: SQS, SES,GIT', 'Senin–Jumat, 08.00–17.00 WIB', 'Pria/Wanita,Pendidikan minimal SMA/SMK,Dapat bekerja dengan tim,Bersedia bekerja dengan sistem remote', 'Tunjangan Komunikasi,BPJS Kesehatan,BPJS Ketenagakerjaan,Cuti Tahunan,THR', 7, 'Malang', NULL);
 
 -- ----------------------------
 -- Table structure for perusahaan
