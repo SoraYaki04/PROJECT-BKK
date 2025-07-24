@@ -225,3 +225,10 @@ body::-webkit-scrollbar {
 .detail-button:hover {
     background-color: #0056b3;
 }
+
+.no-data {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #888;
+}

@@ -61,6 +61,12 @@ body::-webkit-scrollbar {
     max-width: 48%;
 }
 
+.info ul li,
+.requirements ul li {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
 .rincian ul {
     list-style: none;
     padding: 0;
