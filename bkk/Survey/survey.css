@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f0f0f5;
+    font-size: 16px;
+   
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+
+.profile-icon {
+    display: flex;
+    position: absolute;
+    top: 10%;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    background-color: white;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.header-bar {
+    background-color: #d1f0ff; /* Ubah ke warna biru muda yang diinginkan */
+    padding: 10px 20px; /* Tambahkan padding untuk ruang di sekitar teks */
+    text-align: left; /* Rata kanan teks */
+    font-size: 14px; /* Sesuaikan ukuran font */
+    font-weight: 500; /* Buat teks lebih tebal */
+}
+
+.header-bar a {
+    color: #002366; /* Warna teks agar terlihat jelas di atas background biru muda */
+    text-decoration: none; /* Hilangkan garis bawah pada link */
+    margin-right: 40px;
+}
+
+/* SURVEY START */
+
+.survey-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 100px;
+}
+
+.survey-title {
+    margin: 20px 0;
+}
+
+.survey-title p {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.survey-box {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    border: solid 1px black;
+    border-radius: 15px;
+    padding: 25px;
+    background: #EBFAFF;
+}
+
+.survey-box p {
+    font-family: "PT Serif Caption", serif;
+}
+
+.survey-choice p{
+    font-size: 20px;
+}
+
+.survey-choice-input p {
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+.survey-choice-input input {
+    width: 17px;
+    cursor: pointer;
+}
+
+.survey-choice-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    margin: 10px 0;
+}
+
+.survey-choice-input {
+    display: flex;
+    margin: 10px 30px;
+}
+
+.survey-description {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.survey-description textarea {
+    margin-top: 10px;
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    resize: none;
+}
+
+.survey-submit {
+    display: flex;
+    width: 80%;
+    margin-top: 20px;
+}
+
+.survey-submit-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    width: 150px;
+    height: 40px;
+    color: white;
+    background: #3590FA;
+    text-decoration: none;
+}

@@ -1,0 +1,84 @@
+/* PENGANTAR CSS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f5f5;
+    color: #333;
+    font-size: 16px;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+
+.content {
+    display: flex;
+    padding: 20px;
+}
+
+.header-bar {
+    background-color: #d1f0ff;
+    /* Ubah ke warna biru muda yang diinginkan */
+    padding: 10px 20px;
+    /* Tambahkan padding untuk ruang di sekitar teks */
+    text-align: left;
+    /* Rata kanan teks */
+    font-size: 14px;
+    /* Sesuaikan ukuran font */
+    font-weight: 500;
+    /* Buat teks lebih tebal */
+}
+
+.header-bar a {
+    color: #002366;
+    /* Warna teks agar terlihat jelas di atas background biru muda */
+    text-decoration: none;
+    /* Hilangkan garis bawah pada link */
+    margin-right: 40px;
+}
+
+/* Left side - Principal photo and title */
+.left-side {
+    width: 30%;
+    text-align: center;
+    padding-right: 20px;
+    border-right: 1px solid #ddd;
+}
+
+.left-side h1,
+.left-side h2 {
+    font-size: 24px;
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.left-side img {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* Right side - Welcome message */
+.right-side {
+    width: 70%;
+    padding-left: 20px;
+    font-size: 14px;
+    line-height: 1.8;
+    font-weight: 400;
+}
+
+.footer {
+    text-align: left;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}

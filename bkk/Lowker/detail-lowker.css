@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f0f0f5;
+    font-size: 16px;
+
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+
+.header-bar {
+    background-color: #d1f0ff; /* Ubah ke warna biru muda yang diinginkan */
+    padding: 10px 20px; /* Tambahkan padding untuk ruang di sekitar teks */
+    text-align: left; /* Rata kanan teks */
+    font-size: 14px; /* Sesuaikan ukuran font */
+    font-weight: 500; /* Buat teks lebih tebal */
+}
+
+.header-bar a {
+    color: #002366; /* Warna teks agar terlihat jelas di atas background biru muda */
+    text-decoration: none; /* Hilangkan garis bawah pada link */
+    margin-right: 40px;
+}
+.container-detail {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px auto;
+    gap: 20px;
+    max-width: 1200px;
+}
+
+.detail-lowongan {
+    width: 100%;
+}
+
+.kotak-satu, .kotak-dua {
+    border: 1px solid #9b9a9a;
+    border-radius: 8px;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+.kotak-satu {
+    flex: 1;
+    min-width: 350px;
+    max-width: 48%;
+}
+
+.kotak-dua {
+    flex: 1;
+    min-width: 350px;
+    max-width: 48%;
+}
+
+.rincian ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.rincian ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+  
+  .rincian ul li i {
+    margin-right: 8px;
+    color: #007bff;
+}
+
+.gaji, .pendidikan, .tipe, .tanggal {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #333;
+}
+
+.tanggal {
+    margin-bottom: 20px;
+    font-size: 15px;
+    color: rgb(170, 15, 15);
+}
+
+.detail-content h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #007bff;
+    font-size: 16px;
+}
+  
+.detail-content ul {
+    list-style: none;
+    padding: 0;
+    color: #555;
+    font-size: 14px;
+}
+
+.detail-content ul li {
+    margin-bottom: 8px;
+}
+  
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.actions button {
+    padding: 10px 20px;
+    font-size: 14px;
+    width: 150px;
+    height: 50px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.save-btn {
+    background-color: #007bff;
+}
+  
+.apply-btn {
+    background-color: #28a745;
+}
+  
+.actions button:hover {
+    opacity: 0.9;
+}
+  
+/* Responsiveness */
+@media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    .kotak-satu, .kotak-dua {
+      max-width: 100%;
+    }
+
+    .actions {
+      justify-content: center;
+    }
+}

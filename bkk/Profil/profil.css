@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f0f0f5;
+    font-size: 16px;
+
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.profile-icon {
+    display: flex;
+    position: absolute;
+    top: 10%;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    background-color: white;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.header-bar {
+    background-color: #d1f0ff;
+    /* Ubah ke warna biru muda yang diinginkan */
+    padding: 10px 20px;
+    /* Tambahkan padding untuk ruang di sekitar teks */
+    text-align: left;
+    /* Rata kanan teks */
+    font-size: 14px;
+    /* Sesuaikan ukuran font */
+    font-weight: 500;
+    /* Buat teks lebih tebal */
+}
+
+.header-bar a {
+    color: #002366;
+    /* Warna teks agar terlihat jelas di atas background biru muda */
+    text-decoration: none;
+    /* Hilangkan garis bawah pada link */
+    margin-right: 40px;
+}
+
+/* CONTENT PROFILE START */
+
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 20%;
+    padding-bottom: 100px;
+}
+
+.profile-title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    color: white;
+    width: 100%;
+    height: 150px;
+    background: #03205D;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+}
+
+.profile-title .profile-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+}
+
+.profile-title .profile-image img {
+    width: 130px;
+    height: auto;
+}
+
+.profile-title .profile-image-camera {
+    position: absolute;
+    bottom: 7px;
+    left: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #3376F9;
+    width: 45px;
+    height: 45px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.profile-title .profile-image-camera img {
+    width: 25px;
+    height: auto;
+}
+
+.profile-title-nisn {
+    font-size: 20px;
+}
+
+.profile-title-status {
+    color: white;
+    opacity: 0.7;
+    font-weight: 600;
+}
+
+.profile-description {
+    display: flex;
+    margin-top: 20px;
+}
+
+.profile-details {
+    font-weight: bold;
+    font-size: 15px;
+    background: #F5F5F5;
+    width: 65%;
+    min-height: 200px;
+    padding: 10px 15px 10px 15px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 7px;
+}
+
+.profile-details-1 {
+    margin-top: 2px;
+    font-size: 17px;
+    opacity: 0.6;
+    font-weight: 600;
+}
+
+.profile-notification {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    background: #F5F5F5;
+    width: 35%;
+    height: 400px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 7px;
+}
+
+.profile-notification-title {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.profile-notification-title i {
+    position: absolute;
+    left: 10px;
+}
+
+.profile-notification-notif {
+    display: flex;
+    margin: 8px 10px 5px 10px;
+    font-size: 15px;
+}
+
+.profile-notification-notif-left {
+    width: 75%;
+    font-weight: 500;
+}
+
+.profile-notification-notif-right {
+    display: flex;
+    align-items: center;
+    width: 25%;
+    font-size: 13px;
+    opacity: 0.6;
+    font-weight: 700;
+}
