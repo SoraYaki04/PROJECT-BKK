@@ -157,10 +157,10 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
               </div>
               <div class="company-header-popup">
                 <div class="company-title-popup">
-                  <h1><?php echo $row['nama']; ?></h1>
+                  <h1><?php echo htmlspecialchars($row['nama']); ?></h1>
                 </div>
                 <div class="company-desc-popup">
-                  <p><?php echo $row['deskripsi_perusahaan']; ?></p>
+                  <p><?php echo htmlspecialchars($row['deskripsi_perusahaan']); ?></p>
                 </div>
               </div>
 
@@ -170,31 +170,31 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
                 <table>
                   <tr>
                     <td class="company-detail-left">Nama Perusahaan</td>
-                    <td class="company-detail-rigth">: <?php echo $row['nama']; ?></td>
+                    <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['nama']); ?></td>
                   </tr>
                   <tr>
                     <td class="company-detail-left">Alamat</td>
-                    <td class="company-detail-rigth">: <?php echo $row['alamat']; ?></td>
+                    <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['alamat']); ?></td>
                   </tr>
                   <tr>
                     <td class="company-detail-left">Kota</td>
-                    <td class="company-detail-rigth">: <?php echo $row['kota']; ?></td>
+                    <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['kota']); ?></td>
                   </tr>
                   <tr>
                     <td class="company-detail-left">Kontak</td>
-                    <td class="company-detail-rigth">: <?php echo $row['kontak']; ?></td>
+                    <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['kontak']); ?></td>
                   </tr>
                   <tr>
                     <td class="company-detail-left">Email</td>
-                    <td class="company-detail-rigth">: <?php echo $row['email']; ?></td>
+                    <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['email']); ?></td>
                   </tr>
                   <tr>
                     <td class="company-detail-left">Kategori</td>
-                    <td class="company-detail-rigth">: <?php echo $row['kategori']; ?></td>
+                    <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['kategori']); ?></td>
                   </tr>
                   <tr>
                     <td class="company-detail-left">Standar</td>
-                    <td class="company-detail-rigth">: <?php echo $row['standar']; ?></td>
+                    <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['standar']); ?></td>
                   </tr>
                 </table>
               </div>
