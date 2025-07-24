@@ -1,28 +1,40 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
 include '../koneksi.php'; 
 if (!isset($conn)) {
     die("Database connection not established.");
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $choice = $_POST['survey-choice'] ?? '';
-    $description = $_POST['description'] ?? '';
+    $choice = trim($_POST['survey-choice'] ?? '');
+    $description = trim($_POST['description'] ?? '');
 
-    $choice = mysqli_real_escape_string($conn, $choice);
-    $description = mysqli_real_escape_string($conn, $description);
-
-    $sql = "INSERT INTO survey (pilihan_survey, kritiksaran, tgl_dibuat) VALUES ('$choice', '$description', NOW())";
-
-    if ($conn->query($sql) === TRUE) {
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+    // Validasi dasar
+    if (empty($choice)) {
+        die("Pilihan survey tidak boleh kosong.");
     }
 
+    // Gunakan prepared statement
+    $stmt = $conn->prepare("INSERT INTO survey (pilihan_survey, kritiksaran, tgl_dibuat) VALUES (?, ?, NOW())");
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    $stmt->bind_param("ss", $choice, $description);
+
+    if ($stmt->execute()) {
+        echo "Terima kasih atas tanggapan Anda!";
+    } else {
+        echo "Terjadi kesalahan saat menyimpan data: " . $stmt->error;
+    }
+
+    $stmt->close();
     $conn->close();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <title>Bursa Kerja Khusus SMKN 1 Boyolangu</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="../css/navbar.css?v=<?php echo time(); ?>" rel="stylesheet">
   <link href="survey.css?v=<?php echo time(); ?>" rel="stylesheet">
 </head>
 <body>
