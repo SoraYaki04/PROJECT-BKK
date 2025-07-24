@@ -14,7 +14,7 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bursa Kerja Khusus SMKN 1 Boyolangu</title>
-  <link rel="stylesheet" href="../css/navbar.css?php echo time(); ?>">
+  <link rel="stylesheet" href="../css/navbar.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" href="perusahaan.css?v=<?php echo time(); ?>">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
