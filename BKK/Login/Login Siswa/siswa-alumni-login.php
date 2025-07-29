@@ -2,11 +2,27 @@
 session_start();
 include '../../koneksi.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nama = $_POST['nama'];
-    $password = $_POST['password'];
 
-    // Ambil user berdasarkan nama saja
+
+// TODO Rate limiting
+if (isset($_SESSION['last_login_attempt'])) {
+    $time_since_last = time() - $_SESSION['last_login_attempt'];
+    if ($time_since_last < 30) { // ! 30 detik cooldown
+        die("Terlalu banyak percobaan. Silakan tunggu 30 detik.");
+    }
+}
+
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nama = trim($_POST['nama']);
+    $password = trim($_POST['password']);
+
+    if (empty($nama) || empty($password)) {
+        die("Username dan password harus diisi");
+    }
+
+    // TODO Ambil user berdasarkan nama saja
     $sql = "SELECT * FROM alumni WHERE nama = ?";
     $stmt = $koneksi->prepare($sql);
     $stmt->bind_param("s", $nama);
@@ -17,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $result->fetch_assoc();
         $stored_password = $user['password'];
 
-        // Cek apakah password cocok (plaintext atau hash)
+        // ! Cek apakah password cocok (plaintext atau hash)
         if ($password === $stored_password || password_verify($password, $stored_password)) {
             $_SESSION['id'] = $user['id'];
             $_SESSION['nama'] = $user['nama'];
@@ -25,10 +41,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: Home Siswa/homesiswa.php");
             exit();
         } else {
-            echo "<script>alert('Password salah!');</script>";
+
+            if (isset($_SESSION['login_attempts']) && $_SESSION['login_attempts'] > 5) {
+                die("Terlalu banyak percobaan login. Silakan coba lagi nanti.");
+            }
+            $_SESSION['error'] = "Username atau password salah";
+            header("Location: siswa-alumni-login.php");
+            exit();
         }
     } else {
-        echo "<script>alert('Username tidak ditemukan!');</script>";
+        $_SESSION['error'] = "Username atau password salah";
+        header("Location: siswa-alumni-login.php");
+        exit();
     }
 
     $stmt->close();
@@ -38,6 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,6 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="login-container">
         <div class="login-card">
@@ -55,6 +81,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p>Akun Siswa/Alumni</p>
             </div>
             <form action="" method="POST">
+                <?php if (isset($_SESSION['error'])): ?>
+                <div class="alert alert-danger">
+                    <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
+                </div>
+                <?php endif; ?>
                 <div class="input-group">
                     <label for="nama">Username</label>
                     <input type="text" name="nama" id="username" placeholder="Masukkan Username..." required>
