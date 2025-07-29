@@ -1,28 +1,31 @@
 <?php
-session_start();
-include '../../koneksi.php';
+// Include security configurations at the very top
+require_once __DIR__ . '/../../config/security.php';
+require_once __DIR__ . '/../../config/helpers.php';
+require_once __DIR__ . '/../../koneksi.php';
 
-
-
-// TODO Rate limiting
+// Rate limiting implementation
 if (isset($_SESSION['last_login_attempt'])) {
     $time_since_last = time() - $_SESSION['last_login_attempt'];
-    if ($time_since_last < 30) { // ! 30 detik cooldown
-        die("Terlalu banyak percobaan. Silakan tunggu 30 detik.");
+    if ($time_since_last < 30) { // 30 second cooldown
+        $_SESSION['error'] = "Terlalu banyak percobaan. Silakan tunggu 30 detik.";
+        redirect('siswa-alumni-login.php');
     }
 }
 
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // CSRF protection for login form
+    validate_csrf();
+    
     $nama = trim($_POST['nama']);
     $password = trim($_POST['password']);
 
     if (empty($nama) || empty($password)) {
-        die("Username dan password harus diisi");
+        $_SESSION['error'] = "Username dan password harus diisi";
+        redirect('siswa-alumni-login.php');
     }
 
-    // TODO Ambil user berdasarkan nama saja
+    // Get user by username
     $sql = "SELECT * FROM alumni WHERE nama = ?";
     $stmt = $koneksi->prepare($sql);
     $stmt->bind_param("s", $nama);
@@ -33,36 +36,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $result->fetch_assoc();
         $stored_password = $user['password'];
 
-        // ! Cek apakah password cocok (plaintext atau hash)
+        // Verify password (both plaintext and hashed)
         if ($password === $stored_password || password_verify($password, $stored_password)) {
-            $_SESSION['id'] = $user['id'];
+            // Regenerate session ID after successful login
+            session_regenerate_id(true);
+            
+            $_SESSION['user_id'] = $user['id'];  // Changed to 'user_id' for consistency
             $_SESSION['nama'] = $user['nama'];
+            $_SESSION['last_login'] = time();
+            
+            // Reset login attempts on success
+            unset($_SESSION['login_attempts']);
+            unset($_SESSION['last_login_attempt']);
 
-            header("Location: Home Siswa/homesiswa.php");
-            exit();
+            redirect('Home Siswa/homesiswa.php');
         } else {
-
-            if (isset($_SESSION['login_attempts']) && $_SESSION['login_attempts'] > 5) {
-                die("Terlalu banyak percobaan login. Silakan coba lagi nanti.");
+            // Track failed attempts
+            $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
+            $_SESSION['last_login_attempt'] = time();
+            
+            if (($_SESSION['login_attempts'] ?? 0) > 5) {
+                $_SESSION['error'] = "Terlalu banyak percobaan login. Silakan coba lagi nanti.";
+                redirect('siswa-alumni-login.php');
             }
+            
             $_SESSION['error'] = "Username atau password salah";
-            header("Location: siswa-alumni-login.php");
-            exit();
+            redirect('siswa-alumni-login.php');
         }
     } else {
         $_SESSION['error'] = "Username atau password salah";
-        header("Location: siswa-alumni-login.php");
-        exit();
+        redirect('siswa-alumni-login.php');
     }
 
     $stmt->close();
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,7 +82,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
-
 <body>
     <div class="login-container">
         <div class="login-card">
@@ -81,11 +91,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p>Akun Siswa/Alumni</p>
             </div>
             <form action="" method="POST">
+                <?= csrf_field() ?> <!-- CSRF Protection Token -->
+                
                 <?php if (isset($_SESSION['error'])): ?>
                 <div class="alert alert-danger">
                     <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
                 </div>
                 <?php endif; ?>
+                
                 <div class="input-group">
                     <label for="nama">Username</label>
                     <input type="text" name="nama" id="username" placeholder="Masukkan Username..." required>
@@ -102,3 +115,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p class="footer-text">Bursa Kerja Khusus SMKN 1 Boyolangu</p>
         </div>
     </div>
+</body>
+</html>
