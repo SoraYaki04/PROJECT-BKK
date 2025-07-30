@@ -1,5 +1,5 @@
 <?php
-// Start session dengan pengaturan aman
+
 if (session_status() === PHP_SESSION_NONE) {
     session_set_cookie_params([
         'lifetime' => 86400,
