@@ -1,16 +1,15 @@
 <?php
-session_start();
-include '../koneksi.php';
+require_once __DIR__ . '/../config/security.php';
+require_once __DIR__ . '/../config/helpers.php';
+require_once __DIR__ . '/../koneksi.php';
 
-// ! Cek login
-if (!isset($_SESSION['id'])) {
-    header("Location: login.php");
-    exit();
+// ! Check login 
+if (!is_logged_in()) {
+    redirect('../Login/Login Siswa/siswa-alumni-login.php');
 }
 
-
-// TODO Ambil data profile
-$id = intval($_SESSION['id']);
+// TODO AMBIL DATA ALUMNI
+$id = intval($_SESSION['user_id']); 
 $stmt = $koneksi->prepare("SELECT * FROM alumni WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
@@ -19,45 +18,34 @@ $data = $result->fetch_assoc();
 
 $edit_mode = isset($_GET['edit']) && $_GET['edit'] == 'true';
 
-// TODO upload file gambar profil
+// ! UPLOAD IMAGE
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload_profile_image'])) {
+    validate_csrf();
+    
     if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
-      
-        // Gunakan path absolut untuk memastikan direktori benar
         $targetDir = dirname(__DIR__) . '/uploads/profiles/';
         
-        // Buat direktori jika belum ada
+        // ! BUAT DIRECTORY UPLOAD JIKA TIDAK ADA
         if (!file_exists($targetDir)) {
-            // Buat dengan permission 0755 (bisa disesuaikan)
             if (!mkdir($targetDir, 0755, true)) {
                 $_SESSION['error'] = "Gagal membuat direktori upload";
-                error_log("Gagal membuat direktori: " . $targetDir);
-                header("Location: profil.php");
-                exit();
+                redirect('profil.php');
             }
         }
 
-                // Hapus gambar lama jika ada
+        // ! HAPUS GAMBAR LAMA
         if (!empty($data['gambar'])) {
             $oldFilePath = $targetDir . $data['gambar'];
-            if (file_exists($oldFilePath) && is_file($oldFilePath)) {
-                unlink($oldFilePath); // Hapus file lama
+            if (file_exists($oldFilePath)) {
+                unlink($oldFilePath);
             }
-        }
-        
-        // Verifikasi direktori writable
-        if (!is_writable($targetDir)) {
-            $_SESSION['error'] = "Direktori upload tidak dapat ditulisi";
-            error_log("Direktori tidak writable: " . $targetDir);
-            header("Location: profil.php");
-            exit();
         }
         
         $fileExt = pathinfo($_FILES['profile_image']['name'], PATHINFO_EXTENSION);
         $fileName = 'profile_' . $id . '_' . time() . '.' . $fileExt;
         $targetFile = $targetDir . $fileName;
         
-        // ! Validate image
+        // ! VALIDASI GAMBAR
         $check = getimagesize($_FILES['profile_image']['tmp_name']);
         $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
         
@@ -66,12 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload_profile_image'
             $_FILES['profile_image']['size'] <= 2 * 1024 * 1024) {
             
             if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $targetFile)) {
-                // TODO Update database
                 $update = $koneksi->prepare("UPDATE alumni SET gambar = ? WHERE id = ?");
                 $update->bind_param("si", $fileName, $id);
                 if ($update->execute()) {
                     $_SESSION['success'] = "Foto profil berhasil diupdate";
-                    // ! Refresh data
                     $data['gambar'] = $fileName;
                 } else {
                     $_SESSION['error'] = "Gagal menyimpan ke database";
@@ -87,13 +73,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload_profile_image'
     } else {
         $_SESSION['error'] = "Silakan pilih gambar terlebih dahulu";
     }
-    header("Location: profil.php");
-    exit();
+    redirect('profil.php');
 }
 
-// TODO Proses form edit jika dalam mode edit dan form dikirim
+// TODO PROFILE EDIT
 if ($edit_mode && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    // ! Validasi dan sanitasi input 
+    validate_csrf();
+    
+    // ! Sanitize inputs
     $nama = htmlspecialchars(trim($_POST['nama'] ?? ''));
     $tempat_lahir = htmlspecialchars(trim($_POST['tempat_lahir'] ?? ''));
     $tanggal_lahir = $_POST['tanggal_lahir'] ?? '';
@@ -105,14 +92,13 @@ if ($edit_mode && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $kode_pos = htmlspecialchars(trim($_POST['kode_pos'] ?? ''));
     $no_wa = htmlspecialchars(trim($_POST['no_wa'] ?? ''));
 
-    // ! Validasi nomor WhatsApp
+    // ! Validate WhatsApp number
     if (!preg_match('/^[0-9]{10,15}$/', $no_wa)) {
         $_SESSION['error'] = "Nomor WhatsApp tidak valid";
-        header("Location: profil.php?edit=true");
-        exit();
+        redirect('profil.php?edit=true');
     }
 
-    // TODO Update data
+    // TODO Update profile
     $stmt = $koneksi->prepare("UPDATE alumni SET 
         nama = ?,
         tempat_lahir = ?,
@@ -140,16 +126,13 @@ if ($edit_mode && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $id
     ) && $stmt->execute()) {
         $_SESSION['success'] = "Profil berhasil diperbarui";
-        header("Location: profil.php");
-        exit();
+        redirect('profil.php');
     } else {
         $_SESSION['error'] = "Gagal memperbarui profil";
-        header("Location: profil.php?edit=true");
-        exit();
+        redirect('profil.php?edit=true');
     }
 }
 
-// Tutup statement
 $stmt->close();
 ?>
 
@@ -214,7 +197,7 @@ $stmt->close();
   <div class="container">
 
     <nav class="navbar">
-      <!-- data-feather="chevron-down"> -->
+
       <ul class="navbar-container">
         <li>
           <div onclick="" class="profile-icon">
@@ -224,10 +207,10 @@ $stmt->close();
         <li>
           <a href="#">HOME<i class="fa-solid fa-chevron-down"></i></a>
           <ul class="dropdown">
-            <li><a href="../berandautama.php">Halaman Utama</a></li>
-            <li><a href="../Home/pengantar.php">Pengantar</a></li>
-            <li><a href="../Informasi Kegiatan BKK/informasi_kegiatan.html">Informasi Kegiatan BKK</a></li>
-            <li><a href="">Rekapitulasi</a></li>
+            <li><a href="../Home/Halaman Utama/berandautama.php">Halaman Utama</a></li>
+            <li><a href="../Home/pengantar.html">Pengantar</a></li>
+            <li><a href="../Home/Informasi Kegiatan BKK/informasikegiatanbkk.html">Informasi Kegiatan BKK</a></li>
+            <li><a href="../Home/Rekapitulasi/rekapitulasi.php">Rekapitulasi</a></li>
           </ul>
         </li>
 
@@ -254,6 +237,7 @@ $stmt->close();
         <li><a href="../Lowker/loker.php">LOWONGAN KERJA</a></li>
       </ul>
     </nav>
+    
     <div class="header-bar">
       <a href="#">Profil</a>
     </div>
@@ -279,7 +263,7 @@ $stmt->close();
 
           <div class="profile-image-camera">
             <form id="imageUploadForm" method="POST" enctype="multipart/form-data">
-              <!-- Tambahkan input hidden untuk penanda upload -->
+              <?= csrf_field() ?>
               <input type="hidden" name="upload_profile_image" value="1">
               <input type="file" id="profileImageInput" name="profile_image" accept="image/*" style="display: none;">
               <label for="profileImageInput" style="cursor: pointer;">
@@ -301,6 +285,7 @@ $stmt->close();
         <div class="profile-details">
           <h2>Edit Profil</h2>
           <form method="POST" action="profil.php?edit=true">
+            <?= csrf_field() ?>
             <div class="form-group">
               <p class="profile-details-1">Nama Lengkap</p>
               <input type="text" id="nama" name="nama" value="<?= htmlspecialchars($data['nama'] ?? '') ?>" required>
@@ -404,7 +389,6 @@ $stmt->close();
           <p><?php echo $data['nik'] ?></p>
         </div>
 
-        <!-- Bagian notifikasi sama seperti sebelumnya -->
         <div class="profile-notification">
           <div class="profile-notification-title">
             <i class="fa-regular fa-bell"></i>
@@ -442,6 +426,8 @@ $stmt->close();
 
         </div>
       </div>
+<a href="../Login/logout.php">Logout</a>
+
       <?php endif; ?>
     </div>
 
@@ -449,13 +435,13 @@ $stmt->close();
   </div>
 
   <script>
-    // Pastikan script ini ditempatkan setelah elemen HTML terdefinisi
+
     document.getElementById('profileImageInput').addEventListener('change', function (e) {
-      // Validasi file
+      // ! Validasi file
       const file = e.target.files[0];
       if (!file) return;
 
-      // Validasi ukuran dan tipe file
+      // ! Validasi ukuran dan tipe file
       if (file.size > 2 * 1024 * 1024) {
         alert('File terlalu besar (maksimal 2MB)');
         return;
@@ -466,7 +452,7 @@ $stmt->close();
         return;
       }
 
-      // Submit form
+      // TODO Submit form
       document.getElementById('imageUploadForm').submit();
     });
   </script>
