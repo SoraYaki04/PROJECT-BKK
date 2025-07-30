@@ -1,0 +1,189 @@
+/* BERANDA */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f0f0f5;
+    font-size: 16px;
+
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.navbar {
+    background: rgba(81, 53, 250, 0.8);
+}
+
+/* BACKGROUND */
+.container {
+    background-image: url('../../bg utama.png');
+    background-size: cover;
+    background-position: 75% center;
+    width: 100vw;
+}
+
+.hero {
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 50px 20px;
+    margin-left: 30px;
+}
+
+.hero-content {
+    margin-top: 10px;
+    max-width: 100%;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s ease-out, transform 0.6s ease-out;
+}
+
+.hero-content.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-content h1 {
+    font-family: 'Franklin Gothic Medium', sans-serif;
+    font-size: 6rem;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.hero hr {
+    width: 28vw;
+}
+
+.tagline {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    font-family: 'Ponnala';
+    user-select: none;
+}
+
+.video-button {
+    background-color: #e56911;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    width: 13vw;
+    border-radius: 7px;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+}
+
+.video-button i {
+    font-size: 25px;
+    margin-left: 10px;
+
+}
+
+.video-button:hover {
+    background-color: #eba911;
+}
+
+.login-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 20px;
+    grid-column-gap: 10px;
+    justify-content: center;
+    width: 50%;
+    margin-top: 20px;
+}
+
+.login-card {
+    display: flex;
+    align-items: center;
+    background-color: #4e4e50;
+    color: white;
+    padding: 15px;
+    text-align: left;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    width: 100%;
+    max-width: 300px;
+    height: 15vh;
+    transition: background-color 0.3s;
+    box-shadow: 2px 12px 12px rgba(0, 0, 0, 0.2);
+}
+
+.login-card:hover {
+    background-color: #6c757d;
+}
+
+.icon {
+    width: 110px;
+    height: 110px;
+    margin-right: 25px;
+    margin-left: -10px;
+}
+
+/* Footer */
+footer {
+    background-color: #1b1b2f;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 30px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+
+    .container {
+        background-position: 100% top;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .login-options {
+        align-items: center;
+    }
+
+    .contact-info {
+        flex-direction: column;
+        gap: 8px;
+        margin-left: 20px;
+    }
+
+    .contact-phone p,
+    .contact-email p,
+    .contact-map p {
+        font-size: 11px;
+    }
+
+
+    #text-img {
+        width: 200px;
+        /* Sesuaikan ukuran gambar teks */
+        height: auto;
+    }
+
+    .navbar {
+        padding: 5px 5px;
+        position: relative;
+        gap: 10px;
+    }
+
+    .navbar p {
+        font-size: 10px;
+    }
+}
