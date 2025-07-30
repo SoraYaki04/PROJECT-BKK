@@ -1,8 +1,7 @@
 <?php
-include '../koneksi.php';
+require_once __DIR__ . '/../config/helpers.php';
 
 $result = $koneksi->query("SELECT * FROM perusahaan");
-
 
 ?>
 
@@ -14,7 +13,7 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bursa Kerja Khusus SMKN 1 Boyolangu</title>
-  <link rel="stylesheet" href="../css/navbar.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="../navbar/navbar.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" href="perusahaan.css?v=<?php echo time(); ?>">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -64,44 +63,17 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
   </header>
 
   <div class="container">
-    <nav class="navbar">
-      <!-- data-feather="chevron-down"> -->
-      <ul class="navbar-container">
-        <li>
-          <a href="../Home/Halaman Utama/berandautama.html" class="">HOME<i class="fa-solid fa-chevron-down"></i></a>
-          <ul class="dropdown">
-            <li><a href="../Home/Halaman Utama/berandautama.html">Halaman Utama</a></li>
-            <li><a href="../Home/Pengantar/pengantar.html">Pengantar</a></li>
-            <li><a href="../Home/Informasi Kegiatan BKK/informasikegiatanbkk.html">Informasi Kegiatan BKK</a></li>
-            <li><a href="../Home/Halaman Utama/rekapitulasi.html">Rekapitulasi</a></li>
-          </ul>
-        </li>
 
-        <li><a href="#">TENTANG KAMI<i class="fa-solid fa-chevron-down"></i></a>
-          <ul class="dropdown">
-            <li><a href="../Tentang Kami/visimisi.php">Visi Misi</a></li>
-            <li><a href="../Tentang Kami/proker.php">Progam Kerja BKK</a></li>
-            <li><a href="../Tentang Kami/tujuan.php">Tujuan</a></li>
-            <li><a href="../Tentang Kami/strukturorganisasi.php">Struktur Organisasi</a></li>
-          </ul>
-        </li>
-
-        <li><a href="#">LOGIN<i class="fa-solid fa-chevron-down"></i></a>
-          <ul class="dropdown">
-            <li><a href="../Login/admin-login.html">Admin BKK</a></li>
-            <li><a href="../Login/management-login.html">Management</a></li>
-            <li><a href="../Login/siswa-alumni-login.html">Siswa / Alumni</a></li>
-            <li><a href="../Login/pengguna-lain-login.html">Partisipan Lain</a></li>
-          </ul>
-        </li>
-
-        <li><a href="../Informasi Jurusan/informasiJurusan.php">INFORMASI JURUSAN</a></li>
-        <li><a href="#" class="active">PERUSAHAAN</a></li>
-        <li><a href="../Lowker/loker.php">LOWONGAN KERJA</a></li>
-      </ul>
-
-
-    </nav>
+      <!--  NAVBAR -->
+    <?php
+    if (!is_logged_in()) {
+        include '../navbar/guest.php';
+    } elseif (is_alumni()) {
+        include '../navbar/alumni.php';
+    } elseif (is_admin()) {
+        include '../navbar/admin.php';
+    }
+    ?>
 
     <section>
       <div class="header-bar">
