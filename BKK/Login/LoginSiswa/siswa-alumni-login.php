@@ -1,7 +1,5 @@
 <?php
-require_once __DIR__ . '/../../config/security.php';
 require_once __DIR__ . '/../../config/helpers.php';
-require_once __DIR__ . '/../../koneksi.php';
 
 // ! Rate limiting implementation
 if (isset($_SESSION['last_login_attempt'])) {
@@ -49,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             unset($_SESSION['login_attempts']);
             unset($_SESSION['last_login_attempt']);
 
-            redirect('../../Home/Halaman Utama/berandautama.php');
+            redirect('../../Home/HalamanUtama/berandautama.php');
         } else {
             // ! Track failed attempts
             $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
