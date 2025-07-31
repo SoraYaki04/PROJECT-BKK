@@ -1,11 +1,9 @@
 <?php
-require_once __DIR__ . '/../config/security.php';
 require_once __DIR__ . '/../config/helpers.php';
-require_once __DIR__ . '/../koneksi.php';
 
 // ! Check login 
 if (!is_logged_in()) {
-    redirect('../Login/Login Siswa/siswa-alumni-login.php');
+    redirect('../Login/LoginSiswa/siswa-alumni-login.php');
 }
 
 // TODO AMBIL DATA ALUMNI
@@ -148,7 +146,7 @@ $stmt->close();
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Ponnala&family=Franklin+Demi+Cond&display=swap" rel="stylesheet">
-  <link href="../css/navbar.css?v=<?php echo time(); ?>" rel="stylesheet">
+  <link href="../navbar/navbar.css?v=<?php echo time(); ?>" rel="stylesheet">
   <link href="profil.css?v=<?php echo time(); ?>" rel="stylesheet">
 </head>
 
@@ -196,47 +194,16 @@ $stmt->close();
 
   <div class="container">
 
-    <nav class="navbar">
-
-      <ul class="navbar-container">
-        <li>
-          <div onclick="" class="profile-icon">
-            <i class="fa-solid fa-user fa-sm student-profile" style="color: #5135FA;"></i>
-          </div>
-        </li>
-        <li>
-          <a href="#">HOME<i class="fa-solid fa-chevron-down"></i></a>
-          <ul class="dropdown">
-            <li><a href="../Home/Halaman Utama/berandautama.php">Halaman Utama</a></li>
-            <li><a href="../Home/pengantar.html">Pengantar</a></li>
-            <li><a href="../Home/Informasi Kegiatan BKK/informasikegiatanbkk.html">Informasi Kegiatan BKK</a></li>
-            <li><a href="../Home/Rekapitulasi/rekapitulasi.php">Rekapitulasi</a></li>
-          </ul>
-        </li>
-
-        <li><a href="#">TENTANG KAMI<i class="fa-solid fa-chevron-down"></i></a>
-          <ul class="dropdown">
-            <li><a href="../Tentang Kami/visimisi.php">Visi Misi</a></li>
-            <li><a href="../Tentang Kami/proker.php">Progam Kerja BKK</a></li>
-            <li><a href="../Tentang Kami/tujuan.php">Tujuan</a></li>
-            <li><a href="../Tentang Kami/strukturorganisasi.php">Struktur Organisasi</a></li>
-          </ul>
-        </li>
-
-        <li><a href="#">LOGIN<i class="fa-solid fa-chevron-down"></i></a>
-          <ul class="dropdown">
-            <li><a href="../Login/Login Admin/admin-login.php">Admin BKK</a></li>
-            <li><a href="../Login/Login Management/management-login.php">Management</a></li>
-            <li><a href="../Login/Login Siswa/siswa-alumni-login.php">Siswa / Alumni</a></li>
-            <li><a href="../Login/Login User Lain/pengguna-lain-login.html">Partisipan Lain</a></li>
-          </ul>
-        </li>
-
-        <li><a href="../Informasi Jurusan/informasiJurusan.php">INFORMASI JURUSAN</a></li>
-        <li><a href="../Perusahaan/perusahaan.php">PERUSAHAAN</a></li>
-        <li><a href="../Lowker/loker.php">LOWONGAN KERJA</a></li>
-      </ul>
-    </nav>
+    <!--  NAVBAR -->
+    <?php
+    if (!is_logged_in()) {
+        include '../navbar/guest.php';
+    } elseif (is_alumni()) {
+        include '../navbar/alumni.php';
+    } elseif (is_admin()) {
+        include '../navbar/admin.php';
+    }
+    ?>
     
     <div class="header-bar">
       <a href="#">Profil</a>
