@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f0f0f5;
+    font-size: 16px;
+
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+.header-bar {
+    background-color: #d1f0ff;
+    padding: 10px 20px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.header-bar a {
+    color: #002366;
+    text-decoration: none;
+    margin-right: 40px;
+}
+
+.container-tabel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.tabel-wrapper {
+    width: calc(33.33% - 20px);
+    /* dua tabel per baris */
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s ease-out, transform 0.6s ease-out;
+}
+
+.tabel-wrapper.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.judul-tabel {
+    background-color: #003865;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+td:first-child {
+    width: 50%;
+    color: #555;
+}
+
+td:last-child {
+    text-align: right;
+    font-weight: bold;
+    color: #222;
+}
