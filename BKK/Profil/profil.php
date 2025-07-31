@@ -3,7 +3,7 @@ require_once __DIR__ . '/../config/helpers.php';
 
 // ! Check login 
 if (!is_logged_in()) {
-    redirect('../Login/LoginSiswa/siswa-alumni-login.php');
+    redirect('../Home/HalamanUtama/berandautama.php');
 }
 
 // TODO AMBIL DATA ALUMNI
