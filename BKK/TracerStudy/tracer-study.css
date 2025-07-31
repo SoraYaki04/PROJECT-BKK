@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f0f0f5;
+    font-size: 16px;
+
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+
+.header-bar {
+    background-color: #d1f0ff; 
+    padding: 10px 20px; 
+    text-align: left;
+    font-size: 14px; 
+    font-weight: 500;
+}
+
+.header-bar a {
+    color: #002366; 
+    text-decoration: none; 
+    margin-right: 40px;
+}
+
+.container-tracer {
+    padding: 40px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s ease-out, transform 0.6s ease-out;
+}
+
+.container-tracer.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.container-tracer h2 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+/* Tombol Jurusan */
+.jurusan-buttons {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    margin: 8px 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+    background-color: #2799ea;
+}
+
+.btn:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn.active {
+    background-color: #6dc24b!important;
+    color: #fff;
+    box-shadow: 0 0 0 3px rgba(11, 42, 93, 0.2);
+    transform: none;
+}
+
+.container-tracer h3 {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.tracer-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.tracer-table th {
+    background-color: #0b2a5d;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+.tracer-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tracer-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.tracer-table tfoot td {
+    background-color: #0b2a5d;
+    color: white;
+    font-weight: bold;
+}
