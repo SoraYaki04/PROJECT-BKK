@@ -99,91 +99,86 @@ header .rectangle {
 
 /* NAVBAR START */
 
-/* Navbar container */
 .navbar {
     background: #134CBC;
     position: relative;
 }
 
-/* Navbar items and layout */
 .navbar-container {
     display: flex;
     justify-content: space-around;
     height: 50px;
-    /* Membuat jarak otomatis sama */
     list-style: none;
     padding: 0;
     margin: 0;
     position: relative;
 }
 
-/* Navbar item */
 .navbar ul li {
-    position: relative;
-}
-
-.navbar ul li a {
-    display: flex;
-    align-items: center;
-    padding: 10px 25px;
-    color: #FFF;
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: 400;
-    font-family: 'Poppins', sans-serif;
-    position: relative;
-    z-index: 1;
-    transition: color 0.3s ease;
-}
-
-/* Chevron icon style */
-.navbar ul li a i {
-    margin-left: 10px;
-    font-size: 13px;
-}
-
-/* Hover effect for links */
-.navbar ul li a:hover {
-    color: #f0a500;
-}
-
-.navbar ul li a.active {
-    color: #f0a500;
-    /* Optional active color */
-}
-
-.navbar ul li ul.dropdown li {
-    display: block;
-    margin-top: 8px;
-}
-
-.navbar ul li ul.dropdown li a {
-    text-align: left;
-    color: black;
-    font-size: 17px;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.navbar ul li ul.dropdown li a:hover {
-    color: #3376F9;
-
-}
-
-.navbar ul li ul.dropdown li a.active {
-    color: #3376F9;
-
+  position: relative;
 }
 
 .navbar ul li ul.dropdown {
-    margin-top: 3px;
-    width: 260px;
-    background: #FFFFFF;
-    position: absolute;
-    z-index: 999;
-    display: none;
+  width: 260px;
+  background: #FFFFFF;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 999;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .navbar ul li:hover ul.dropdown {
-    display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.navbar ul li ul.dropdown li {
+  display: block;
+  margin-top: 8px;
+}
+
+.navbar ul li ul.dropdown li a {
+  text-align: left;
+  color: black;
+  font-size: 17px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar ul li ul.dropdown li a:hover,
+.navbar ul li ul.dropdown li a.active {
+  color: #3376F9;
+}
+
+.navbar ul li a {
+  display: flex;
+  align-items: center;
+  padding: 10px 25px;
+  color: #FFF;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.navbar ul li a i {
+  margin-left: 10px;
+  font-size: 13px;
+}
+
+.navbar ul li a:hover,
+.navbar ul li a.active {
+  color: #f0a500;
 }

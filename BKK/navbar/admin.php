@@ -2,13 +2,25 @@
 require_once __DIR__ . '/../config/helpers.php';
 ?>
 
+<style>
+.navbar ul li a {
+    padding: 10px 10px;
+}
+
+.navbar ul li.crud-dropdown ul.dropdown {
+  right: 0;
+  left: auto;
+}
+
+</style>
+
 <nav class="navbar">
   <ul class="navbar-container">
 
-    <?php if (is_alumni()): ?>
+    <?php if (is_admin()): ?>
       <li>
         <div onclick="window.location.href='<?= base_url('Profil/profil.php') ?>'" class="profile-icon">
-          <i class="fa-solid fa-user fa-sm student-profile" style="color: #5135FA;"></i>
+          <i class="fa-solid fa-user-tie fa-sm" style="color: #5135FA;"></i>
         </div>
       </li>
     <?php endif; ?>
@@ -20,16 +32,6 @@ require_once __DIR__ . '/../config/helpers.php';
         <li><a class="<?= nav_active('Home/Pengantar/pengantar.php') ?>" href="<?= base_url('Home/Pengantar/pengantar.php') ?>">Pengantar</a></li>
         <li><a class="<?= nav_active('Home/InformasiKegiatanBKK/informasikegiatanbkk.php') ?>" href="<?= base_url('Home/InformasiKegiatanBKK/informasikegiatanbkk.php') ?>">Informasi Kegiatan BKK</a></li>
         <li><a href="#">Rekapitulasi</a></li>
-      </ul>
-    </li>
-
-    <li>
-      <a class="<?= nav_active(['TentangKami/visimisi.php', 'TentangKami/proker.php', 'TentangKami/tujuan.php', 'TentangKami/strukturorganisasi.php']) ?>" href="#">TENTANG KAMI<i class="fa-solid fa-chevron-down"></i></a>
-      <ul class="dropdown">
-        <li><a class="<?= nav_active('TentangKami/visimisi.php') ?>" href="<?= base_url('TentangKami/visimisi.php') ?>">Visi Misi</a></li>
-        <li><a class="<?= nav_active('TentangKami/proker.php') ?>" href="<?= base_url('TentangKami/proker.php') ?>">Program Kerja</a></li>
-        <li><a class="<?= nav_active('TentangKami/tujuan.php') ?>" href="<?= base_url('TentangKami/tujuan.php') ?>">Tujuan</a></li>
-        <li><a class="<?= nav_active('TentangKami/strukturorganisasi.php') ?>" href="<?= base_url('TentangKami/strukturorganisasi.php') ?>">Struktur Organisasi</a></li>
       </ul>
     </li>
 
@@ -45,8 +47,26 @@ require_once __DIR__ . '/../config/helpers.php';
     </li>
     <?php endif; ?>
 
+    <li><a class="<?= nav_active('TracerStudy/tracer-study.php') ?>" href="<?= base_url('TracerStudy/tracer-study.php') ?>">TRACER STUDY</a></li>
     <li><a class="<?= nav_active('InformasiJurusan/informasiJurusan.php') ?>" href="<?= base_url('InformasiJurusan/informasiJurusan.php') ?>">INFORMASI JURUSAN</a></li>
     <li><a class="<?= nav_active('Perusahaan/perusahaan.php') ?>" href="<?= base_url('Perusahaan/perusahaan.php') ?>">PERUSAHAAN</a></li>
+    <li><a class="<?= nav_active('Lowker/loker.php') ?>" href="<?= base_url('Lowker/loker.php') ?>">LOWONGAN KERJA</a></li>
+
+    <li>
+      <a class="<?= nav_active(['Rekap/rekap-alumni.php', 'Rekap/rekap-loker.php']) ?>" href="#">REKAP<i class="fa-solid fa-chevron-down"></i></a>
+      <ul class="dropdown">
+        <li><a class="<?= nav_active('Rekap/rekap-alumni.php') ?>" href="<?= base_url('Rekap/rekap-alumni.php') ?>">Rekap Alumni</a></li>
+        <li><a class="<?= nav_active('Rekap/rekap-loker.php') ?>" href="<?= base_url('Rekap/rekap-loker.php') ?>">Rekap Lowongan Kerja</a></li>
+      </ul>
+    </li>
+
+    <li class="crud-dropdown">
+      <a class="<?= nav_active(['CRUD/crud-perusahaan.php', 'CRUD/crud-loker.php']) ?>" href="#">C.R.U.D<i class="fa-solid fa-chevron-down"></i></a>
+      <ul class="dropdown">
+        <li><a class="<?= nav_active('CRUD/crud-perusahaan.php') ?>" href="<?= base_url('CRUD/crud-perusahaan.php') ?>">CRUD Perusahaan</a></li>
+        <li><a class="<?= nav_active('CRUD/crud-loker.php') ?>" href="<?= base_url('CRUD/crud-loker.php') ?>">CRUD Lowongan Kerja</a></li>
+      </ul>
+    </li>
 
   </ul>
 </nav>
