@@ -1,12 +1,22 @@
 <?php
 require_once __DIR__ . '/../../config/helpers.php';
 
-// ! Rate limiting implementation
-if (isset($_SESSION['last_login_attempt'])) {
-    $time_since_last = time() - $_SESSION['last_login_attempt'];
-    if ($time_since_last < 30) { 
+// ! Redirect jika sudah login sebagai admin
+if (isset($_SESSION['user_id']) && $_SESSION['role'] === 'alumni') {
+    redirect('../../Home/HalamanUtama/berandautama.php');
+    exit();
+}
+
+// ! Rate limiting
+if (isset($_SESSION['login_attempts']) && $_SESSION['login_attempts'] >= 5) {
+    $time_since_last = time() - ($_SESSION['last_login_attempt'] ?? 0);
+    if ($time_since_last < 30) {
         $_SESSION['error'] = "Terlalu banyak percobaan. Silakan tunggu 30 detik.";
         redirect('siswa-alumni-login.php');
+        exit();
+    } else {
+        unset($_SESSION['login_attempts']);
+        unset($_SESSION['last_login_attempt']);
     }
 }
 
@@ -20,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($nama) || empty($password)) {
         $_SESSION['error'] = "Username dan password harus diisi";
         redirect('siswa-alumni-login.php');
+        exit();
     }
 
     // TODO AMBIL DATA ALUMNI
@@ -48,6 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             unset($_SESSION['last_login_attempt']);
 
             redirect('../../Home/HalamanUtama/berandautama.php');
+            exit();
         } else {
             // ! Track failed attempts
             $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
@@ -56,14 +68,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (($_SESSION['login_attempts'] ?? 0) > 5) {
                 $_SESSION['error'] = "Terlalu banyak percobaan login. Silakan coba lagi nanti.";
                 redirect('siswa-alumni-login.php');
+                exit();
             }
             
             $_SESSION['error'] = "Username atau password salah";
             redirect('siswa-alumni-login.php');
+            exit();
         }
     } else {
         $_SESSION['error'] = "Username atau password salah";
         redirect('siswa-alumni-login.php');
+        exit();
     }
 
     $stmt->close();
@@ -92,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?= csrf_field() ?>
                 
                 <?php if (isset($_SESSION['error'])): ?>
-                <div class="alert alert-danger">
+                <div class="error-message">
                     <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
                 </div>
                 <?php endif; ?>
