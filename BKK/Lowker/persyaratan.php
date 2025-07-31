@@ -1,5 +1,5 @@
 <?php
-session_start(); // Mulai session untuk CSRF protection dan user data
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -20,9 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_lamaran'])) {
     // if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
     //     die("Invalid CSRF token");
     // }
-
+    require_once __DIR__ . '/../config/helpers.php';
     require '../../vendor/autoload.php';
-    include '../koneksi.php';
 
     // Ambil data user yang login dari session
     if (!isset($_SESSION['user_id'])) {
@@ -188,45 +187,7 @@ $id_lowker = (int)$_GET['id'] ?? 0;
 
   <!-- Header dan Navbar sama seperti sebelumnya -->
 
-  <header>
-    <div class="rectangle">
-    </div>
-
-    <div class="logo">
-      <div class="logo-header">
-        <img src="../logo.png" alt="BKK SMKN 1 Boyolangu Logo">
-      </div>
-      <div class="header-text">
-        <img src="../tulisan logo.png" alt="Bursa Kerja Khusus SMKN 1 Boyolangu" id="text-img">
-      </div>
-    </div>
-
-    <div class="contact-info">
-      <div class="contact-phone">
-        <i class="fas fa-phone-alt"></i>
-        <div class="contact-ket">
-          <p>Call Us</p>
-          <p>+6281-xxx-xxx-xxx</p>
-        </div>
-      </div>
-      <div class="contact-email">
-        <i class="fas fa-envelope"></i>
-        <div class="contact-ket">
-          <p>Email Us</p>
-          <p>bkk@smkn1boyolangu@gmail.com</p>
-        </div>
-
-      </div>
-      <div class="contact-map">
-        <i class="fas fa-map-marker-alt"></i>
-        <div class="contact-ket">
-          <p>Located Us</p>
-          <p>Jl. Ki Mangun Sarkoro No.VI/3, Beji, Boyolangu</p>
-        </div>
-
-      </div>
-    </div>
-  </header>
+  <?php include '../navbar/header.php' ?>
 
   <div class="container">
     <nav class="navbar">
