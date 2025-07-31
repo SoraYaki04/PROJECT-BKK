@@ -1,6 +1,5 @@
 <?php
-require_once __DIR__ . '/../../config/security.php'; 
-include '../../koneksi.php';
+require_once __DIR__ . '/../../config/helpers.php'; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // ! Validasi CSRF token
@@ -9,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // ! Sanitasi input
-    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+    $username = trim($_POST['username'] ?? '');
     $old_password = $_POST['old_password'];
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'] ?? '';
