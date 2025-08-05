@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../config/helpers.php';
 
+allow_role(['admin', 'alumni']);
+
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("ID lowongan tidak valid.");
 }
@@ -25,10 +27,6 @@ if ($result->num_rows === 0) {
 }
 
 $data = $result->fetch_assoc();
-
-$keahlianList = isset($data['keahlian']) ? explode(',', $data['keahlian']) : [];
-$kualifikasiList = isset($data['kualifikasi']) ? explode(',', $data['kualifikasi']) : [];
-$tunjanganList = isset($data['tunjangan']) ? explode(',', $data['tunjangan']) : [];
 ?>
 
 <!DOCTYPE html>
@@ -48,14 +46,12 @@ $tunjanganList = isset($data['tunjangan']) ? explode(',', $data['tunjangan']) : 
 
     <?php include '../navbar/header.php' ?>
 
-
-
     <div class="container">
 
         <!--  NAVBAR -->
         <?php
         if (!is_logged_in()) {
-            include 'navbar/guest.php';
+            include '../navbar/guest.php';
         } elseif (is_alumni()) {
             include '../navbar/alumni.php';
         } elseif (is_admin()) {
@@ -69,8 +65,10 @@ $tunjanganList = isset($data['tunjangan']) ? explode(',', $data['tunjangan']) : 
         <main>
             <section class="detail-lowongan">
                 <div class="container-detail">
+
                     <div class="kotak-satu">
                         <h2><?= htmlspecialchars($data['judul_lowker']) ?></h2>
+
                         <div class="rincian">
                             <ul>
                                 <li><i class="fa-solid fa-building"></i><?= htmlspecialchars($data['id_perusahaan']) ?></li>
@@ -79,67 +77,73 @@ $tunjanganList = isset($data['tunjangan']) ? explode(',', $data['tunjangan']) : 
                             </ul>
                         </div>
 
-                        <p><?= htmlspecialchars($data['deskripsi_lowker']) ?></p>
-
-                        <div class="gaji">
-                            <p>Gaji :</p>
+                        <div class="form-input">
+                            <h4>Gaji :</h4>
                             <p><?= htmlspecialchars($data['gaji']) ?></p>
                         </div>
 
-                        <div class="pendidikan">
-                            <p>Pendidikan :</p>
+                        <div class="form-input">
+                            <h4>Pendidikan :</h4>
                             <p><?= htmlspecialchars($data['pendidikan']) ?></p>
                         </div>
 
-                        <div class="tipe">
-                            <p>Tipe pekerjaan :</p>
+                        <div class="form-input">
+                            <h4>Tipe pekerjaan :</h4>
                             <p><?= htmlspecialchars($data['tipe_pekerjaan']) ?></p>
                         </div>
 
-                        <div class="tanggal">
-                            <p><strong>Tanggal posting : <?= date('l, d M Y', strtotime($data['tgl_posting'])) ?></strong></p>
-                            <p><strong>Tanggal exp : <?= date('l, d M Y', strtotime($data['tgl_ditutup'])) ?></strong></p>
+                        <div class="form-input">
+                            <h4>Tanggal exp : </h4>
+                            <p><?= htmlspecialchars($data['tgl_ditutup']) ?></p>
                         </div>
                     </div>
 
                     <div class="kotak-dua">
                         <div class="detail-content">
-                            <div class="info">
-                                <h3>Keahlian:</h3>
-                                <ul>
-                                    <?php foreach ($keahlianList as $item_keahlian): ?>
-                                    <li><?= htmlspecialchars(trim($item_keahlian)) ?></li>
-                                    <?php endforeach; ?>
-                                </ul>
 
-                                <h3>Waktu Bekerja:</h3>
+                            <div class="form-input">
+                                <h4>Deskripsi : </h4>
+                                <p><?= nl2br(htmlspecialchars($data['deskripsi_lowker'])) ?></p>
+                                
+                            </div>
+
+                            <div class="form-input">
+                                <h4>Keahlian : </h4>
+                                <p><?= nl2br(htmlspecialchars($data['keahlian'])) ?></p>
+                            </div>
+
+                            <div class="form-input">
+                                <h4>Waktu Bekerja :</h4>
                                 <p><?= htmlspecialchars($data['waktu_bekerja']) ?></p>
                             </div>
 
-                            <div class="requirements">
-                                <h3>Kualifikasi:</h3>
-                                <ul>
-                                    <?php foreach ($kualifikasiList as $item_kualifikasi): ?>
-                                    <li><?= htmlspecialchars(trim($item_kualifikasi)) ?></li>
-                                    <?php endforeach; ?>
-                                </ul>
+                        </div>
 
+                    </div>
 
-                                <h3>Tunjangan:</h3>
-                                <ul>
-                                    <?php foreach ($tunjanganList as $item_tunjangan): ?>
-                                    <li><?= htmlspecialchars(trim($item_tunjangan)) ?></li>
-                                    <?php endforeach; ?>
-                                </ul>
+                        <div class="kotak-tiga">
+                            
+                            <div class="form-input">
+                                <h4>Kualifikasi :</h4>
+                                <p><?= nl2br(htmlspecialchars($data['kualifikasi'])) ?></p>
+                            </div>
+                            
+                            <div class="form-input">
+                                <h4>Tunjangan :</h4>
+                                <p><?= nl2br(htmlspecialchars($data['tunjangan'])) ?></p>
+                            </div>
 
+                            <div class="form-input" id="jurusan">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                                <p><?= htmlspecialchars($data['nama_jurusan']); ?></p>
                             </div>
                         </div>
-                    </div>
 
                     <div class="actions">
-                        <button class="save-btn">SIMPAN</button>
-                        <button class="apply-btn">LAMAR</button>
+                        <a href="persyaratan.php?id=<?= $data['id_lowker'] ?>" class="save-btn">LAMAR</a>
+                        <a href="loker.php" class="apply-btn">BATAL</a>
                     </div>
+
                 </div>
             </section>
         </main>

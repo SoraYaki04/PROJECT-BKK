@@ -1,29 +1,22 @@
 <?php
 
+require_once __DIR__ . '/../config/helpers.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
+allow_role(['admin', 'alumni']);
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("ID lowongan tidak valid.");
 }
 
-
-
-// // Generate CSRF token jika belum ada
-// if (empty($_SESSION['csrf_token'])) {
-//     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-// }
-
-// Proses form jika ada data yang dikirim
+// ! Proses form jika ada data yang dikirim
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_lamaran'])) {
-    // Validasi CSRF token
-    // if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-    //     die("Invalid CSRF token");
-    // }
     require_once __DIR__ . '/../config/helpers.php';
     require '../../vendor/autoload.php';
 
-    // Ambil data user yang login dari session
+    // TODO Ambil data user yang login dari session
     if (!isset($_SESSION['user_id'])) {
         die("Anda harus login terlebih dahulu");
     }
@@ -36,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_lamaran'])) {
     mkdir($upload_dir, 0755, true);
 }
 
-    // Validasi ID lowongan dengan prepared statement
+    // ! Validasi ID lowongan dengan prepared statement
     $stmt = $koneksi->prepare("SELECT l.*, p.id_perusahaan, p.email, p.nama 
                               FROM lowker l 
                               JOIN perusahaan p ON l.id_perusahaan = p.id_perusahaan 
@@ -48,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_lamaran'])) {
     if (!$lowker) {
         $error_message = "ID lowongan tidak valid atau tidak ditemukan.";
     } else {
-        // Ambil data user dari database
+        // TODO Ambil data user dari database
         $stmt_user = $koneksi->prepare("SELECT * FROM users WHERE id = ?");
         $stmt_user->bind_param("i", $user_id);
         $stmt_user->execute();
@@ -57,21 +50,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_lamaran'])) {
         if (!$user) {
             $error_message = "Data user tidak ditemukan.";
         } else {
-            // Fungsi untuk menyimpan file dengan validasi lebih ketat
+            // TODO Fungsi untuk menyimpan file dengan validasi lebih ketat
             function simpanFile($fieldname) {
                 global $upload_dir;
                 if (isset($_FILES[$fieldname])) {
-                    // Cek error
+                    // ! Cek error
                     if ($_FILES[$fieldname]['error'] !== UPLOAD_ERR_OK) {
                         return null;
                     }
                     
-                    // Validasi ukuran file (maks 5MB)
+                    // ! Validasi ukuran file (maks 5MB)
                     if ($_FILES[$fieldname]['size'] > 5 * 1024 * 1024) {
                         return null;
                     }
                     
-                    // Validasi ekstensi file
+                    // ! Validasi ekstensi file
                     $allowed_ext = ['pdf', 'jpg', 'jpeg', 'png'];
                     $file_ext = strtolower(pathinfo($_FILES[$fieldname]['name'], PATHINFO_EXTENSION));
                     
@@ -79,11 +72,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_lamaran'])) {
                         return null;
                     }
                     
-                    // Generate nama unik yang lebih aman
+                    // ! Generate nama unik yang lebih aman
                     $newname = uniqid() . '_' . bin2hex(random_bytes(8)) . "." . $file_ext;
                     $target_path = $upload_dir . $newname;
                     
-                    // Pindahkan file
+                    // ! Pindahkan file
                     if (move_uploaded_file($_FILES[$fieldname]['tmp_name'], $target_path)) {
                         return $newname;
                     } else {
@@ -96,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_lamaran'])) {
                 return null;
             }
 
-            // Simpan semua file yang diupload
+            // TODO Simpan semua file yang diupload
             $data_lamaran = [
                 'pass_foto'     => simpanFile('pass_foto'),
                 'ijazah'        => simpanFile('ijazah'),
@@ -108,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_lamaran'])) {
                 'surat_lamaran' => simpanFile('surat_lamaran'),
             ];
 
-            // Simpan ke database termasuk user_id
+            // TODO Simpan ke database termasuk user_id
             $stmt = $koneksi->prepare("INSERT INTO lamaran (
                 id_lowker, user_id, pass_foto, ijazah, portofolio, sertifikat, 
                 ktp_kk, cv, skck, surat_lamaran, tanggal_lamaran
@@ -128,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_lamaran'])) {
             );
 
             if ($stmt->execute()) {
-                // Kirim email ke perusahaan menggunakan data yang sudah diambil
+                // TODO Kirim email ke perusahaan menggunakan data yang sudah diambil
                 $mail = new PHPMailer(true);
                 try {
                     $mail->isSMTP();
@@ -143,7 +136,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_lamaran'])) {
                     $mail->addAddress($lowker['email'], $lowker['nama']);
                     $mail->Subject = "Lamaran Baru untuk Lowongan: " . $lowker['judul_lowker'];
                     
-                    // Email body dengan informasi user
                     $mail->Body = "Terdapat lamaran baru untuk lowongan " . $lowker['judul_lowker'] . 
                                  "\n\nPelamar: " . $user['nama'] . 
                                  "\nEmail: " . $user['email'] .
@@ -152,8 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_lamaran'])) {
                     $mail->send();
                     $success_message = "Lamaran berhasil dikirim! Perusahaan akan menghubungi Anda jika memenuhi kualifikasi.";
                     
-                    // Regenerasi CSRF token setelah sukses
-                    // $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
                 } catch (Exception $e) {
                     error_log("Gagal mengirim email: " . $e->getMessage());
                     $error_message = "Lamaran berhasil disimpan tetapi gagal mengirim notifikasi email.";
@@ -166,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_lamaran'])) {
     }
 }
 
-// Ambil ID lowongan dari URL jika ada
+
 $id_lowker = (int)$_GET['id'] ?? 0;
 ?>
 
@@ -177,7 +168,7 @@ $id_lowker = (int)$_GET['id'] ?? 0;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bursa Kerja Khusus SMKN 1 Boyolangu</title>
-  <link rel="stylesheet" href="../css/navbar.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="../navbar/navbar.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" href="persyaratan.css?v=<?php echo time(); ?>">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -185,50 +176,20 @@ $id_lowker = (int)$_GET['id'] ?? 0;
 
 <body>
 
-  <!-- Header dan Navbar sama seperti sebelumnya -->
-
   <?php include '../navbar/header.php' ?>
 
   <div class="container">
-    <nav class="navbar">
-      <!-- data-feather="chevron-down"> -->
-      <ul class="navbar-container">
-        <li>
-          <a href="../Home/Halaman Utama/berandautama.html">HOME<i class="fa-solid fa-chevron-down"></i></a>
-          <ul class="dropdown">
-            <li><a href="../Home/Halaman Utama/berandautama.html">Halaman Utama</a></li>
-            <li><a href="../Home/Pengantar/pengantar.html">Pengantar</a></li>
-            <li><a href="../Home/Informasi Kegiatan BKK/informasikegiatanbkk.html">Informasi Kegiatan BKK</a></li>
-            <li><a href="../Home/Halaman Utama/rekapitulasi.html">Rekapitulasi</a></li>
-          </ul>
-        </li>
 
-        <li><a href="#">TENTANG KAMI<i class="fa-solid fa-chevron-down"></i></a>
-          <ul class="dropdown">
-            <li><a href="../Tentang Kami/visimisi.php">Visi Misi</a></li>
-            <li><a href="../Tentang Kami/proker.php">Progam Kerja BKK</a></li>
-            <li><a href="../Tentang Kami/tujuan.php">Tujuan</a></li>
-            <li><a href="../Tentang Kami/strukturorganisasi.php">Struktur Organisasi</a></li>
-          </ul>
-        </li>
-
-        <li><a href="#">LOGIN<i class="fa-solid fa-chevron-down"></i></a>
-          <ul class="dropdown">
-            <li><a href="../Login/admin-login.html">Admin BKK</a></li>
-            <li><a href="../Login/management-login.html">Management</a></li>
-            <li><a href="../Login/siswa-alumni-login.html">Siswa / Alumni</a></li>
-            <li><a href="../Login/pengguna-lain-login.html">Partisipan Lain</a></li>
-          </ul>
-        </li>
-
-        <li><a href="../Informasi Jurusan/informasiJurusan.php">INFORMASI JURUSAN</a></li>
-        <li><a href="../Perusahaan/perusahaan.php">PERUSAHAAN</a></li>
-        <li><a href="loker.php" class="active">LOWONGAN KERJA</a></li>
-      </ul>
-
-
-    </nav>
-    <!-- Navbar sama seperti sebelumnya -->
+    <!--  NAVBAR -->
+    <?php
+        if (!is_logged_in()) {
+            include '../navbar/guest.php';
+        } elseif (is_alumni()) {
+            include '../navbar/alumni.php';
+        } elseif (is_admin()) {
+            include '../navbar/admin.php';
+        }
+        ?>
 
     <div class="header-bar">
       <a href="#">Lowongan Kerja</a>
@@ -401,7 +362,7 @@ $id_lowker = (int)$_GET['id'] ?? 0;
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      // Fungsi untuk view file
+      // ! Fungsi untuk view file
       document.querySelectorAll('.view-btn').forEach(btn => {
         btn.addEventListener('click', function () {
           const targetId = this.getAttribute('data-target');
@@ -411,10 +372,10 @@ $id_lowker = (int)$_GET['id'] ?? 0;
             const file = fileInput.files[0];
             const fileURL = URL.createObjectURL(file);
 
-            // Buka file di tab baru
+            // TODO Buka file di tab baru
             window.open(fileURL, '_blank');
 
-            // Hapus URL objek setelah digunakan
+            // TODO Hapus URL objek setelah digunakan
             setTimeout(() => URL.revokeObjectURL(fileURL), 100);
           } else {
             alert('Silakan upload file terlebih dahulu.');
@@ -422,7 +383,7 @@ $id_lowker = (int)$_GET['id'] ?? 0;
         });
       });
 
-      // Tampilkan nama file setelah upload
+      // TODO Tampilkan nama file setelah upload
       document.querySelectorAll('input[type="file"]').forEach(input => {
         input.addEventListener('change', function () {
           if (this.files && this.files[0]) {
@@ -430,7 +391,7 @@ $id_lowker = (int)$_GET['id'] ?? 0;
             const box = this.closest('.requirement-box');
             const optionalText = box.querySelector('.optional');
 
-            // Tambahkan nama file di bawah optional text
+            // TODO Tambahkan nama file di bawah optional text
             if (!box.querySelector('.file-name')) {
               const fileNameElement = document.createElement('span');
               fileNameElement.className = 'file-name';
