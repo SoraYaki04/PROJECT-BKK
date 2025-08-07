@@ -7,12 +7,13 @@ function redirect($url) {
     exit;
 }
 
-// ? Cek apakah user sudah login
+// ? AUTH
+// * Cek apakah user sudah login
 function is_logged_in() {
     return isset($_SESSION['user_id']);
 }
 
-// ? Cek apakah user memiliki role yang diizinkan
+// * Cek apakah user memiliki role yang diizinkan
 function allow_role(array $allowed_roles) {
     if (!is_logged_in()) {
         redirect('../Login/logout.php');
@@ -24,17 +25,17 @@ function allow_role(array $allowed_roles) {
     }
 }
 
-// ! Fungsi khusus untuk admin
+// * Fungsi khusus untuk admin
 function is_admin() {
     return is_logged_in() && ($_SESSION['role'] ?? '') === 'admin';
 }
 
-// ! Fungsi khusus untuk alumni
+// * Fungsi khusus untuk alumni
 function is_alumni() {
     return is_logged_in() && ($_SESSION['role'] ?? '') === 'alumni';
 }
 
-// ! Fungsi khusus untuk manajemen
+// * Fungsi khusus untuk manajemen
 function is_manajemen() {
     return is_logged_in() && ($_SESSION['role'] ?? '') === 'manajemen';
 }
@@ -43,9 +44,7 @@ function is_recruiter() {
     return is_logged_in() && ($_SESSION['role'] ?? '') === 'recruiter';
 }
 
-
 // ? NAVBAR
-
 function base_url($path = '') {
     return '/BKK/PROJECT-BKK-main/bkk/' . ltrim($path, '/');
 }
@@ -64,4 +63,21 @@ function nav_active($path_or_paths) {
     return '';
 }
 
+
+
+
+// ? DELETE
+function delete_uploaded_image($filename) {
+    $uploadDir = __DIR__ . '/../uploads/kegiatan/';
+    if (!$filename || strpos($filename, '..') !== false) return false;
+
+    $filePath = $uploadDir . $filename;
+    return (file_exists($filePath) && is_file($filePath)) ? unlink($filePath) : false;
+}
+
+
+
 ?>
+
+
+
