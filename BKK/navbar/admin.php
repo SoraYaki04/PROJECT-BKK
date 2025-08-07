@@ -16,15 +16,6 @@ require_once __DIR__ . '/../config/helpers.php';
 
 <nav class="navbar">
   <ul class="navbar-container">
-
-    <?php if (is_admin()): ?>
-      <li>
-        <div onclick="window.location.href='<?= base_url('Profil/profil.php') ?>'" class="profile-icon">
-          <i class="fa-solid fa-user-tie fa-sm" style="color: #5135FA;"></i>
-        </div>
-      </li>
-    <?php endif; ?>
-
     <li>
       <a class="<?= nav_active(['Home/HalamanUtama/berandautama.php', 'Home/Pengantar/pengantar.php', 'Home/InformasiKegiatanBKK/informasikegiatanbkk.php']) ?>" href="#">HOME<i class="fa-solid fa-chevron-down"></i></a>
       <ul class="dropdown">
@@ -61,10 +52,11 @@ require_once __DIR__ . '/../config/helpers.php';
     </li>
 
     <li class="crud-dropdown">
-      <a class="<?= nav_active(['CRUD/crud-perusahaan.php', 'CRUD/crud-loker.php']) ?>" href="#">C.R.U.D<i class="fa-solid fa-chevron-down"></i></a>
+      <a class="<?= nav_active(['CRUD/crud-perusahaan.php', 'CRUD/loker/loker.php', 'CRUD/loker/loker-tambah.php', 'CRUD/informasikegiatanbkk/infokegbkk.php']) ?>" href="#">C.R.U.D<i class="fa-solid fa-chevron-down"></i></a>
       <ul class="dropdown">
+        <li><a class="<?= nav_active('CRUD/informasikegiatanbkk/infokegbkk.php') ?>" href="<?= base_url('CRUD/informasikegiatanbkk/infokegbkk.php') ?>">CRUD Kegiatan BKK</a></li>
         <li><a class="<?= nav_active('CRUD/crud-perusahaan.php') ?>" href="<?= base_url('CRUD/crud-perusahaan.php') ?>">CRUD Perusahaan</a></li>
-        <li><a class="<?= nav_active('CRUD/crud-loker.php') ?>" href="<?= base_url('CRUD/crud-loker.php') ?>">CRUD Lowongan Kerja</a></li>
+        <li><a class="<?= nav_active('CRUD/loker/loker.php') ?>" href="<?= base_url('CRUD/loker/loker.php') ?>">CRUD Lowongan Kerja</a></li>
       </ul>
     </li>
 
