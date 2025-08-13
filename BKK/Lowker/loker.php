@@ -160,7 +160,7 @@ $result = $stmt->get_result();
 
         <div class="job-footer">
           <a href="detail-lowker.php?id=<?= $row['id_lowker'] ?>">
-            <button class="detail-button"><i class="fas fa-info-circle"></i> DETAIL</button>
+            <button class="detail-button"><i class="fas fa-list"></i> DETAIL</button>
           </a>
         </div>
       </div>

@@ -19,14 +19,23 @@ $query = $koneksi->prepare("
 ");
 $query->bind_param("i", $id);
 $query->execute();
-$result = $query->get_result();
+$resultLowker = $query->get_result();
 
-
-if ($result->num_rows === 0) {
+if ($resultLowker->num_rows === 0) {
     die("Lowongan tidak ditemukan.");
 }
 
-$data = $result->fetch_assoc();
+$data = $resultLowker->fetch_assoc();
+$query->close();
+
+// TODO hitung jumlah pelamar per lowongan
+$stmtPelamar = $koneksi->prepare("SELECT COUNT(*) FROM lamaran WHERE id_lowker = ?");
+$stmtPelamar->bind_param("i", $id);
+$stmtPelamar->execute();
+$stmtPelamar->bind_result($jumlahPelamarLowongan);
+$stmtPelamar->fetch();
+$stmtPelamar->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +52,13 @@ $data = $result->fetch_assoc();
 </head>
 
 <body>
+
+    <?php if (isset($_SESSION['success']) || isset($_SESSION['error'])): ?>
+        <div class="floating-notif <?= isset($_SESSION['success']) ? 'success' : 'error' ?>">
+            <?= htmlspecialchars($_SESSION['success'] ?? $_SESSION['error']) ?>
+        </div>
+        <?php unset($_SESSION['success'], $_SESSION['error']); ?>
+    <?php endif; ?>
 
     <?php include '../navbar/header.php' ?>
 
@@ -73,7 +89,7 @@ $data = $result->fetch_assoc();
                             <ul>
                                 <li><i class="fa-solid fa-building"></i><?= htmlspecialchars($data['id_perusahaan']) ?></li>
                                 <li><i class="fa-solid fa-location-dot"></i><?= htmlspecialchars($data['lokasi']) ?></li>
-                                <li><i class="fa-solid fa-users"></i><?= htmlspecialchars($data['jumlah_pelamar']) ?> pelamar</li>
+                                <li><i class="fa-solid fa-users"></i><p>Jumlah Pelamar: <?= $jumlahPelamarLowongan ?></p>
                             </ul>
                         </div>
 
@@ -94,7 +110,7 @@ $data = $result->fetch_assoc();
 
                         <div class="form-input">
                             <h4>Tanggal exp : </h4>
-                            <p><?= htmlspecialchars($data['tgl_ditutup']) ?></p>
+                            <p><?= date('d M Y', strtotime($data['tgl_ditutup'])) ?></p>
                         </div>
                     </div>
 
@@ -104,7 +120,7 @@ $data = $result->fetch_assoc();
                             <div class="form-input">
                                 <h4>Deskripsi : </h4>
                                 <p><?= nl2br(htmlspecialchars($data['deskripsi_lowker'])) ?></p>
-                                
+
                             </div>
 
                             <div class="form-input">
@@ -121,23 +137,23 @@ $data = $result->fetch_assoc();
 
                     </div>
 
-                        <div class="kotak-tiga">
-                            
-                            <div class="form-input">
-                                <h4>Kualifikasi :</h4>
-                                <p><?= nl2br(htmlspecialchars($data['kualifikasi'])) ?></p>
-                            </div>
-                            
-                            <div class="form-input">
-                                <h4>Tunjangan :</h4>
-                                <p><?= nl2br(htmlspecialchars($data['tunjangan'])) ?></p>
-                            </div>
+                    <div class="kotak-tiga">
 
-                            <div class="form-input" id="jurusan">
-                                <i class="fa-solid fa-graduation-cap"></i>
-                                <p><?= htmlspecialchars($data['nama_jurusan']); ?></p>
-                            </div>
+                        <div class="form-input">
+                            <h4>Kualifikasi :</h4>
+                            <p><?= nl2br(htmlspecialchars($data['kualifikasi'])) ?></p>
                         </div>
+
+                        <div class="form-input">
+                            <h4>Tunjangan :</h4>
+                            <p><?= nl2br(htmlspecialchars($data['tunjangan'])) ?></p>
+                        </div>
+
+                        <div class="form-input" id="jurusan">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <p><?= htmlspecialchars($data['nama_jurusan']); ?></p>
+                        </div>
+                    </div>
 
                     <div class="actions">
                         <a href="persyaratan.php?id=<?= $data['id_lowker'] ?>" class="save-btn">LAMAR</a>
