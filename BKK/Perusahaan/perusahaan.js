@@ -132,3 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   new Carousel(companyContainer, companyItems, companyControls);
 });
+
+function togglePopup(popupId) {
+    document.getElementById(popupId).classList.toggle("active");
+}
