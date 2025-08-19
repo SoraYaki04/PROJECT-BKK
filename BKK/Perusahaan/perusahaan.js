@@ -1,105 +1,134 @@
-const companyContainer = document.querySelector('.company-container');
-const companyControlsContainer = document.querySelector('.company-controls');
-const companyControls = ['previous', 'next'];
-const companyItems = document.querySelectorAll('.company-item');
+document.addEventListener('DOMContentLoaded', () => {
+  const companyContainer = document.querySelector('.company-container');
+  const companyControlsContainer = document.querySelector('.company-controls');
+  const companyControls = ['previous', 'next'];
+  const companyItems = document.querySelectorAll('.company-item');
 
-class Carousel {
+  if (!companyContainer || companyItems.length < 5) return; // kalau item < 5, tidak perlu carousel
 
+  class Carousel {
     constructor(container, items, controls) {
-        this.carouselContainer = container;
-        this.carouselControls = controls;
-        this.carouselArray = [...items];
-        this.isTransitioning = false;
-        this.controlButtons = [];
+      this.carouselContainer = container;
+      this.carouselControls = controls;
+      this.carouselArray = [...items];
+      this.isTransitioning = false;
+      this.controlButtons = [];
+      this.autoPlayInterval = null;
+
+      // 🔀 acak sekali di awal
+      this.shuffleItems();
+
+      // inisialisasi
+      this.setControls();
+      this.useControls();
+      this.updateCompany();
+      this.startAutoPlay(4000);
+    }
+
+    // 🔀 Fisher–Yates shuffle
+    shuffleItems() {
+      for (let i = this.carouselArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [this.carouselArray[i], this.carouselArray[j]] = [this.carouselArray[j], this.carouselArray[i]];
+      }
     }
 
     updateCompany() {
-        this.carouselArray.forEach((el, index) => {
-            const detailElement = el.querySelector('.company-detail');
+      // reset semua item
+      this.carouselArray.forEach(el => {
+        el.classList.remove(
+          'company-item-1','company-item-2','company-item-3','company-item-4','company-item-5'
+        );
+        // sembunyikan detail
+        const detail = el.querySelector('.company-detail');
+        if (detail) {
+          detail.style.opacity = '0';
+          detail.style.display = 'none';
+        }
+        // default: sembunyikan item yang tidak dipakai
+        el.style.display = 'none';
+      });
 
-            if (detailElement && index !== 2) {
-                detailElement.style.opacity = '0';
-                detailElement.style.transition = 'opacity 0.3s ease-in-out';
-                setTimeout(() => {
-                    detailElement.style.display = 'none';
-                }, 500);
-            }
-        });
+      // tampilkan hanya 5 pertama (hasil shuffle)
+      this.carouselArray.slice(0, 5).forEach((el, i) => {
+        el.classList.add(`company-item-${i+1}`);
+        el.style.display = ''; // tampilkan
 
-        this.carouselArray.forEach(el => {
-            el.classList.remove(
-                'company-item-1',
-                'company-item-2',
-                'company-item-3',
-                'company-item-4',
-                'company-item-5'
-            );
-        });
-
-        this.carouselArray.slice(0, 5).forEach((el, i) => {
-            el.classList.add(`company-item-${i+1}`);
-
-            if (i === 2) {
-                const detailElement = el.querySelector('.company-detail');
-                if (detailElement) {
-                    detailElement.style.display = 'block';
-                    setTimeout(() => {
-                        detailElement.style.opacity = '1';
-                    }, 0);
-                }
-            }
-        });
+        if (i === 2) { // item tengah
+          const detail = el.querySelector('.company-detail');
+          if (detail) {
+            detail.style.display = 'block';
+            requestAnimationFrame(() => { detail.style.opacity = '1'; });
+          }
+        }
+      });
     }
 
     setCurrentState(direction) {
-        if (this.isTransitioning) return;
-        this.isTransitioning = true;
+      if (this.isTransitioning) return;
+      this.isTransitioning = true;
 
-        this.controlButtons.forEach(btn => btn.disabled = true);
+      this.controlButtons.forEach(btn => btn.disabled = true);
 
-        if (direction.className === 'company-controls-previous') {
-            this.carouselArray.unshift(this.carouselArray.pop());
-        } else {
-            this.carouselArray.push(this.carouselArray.shift());
-        }
+      if (direction.className === 'company-controls-previous') {
+        this.carouselArray.unshift(this.carouselArray.pop());
+      } else {
+        this.carouselArray.push(this.carouselArray.shift());
+      }
 
-        this.updateCompany();
+      this.updateCompany();
 
-        setTimeout(() => {
-            this.isTransitioning = false;
-            this.controlButtons.forEach(btn => btn.disabled = false);
-        }, 600);
+      setTimeout(() => {
+        this.isTransitioning = false;
+        this.controlButtons.forEach(btn => btn.disabled = false);
+      }, 600);
     }
 
     setControls() {
-        this.carouselControls.forEach(control => {
-            const button = document.createElement('button');
-            button.className = `company-controls-${control}`;
-            button.innerHTML = '';
-            companyControlsContainer.appendChild(button);
-        });
+      // bersihkan jika sudah ada
+      companyControlsContainer.innerHTML = '';
+
+      this.carouselControls.forEach(control => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = `company-controls-${control}`;
+        button.setAttribute('aria-label', control);
+        // (biarkan innerHTML kosong jika icon via CSS)
+        companyControlsContainer.appendChild(button);
+      });
     }
 
     useControls() {
-        const triggers = [...companyControlsContainer.childNodes];
-        this.controlButtons = triggers;
+      const triggers = [...companyControlsContainer.children];
+      this.controlButtons = triggers;
 
-        triggers.forEach(control => {
-            control.addEventListener('click', e => {
-                e.preventDefault();
-                if (!this.isTransitioning) {
-                    this.setCurrentState(control);
-                }
-            });
+      triggers.forEach(control => {
+        control.addEventListener('click', e => {
+          e.preventDefault();
+          if (!this.isTransitioning) {
+            this.setCurrentState(control);
+          }
         });
+      });
+
+      // optional: pause saat hover
+      this.carouselContainer.addEventListener('mouseenter', () => this.stopAutoPlay());
+      this.carouselContainer.addEventListener('mouseleave', () => this.startAutoPlay());
     }
-}
 
-const exampleCarousel = new Carousel(companyContainer, companyItems, companyControls);
-exampleCarousel.setControls();
-exampleCarousel.useControls();
-exampleCarousel.updateCompany();
+    startAutoPlay(interval = 3000) {
+      this.stopAutoPlay();
+      this.autoPlayInterval = setInterval(() => {
+        if (!this.isTransitioning) {
+          this.setCurrentState({ className: 'company-controls-next' });
+        }
+      }, interval);
+    }
 
-function togglePopup(popupId) {
-    document.getElementById(popupId).classList.toggle("active");
-}
+    stopAutoPlay() {
+      if (this.autoPlayInterval) clearInterval(this.autoPlayInterval);
+    }
+  }
+
+  new Carousel(companyContainer, companyItems, companyControls);
+});

@@ -26,14 +26,14 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
 
   <div class="container">
 
-      <!--  NAVBAR -->
+    <!--  NAVBAR -->
     <?php
     if (!is_logged_in()) {
-        include '../navbar/guest.php';
+      include '../navbar/guest.php';
     } elseif (is_alumni()) {
-        include '../navbar/alumni.php';
+      include '../navbar/alumni.php';
     } elseif (is_admin()) {
-        include '../navbar/admin.php';
+      include '../navbar/admin.php';
     }
     ?>
 
@@ -60,120 +60,122 @@ $result = $koneksi->query("SELECT * FROM perusahaan");
         </div>
 
       </div>
-      <div class="company-container">
+ <div class="company-container" 
+     <?php if ($result->num_rows < 5) echo 'style="display:none;"'; ?>> <!-- jika kurang dari 5, sembunyikan -->
 
-        <div class="company-list">
-
-          <?php 
+  <div class="company-list">
+    <?php if ($result->num_rows >= 5): ?>
+      <?php
       $no = 1;
-      while($row = $result->fetch_assoc()):
-        $imgData = base64_encode($row['gambar']);
+      while ($row = $result->fetch_assoc()):
         $popup_id = "popup-" . $no;
       ?>
+        <div class="company-item company-item-<?= $no ?>" data-index="<?= $no ?>">
+          <img src="<?= base_url('uploads/perusahaan/' . htmlspecialchars($row['gambar'])) ?>" alt="tidak tersedia">
 
-          <div class="company-item company-item-<?= $no ?>" data-index="<?= $no ?>">
-            <img src="data:image/png;base64,<?= $imgData ?>" alt="<?= htmlspecialchars($row['nama']) ?>" />
-
-            <div class="company-detail company-detail-<?= $no ?>" data-index="<?= $no ?>">
-              <h2><?= htmlspecialchars($row['nama']) ?></h2>
-              <button onclick="togglePopup('<?= $popup_id ?>')" class="detail-btn">
-                <i class="fa-solid fa-list"></i> Detail Penelusuran
-              </button>
-            </div>
+          <div class="company-detail company-detail-<?= $no ?>" data-index="<?= $no ?>">
+            <h2><?= htmlspecialchars($row['nama']) ?></h2>
+            <button onclick="togglePopup('<?= $popup_id ?>')" class="detail-btn">
+              <i class="fa-solid fa-list"></i> Detail Penelusuran
+            </button>
           </div>
+        </div>
 
+      <!-- POPUP -->
+    <div class="popup" id="<?php echo $popup_id; ?>">
+      <div class="company-popup">
+        <div class="close-popup">
+          <button class="close-btn" onclick="togglePopup('<?php echo $popup_id; ?>')">&times;</button>
+        </div>
+        <div class="company-header-popup">
+          <div class="company-title-popup">
+            <h1><?php echo htmlspecialchars($row['nama']); ?></h1>
+          </div>
+          <div class="company-desc-popup">
+            <p><?php echo htmlspecialchars($row['deskripsi_perusahaan']); ?></p>
+          </div>
+        </div>
 
-          <!-- POPUP -->
-          <div class="popup" id="<?php echo $popup_id; ?>">
-            <div class="company-popup"> 
-              <div class="close-popup">
-                <button class="close-btn" onclick="togglePopup('<?php echo $popup_id; ?>')">&times;</button>
-              </div>
-              <div class="company-header-popup">
-                <div class="company-title-popup">
-                  <h1><?php echo htmlspecialchars($row['nama']); ?></h1>
-                </div>
-                <div class="company-desc-popup">
-                  <p><?php echo htmlspecialchars($row['deskripsi_perusahaan']); ?></p>
-                </div>
-              </div>
+        <hr>
 
-              <hr>
+        <div class="company-detail-popup">
+          <table>
+            <tr>
+              <td class="company-detail-left">Nama Perusahaan</td>
+              <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['nama']); ?></td>
+            </tr>
+            <tr>
+              <td class="company-detail-left">Alamat</td>
+              <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['alamat']); ?></td>
+            </tr>
+            <tr>
+              <td class="company-detail-left">Kota</td>
+              <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['kota']); ?></td>
+            </tr>
+            <tr>
+              <td class="company-detail-left">Kontak</td>
+              <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['kontak']); ?></td>
+            </tr>
+            <tr>
+              <td class="company-detail-left">Email</td>
+              <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['email']); ?></td>
+            </tr>
+            <tr>
+              <td class="company-detail-left">Kategori</td>
+              <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['kategori']); ?></td>
+            </tr>
+            <tr>
+              <td class="company-detail-left">Standar</td>
+              <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['standar']); ?></td>
+            </tr>
+          </table>
+        </div>
 
-              <div class="company-detail-popup">
-                <table>
-                  <tr>
-                    <td class="company-detail-left">Nama Perusahaan</td>
-                    <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['nama']); ?></td>
-                  </tr>
-                  <tr>
-                    <td class="company-detail-left">Alamat</td>
-                    <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['alamat']); ?></td>
-                  </tr>
-                  <tr>
-                    <td class="company-detail-left">Kota</td>
-                    <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['kota']); ?></td>
-                  </tr>
-                  <tr>
-                    <td class="company-detail-left">Kontak</td>
-                    <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['kontak']); ?></td>
-                  </tr>
-                  <tr>
-                    <td class="company-detail-left">Email</td>
-                    <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['email']); ?></td>
-                  </tr>
-                  <tr>
-                    <td class="company-detail-left">Kategori</td>
-                    <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['kategori']); ?></td>
-                  </tr>
-                  <tr>
-                    <td class="company-detail-left">Standar</td>
-                    <td class="company-detail-rigth">: <?php echo htmlspecialchars($row['standar']); ?></td>
-                  </tr>
-                </table>
-              </div>
+        <div class="company-table-popup">
+          <table>
+            <tr>
+              <th class="table-number">No</th>
+              <th width="970px">Kerjasama</th>
+            </tr>
 
-              <div class="company-table-popup">
-                <table>
-                  <tr>
-                    <th class="table-number">No</th>
-                    <th width="970px">Kerjasama</th>
-                  </tr>
-
-                  <?php
-            $kerjaList = preg_split("/[\r\n]+/", $row['kerja_sama']); 
+            <?php
+            $kerjaList = preg_split("/[\r\n]+/", $row['kerja_sama']);
             $kerjaNo = 1;
             foreach ($kerjaList as $item) {
-                $item = trim($item);
-                if (!empty($item)) {
-                    echo "<tr>
-                            <td class='table-number'>{$kerjaNo}</td>
-                            <td>{$item}</td>
-                          </tr>";
-                    $kerjaNo++;
-                }
+              $item = trim($item);
+              if (!empty($item)) {
+                echo "<tr>
+                        <td class='table-number'>{$kerjaNo}</td>
+                        <td>{$item}</td>
+                      </tr>";
+                $kerjaNo++;
+              }
             }
             ?>
-                </table>
-              </div>
-            </div>
-          </div>
-
-          <?php 
-    $no++;
-    endwhile; 
-?>
-
+          </table>
         </div>
-
-        <div class="company-controls">
-
-        </div>
-
       </div>
+    </div>
+    
+      <?php
+        $no++;
+      endwhile;
+      ?>
+    <?php endif; ?>
+  </div>
+
+  <div class="company-controls" 
+       <?php if ($result->num_rows < 5) echo 'style="display:none;"'; ?>>
+    <!-- tombol panah hanya muncul kalau ada 5 atau lebih perusahaan -->
+  </div>
+
+</div>
+
     </section>
 
   </div>
+
+
 
   <script src="perusahaan.js"></script>
 
