@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const companyControls = ['previous', 'next'];
   const companyItems = document.querySelectorAll('.company-item');
 
-  if (!companyContainer || companyItems.length < 5) return; // kalau item < 5, tidak perlu carousel
+  if (!companyContainer || companyItems.length < 5) return;
 
   class Carousel {
     constructor(container, items, controls) {
@@ -15,17 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
       this.controlButtons = [];
       this.autoPlayInterval = null;
 
-      // 🔀 acak sekali di awal
       this.shuffleItems();
 
-      // inisialisasi
+    
       this.setControls();
       this.useControls();
       this.updateCompany();
       this.startAutoPlay(4000);
     }
 
-    // 🔀 Fisher–Yates shuffle
     shuffleItems() {
       for (let i = this.carouselArray.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -34,27 +32,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     updateCompany() {
-      // reset semua item
+    
       this.carouselArray.forEach(el => {
         el.classList.remove(
           'company-item-1','company-item-2','company-item-3','company-item-4','company-item-5'
         );
-        // sembunyikan detail
+ 
         const detail = el.querySelector('.company-detail');
         if (detail) {
           detail.style.opacity = '0';
           detail.style.display = 'none';
         }
-        // default: sembunyikan item yang tidak dipakai
+    
         el.style.display = 'none';
       });
 
-      // tampilkan hanya 5 pertama (hasil shuffle)
+
       this.carouselArray.slice(0, 5).forEach((el, i) => {
         el.classList.add(`company-item-${i+1}`);
-        el.style.display = ''; // tampilkan
+        el.style.display = ''; 
 
-        if (i === 2) { // item tengah
+        if (i === 2) { 
           const detail = el.querySelector('.company-detail');
           if (detail) {
             detail.style.display = 'block';
@@ -85,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     setControls() {
-      // bersihkan jika sudah ada
+  
       companyControlsContainer.innerHTML = '';
 
       this.carouselControls.forEach(control => {
@@ -93,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
         button.type = 'button';
         button.className = `company-controls-${control}`;
         button.setAttribute('aria-label', control);
-        // (biarkan innerHTML kosong jika icon via CSS)
         companyControlsContainer.appendChild(button);
       });
     }
@@ -111,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
 
-      // optional: pause saat hover
       this.carouselContainer.addEventListener('mouseenter', () => this.stopAutoPlay());
       this.carouselContainer.addEventListener('mouseleave', () => this.startAutoPlay());
     }
