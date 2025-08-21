@@ -10,7 +10,6 @@ $kota = trim($_POST['kota']);
 $deskripsi_perusahaan = trim($_POST['deskripsi_perusahaan']);
 $kontak = trim($_POST['kontak']);
 $email = trim($_POST['email']);
-$gambar = $_FILES['gambar'] ?? null;
 $standar = trim($_POST['standar']);
 $kategori = trim($_POST['kategori']);
 $kerja_sama = trim($_POST['kerja_sama']);
@@ -24,7 +23,6 @@ if (!$kota) $errors[] = "Kota";
 if (!$deskripsi_perusahaan) $errors[] = "Deskripsi Perusahaan";
 if (!$kontak) $errors[] = "Kontak";
 if (!$email) $errors[] = "Email";
-if (!$gambar) $errors[] = "Gambar";
 if (!$standar) $errors[] = "Standar";
 if (!$kategori) $errors[] = "Kategori";
 
@@ -76,7 +74,7 @@ if (!empty($_FILES['gambar']['name'])) {
 
 // TODO Update data
 $stmt = $koneksi->prepare("UPDATE perusahaan SET nama=?, alamat=?, kota=?, deskripsi_perusahaan=?, kontak=?, email=?, gambar=?, standar=?, kategori=?, kerja_sama=? WHERE id_perusahaan=?");
-$stmt->bind_param("ssisssi", $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $gambarBaru, $standar, $kategori, $kerja_sama, $id);
+$stmt->bind_param("ssssssssssi", $nama, $alamat, $kota, $deskripsi_perusahaan, $kontak, $email, $gambarBaru, $standar, $kategori, $kerja_sama, $id);
 
 if ($stmt->execute()) {
     $_SESSION['success'] = "perusahaan berhasil diubah.";

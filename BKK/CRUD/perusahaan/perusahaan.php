@@ -3,27 +3,24 @@ require_once __DIR__ . '/../../config/helpers.php';
 
 allow_role(['admin']);
 
-// ? Pagination setup
+// TODO Pagination setup
 $limit = 6; // ! Jumlah perusahaan per halaman
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 if ($page < 1) $page = 1;
 $offset = ($page - 1) * $limit;
 
-// ? Ambil input filter
+
+// TODO Filter search
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 $kategori_filter = $_GET['kategori'] ?? '';
 
-// ? Base query hitung total
 $sql_count = "SELECT COUNT(*) AS total FROM perusahaan WHERE 1=1";
 
-// Filter search
 if ($search !== '') {
   $sql_count .= " AND (nama LIKE '%" . $koneksi->real_escape_string($search) . "%'
                  OR alamat LIKE '%" . $koneksi->real_escape_string($search) . "%'
                  OR kota LIKE '%" . $koneksi->real_escape_string($search) . "%')";
 }
-
-// Filter kategori
 if ($kategori_filter !== '') {
   $sql_count .= " AND kategori = '" . $koneksi->real_escape_string($kategori_filter) . "'";
 }
@@ -219,19 +216,22 @@ $standar_list = getEnumValues($koneksi, 'perusahaan', 'standar');
     <!-- // ? PAGINATION -->
     <div class="pagination-container">
       <div class="pagination-info">
-        <p>Ditampilkan <strong><?= $start ?></strong> sampai <strong><?= $end ?></strong> dari total <strong><?= $total ?></strong> kegiatan</p>
+        <p>Ditampilkan <strong><?= $start ?></strong> sampai <strong><?= $end ?></strong> dari total <strong><?= $total ?></strong> perusahaan</p>
       </div>
       <div class="pagination">
         <?php if ($page > 1): ?>
-          <a class="navigate" href="?page=<?= $page - 1 ?>">&laquo; Prev</a>
+          <a class="navigate" href="?page=<?= $page - 1 ?>&search=<?= urlencode($search) ?>&kategori=<?= urlencode($kategori_filter) ?>">&laquo; Prev</a>
         <?php endif; ?>
 
         <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-          <a href="?page=<?= $i ?>" class="<?= ($i == $page) ? 'active' : '' ?>"><?= $i ?></a>
+          <a href="?page=<?= $i ?>&search=<?= urlencode($search) ?>&kategori=<?= urlencode($kategori_filter) ?>"
+            class="<?= ($i == $page) ? 'active' : '' ?>">
+            <?= $i ?>
+          </a>
         <?php endfor; ?>
 
         <?php if ($page < $total_pages): ?>
-          <a class="navigate" href="?page=<?= $page + 1 ?>">Next &raquo;</a>
+          <a class="navigate" href="?page=<?= $page + 1 ?>&search=<?= urlencode($search) ?>&kategori=<?= urlencode($kategori_filter) ?>">Next &raquo;</a>
         <?php endif; ?>
       </div>
     </div>
@@ -357,7 +357,7 @@ $standar_list = getEnumValues($koneksi, 'perusahaan', 'standar');
   <div class="popup" id="popup-edit">
     <div class="overlay" onclick="togglePopup('popup-edit')"></div>
     <div class="company-popup">
-      <form action="perusahaan-simpan.php" method="POST" enctype="multipart/form-data">
+      <form action="perusahaan-edit.php" method="POST" enctype="multipart/form-data">
         <?= csrf_field() ?>
         <input type="hidden" name="id_perusahaan" id="edit-id">
 
