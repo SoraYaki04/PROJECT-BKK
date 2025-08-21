@@ -58,8 +58,10 @@ require_once __DIR__ . '/../config/helpers.php';
           </div>
         </div>
       </div>
+
+
       <div class="popup" id="popup-1">
-        <div class="overlay"></div>
+        <div class="overlay" onclick="togglePopup('popup-1')"></div>
         <div class="card-popup">
           <div class="title">
             <p>Teknik Kimia Industri</p>
