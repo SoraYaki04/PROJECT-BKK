@@ -14,7 +14,7 @@ require_once __DIR__ . '/../config/helpers.php';
     <?php endif; ?>
 
     <li>
-      <a class="<?= nav_active(['Home/HalamanUtama/berandautama.php', 'Home/Pengantar/pengantar.html', 'Home/InformasiKegiatanBKK/informasikegiatanbkk.php']) ?>" href="#">HOME<i class="fa-solid fa-chevron-down"></i></a>
+      <a class="<?= nav_active(['Home/HalamanUtama/berandautama.php', 'Home/Pengantar/pengantar.php', 'Home/InformasiKegiatanBKK/informasikegiatanbkk.php']) ?>" href="#">HOME<i class="fa-solid fa-chevron-down"></i></a>
       <ul class="dropdown">
         <li><a class="<?= nav_active('Home/HalamanUtama/berandautama.php') ?>" href="<?= base_url('Home/HalamanUtama/berandautama.php') ?>">Halaman Utama</a></li>
         <li><a class="<?= nav_active('Home/Pengantar/pengantar.php') ?>" href="<?= base_url('Home/Pengantar/pengantar.php') ?>">Pengantar</a></li>
@@ -51,3 +51,4 @@ require_once __DIR__ . '/../config/helpers.php';
 
   </ul>
 </nav>
+
