@@ -29,8 +29,8 @@ $end = $offset + $result->num_rows;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bursa Kerja Khusus SMKN 1 Boyolangu</title>
-    <link rel="stylesheet" href="../../navbar/navbar.css" />
-    <link rel="stylesheet" href="infokegbkk.css" />
+    <link rel="stylesheet" href="../../navbar/navbar.css?v=<?php echo time(); ?>" />
+    <link rel="stylesheet" href="infokegbkk.css?v=<?php echo time(); ?>" />
     <link href="https://fonts.googleapis.com/css2?family=Ramabhadra&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
@@ -147,8 +147,8 @@ $end = $offset + $result->num_rows;
     <div class="popup" id="popup-tambah">
         <div class="overlay" onclick="togglePopup('popup-tambah')"></div>
         <div class="card-popup">
-            <?= csrf_field() ?>
             <form action="infokegbkk-simpan.php" method="POST" enctype="multipart/form-data">
+                <?= csrf_field() ?>
                 <div class="popup-header">
                     <h1><input type="text" name="judul" placeholder="Masukkan Judul Kegiatan" required></h1>
                 </div>
@@ -273,7 +273,6 @@ $end = $offset + $result->num_rows;
     </div>
 
     <script>
-
         //  TODO SMOOTH ANIMATION
         const content = document.querySelectorAll('.activity-card');
         const observer = new IntersectionObserver((entries) => {
@@ -352,24 +351,23 @@ $end = $offset + $result->num_rows;
             }
         }
 
-      function previewEditGambar(event) {
-      const input = event.target;
-      const preview = document.getElementById('edit-preview');
-      const placeholder = document.getElementById('edit-placeholder');
+        function previewEditGambar(event) {
+            const input = event.target;
+            const preview = document.getElementById('edit-preview');
+            const placeholder = document.getElementById('edit-placeholder');
 
-      if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          preview.src = e.target.result;
-          preview.style.display = 'block';
-          if (placeholder) placeholder.style.display = 'none';
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    if (placeholder) placeholder.style.display = 'none';
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 
 </body>
-
 
 </html>
