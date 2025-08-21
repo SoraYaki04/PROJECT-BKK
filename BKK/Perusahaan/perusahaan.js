@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const companyControlsContainer = document.querySelector('.company-controls');
   const companyControls = ['previous', 'next'];
   const companyItems = document.querySelectorAll('.company-item');
+  companyItems.forEach((item, index) => {
+    setTimeout(() => {
+      item.classList.add("show");
+    }, index * 100); 
+  });
 
   if (!companyContainer || companyItems.length < 5) return;
 
@@ -15,15 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
       this.controlButtons = [];
       this.autoPlayInterval = null;
 
+      // ! acak sekali di awal dengan Fisher–Yates
       this.shuffleItems();
 
-    
+      // ! ambil 5 item pertama setelah shuffle
+      this.carouselArray = this.carouselArray.slice(0, 5);
+
       this.setControls();
       this.useControls();
       this.updateCompany();
-      this.startAutoPlay(4000);
+      this.startAutoPlay(3000);
     }
 
+    // ! Fisher–Yates shuffle
     shuffleItems() {
       for (let i = this.carouselArray.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -32,35 +41,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     updateCompany() {
-    
-      this.carouselArray.forEach(el => {
+      // ! reset semua item (bukan hanya 5)
+      document.querySelectorAll('.company-item').forEach(el => {
         el.classList.remove(
-          'company-item-1','company-item-2','company-item-3','company-item-4','company-item-5'
+          'company-item-1', 'company-item-2', 'company-item-3', 'company-item-4', 'company-item-5'
         );
- 
         const detail = el.querySelector('.company-detail');
         if (detail) {
           detail.style.opacity = '0';
           detail.style.display = 'none';
         }
-    
         el.style.display = 'none';
       });
 
-
-      this.carouselArray.slice(0, 5).forEach((el, i) => {
+      // ! tampilkan hanya 5 dari array aktif
+      this.carouselArray.forEach((el, i) => {
         el.classList.add(`company-item-${i+1}`);
-        el.style.display = ''; 
+        el.style.display = '';
 
-        if (i === 2) { 
+        if (i === 2) { // ! item tengah
           const detail = el.querySelector('.company-detail');
           if (detail) {
             detail.style.display = 'block';
-            requestAnimationFrame(() => { detail.style.opacity = '1'; });
+            requestAnimationFrame(() => {
+              detail.style.opacity = '1';
+            });
           }
         }
       });
     }
+
 
     setCurrentState(direction) {
       if (this.isTransitioning) return;
@@ -68,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       this.controlButtons.forEach(btn => btn.disabled = true);
 
-      if (direction.className === 'company-controls-previous') {
+      if (direction.classList.contains('company-controls-previous')) {
         this.carouselArray.unshift(this.carouselArray.pop());
       } else {
         this.carouselArray.push(this.carouselArray.shift());
@@ -83,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     setControls() {
-  
+      // ! bersihkan jika sudah ada
       companyControlsContainer.innerHTML = '';
 
       this.carouselControls.forEach(control => {
@@ -108,15 +118,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
 
+      // ! pause saat hover
       this.carouselContainer.addEventListener('mouseenter', () => this.stopAutoPlay());
       this.carouselContainer.addEventListener('mouseleave', () => this.startAutoPlay());
     }
 
-    startAutoPlay(interval = 3000) {
+    startAutoPlay(interval = 5000) {
       this.stopAutoPlay();
       this.autoPlayInterval = setInterval(() => {
         if (!this.isTransitioning) {
-          this.setCurrentState({ className: 'company-controls-next' });
+          this.setCurrentState(
+            document.querySelector('.company-controls-next')
+          );
         }
       }, interval);
     }
@@ -129,6 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new Carousel(companyContainer, companyItems, companyControls);
 });
 
+
 function togglePopup(popupId) {
-    document.getElementById(popupId).classList.toggle("active");
+  document.getElementById(popupId).classList.toggle("active");
 }
