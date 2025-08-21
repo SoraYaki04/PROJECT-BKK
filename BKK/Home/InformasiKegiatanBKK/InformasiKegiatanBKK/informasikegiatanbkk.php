@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/../../config/helpers.php';
 
-allow_role(['admin', 'alumni']);
 
 // ? Pagination setup
 $limit = 6; // ! Jumlah kegiatan per halaman
@@ -82,17 +81,17 @@ $end = $offset + $result->num_rows;
               </div>
             </div>
             <div class="activity-footer">
-<button class="detail-button" onclick="openPopup(<?= htmlspecialchars(json_encode([
-  'id' => $id,
-  'judul' => $judul,
-  'tanggal' => $tanggal,
-  'jml_peserta' => $jml_peserta,
-  'lokasi' => $lokasi,
-  'deskripsi' => $deskripsi,
-  'gambar' => htmlspecialchars($row['gambar']),
-])) ?>)">
-  <i class="fas fa-list"></i> DETAIL
-</button>
+              <button class="detail-button" onclick="openPopup(<?= htmlspecialchars(json_encode([
+                                                                  'id' => $id,
+                                                                  'judul' => $judul,
+                                                                  'tanggal' => $tanggal,
+                                                                  'jml_peserta' => $jml_peserta,
+                                                                  'lokasi' => $lokasi,
+                                                                  'deskripsi' => $deskripsi,
+                                                                  'gambar' => htmlspecialchars($row['gambar']),
+                                                                ])) ?>)">
+                <i class="fas fa-list"></i> DETAIL
+              </button>
             </div>
           </div>
 
@@ -179,50 +178,50 @@ $end = $offset + $result->num_rows;
   </div>
 
 
-<script>
-
+  <script>
     // ? POPUP
     function openPopup(data) {
-        // ! Isi data ke dalam popup
-        document.getElementById('popup-id').value = data.id;
-        document.getElementById('popup-judul').textContent = data.judul;
-        document.getElementById('popup-tanggal').textContent = data.tanggal;
-        document.getElementById('popup-jml_peserta').textContent = data.jml_peserta;
-        document.getElementById('popup-lokasi').textContent = data.lokasi;
-        document.getElementById('popup-deskripsi').innerHTML = data.deskripsi;
-        
-        const gambar = document.getElementById('popup-gambar');
-        if (data.gambar) {
-            gambar.src = '<?= base_url("uploads/kegiatan/") ?>' + data.gambar;
-            gambar.style.display = 'block';
-        } else {
-            gambar.style.display = 'none';
-        }
-        
-        // ! Tampilkan popup
-        togglePopup('popup-detail');
+      // ! Isi data ke dalam popup
+      document.getElementById('popup-id').value = data.id;
+      document.getElementById('popup-judul').textContent = data.judul;
+      document.getElementById('popup-tanggal').textContent = data.tanggal;
+      document.getElementById('popup-jml_peserta').textContent = data.jml_peserta;
+      document.getElementById('popup-lokasi').textContent = data.lokasi;
+      document.getElementById('popup-deskripsi').innerHTML = data.deskripsi;
+
+      const gambar = document.getElementById('popup-gambar');
+      if (data.gambar) {
+        gambar.src = '<?= base_url("uploads/kegiatan/") ?>' + data.gambar;
+        gambar.style.display = 'block';
+      } else {
+        gambar.style.display = 'none';
+      }
+
+      // ! Tampilkan popup
+      togglePopup('popup-detail');
     }
+
     function togglePopup(popupId) {
-        document.getElementById(popupId).classList.toggle("active");
+      document.getElementById(popupId).classList.toggle("active");
     }
 
 
     // ? SMOOTH ANIMATION
     const content = document.querySelectorAll('.activity-card');
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('show');
-            }
-        });
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
     }, {
-        threshold: 0.1
+      threshold: 0.1
     });
 
     content.forEach(content => {
-        observer.observe(content);
+      observer.observe(content);
     });
-</script>
+  </script>
 
 </body>
 

@@ -135,8 +135,10 @@ body::-webkit-scrollbar {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.7);
-  z-index: 1;
-  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-in-out;
+  z-index: 10;
 }
 
 .popup .card-popup {
@@ -148,11 +150,13 @@ body::-webkit-scrollbar {
   width: 60vw;
   min-height: 90vh;
   overflow: hidden;
-  z-index: 2;
+  z-index: 20;
   box-sizing: border-box;
   transition: all 0.3s ease-in-out;
-  transform: translate(-50%, -30%) scale(0);
+  transform: translate(-50%, -30%) scale(0.9); 
+  transition: opacity 0.4s ease, transform 0.4s ease;
   opacity: 0;
+  pointer-events: none;
 }
 
 .card-popup .popup-header {
@@ -259,13 +263,14 @@ body::-webkit-scrollbar {
 }
 
 .popup.active .overlay {
-  display: block;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .popup.active .card-popup {
-  transition: all 0.3s ease-in-out;
-  transform: translate(-50%, -30%) scale(1);
   opacity: 1;
+  transform: translate(-50%, -30%) scale(1); 
+  pointer-events: auto;
 }
 
 .popup.closing .card-popup {
