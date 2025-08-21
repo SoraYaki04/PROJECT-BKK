@@ -87,7 +87,7 @@ $stmtPelamar->close();
 
                         <div class="rincian">
                             <ul>
-                                <li><i class="fa-solid fa-building"></i><?= htmlspecialchars($data['id_perusahaan']) ?></li>
+                                <li><i class="fa-solid fa-building"></i><?= htmlspecialchars($data['nama_perusahaan']) ?></li>
                                 <li><i class="fa-solid fa-location-dot"></i><?= htmlspecialchars($data['lokasi']) ?></li>
                                 <li><i class="fa-solid fa-users"></i><p>Jumlah Pelamar: <?= $jumlahPelamarLowongan ?></p>
                             </ul>
