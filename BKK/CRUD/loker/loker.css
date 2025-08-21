@@ -107,11 +107,15 @@ body::-webkit-scrollbar {
 }
 
 #tambah-loker .tambah-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     cursor: pointer;
     opacity: 0.5;
 }
 
-#tambah-loker .tambah-btn a {  
+#tambah-loker .tambah-btn a {
     text-decoration: none;
     color: #000;
 }
@@ -260,10 +264,10 @@ body::-webkit-scrollbar {
 }
 
 .no-data {
-  text-align: center;
-  padding: 3rem;
-  font-size: 1.2rem;
-  color: #888;
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.2rem;
+    color: #888;
 }
 
 
@@ -309,7 +313,7 @@ body::-webkit-scrollbar {
     color: #fff;
 }
 
-.pagination .navigate  {
+.pagination .navigate {
     background: #3376F9;
     color: white;
 }
@@ -322,30 +326,39 @@ body::-webkit-scrollbar {
 
 /* ? NOTIFICATION */
 .floating-notif {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 16px;
-  z-index: 9999;
-  color: white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  animation: fadeOut 5s forwards;
-  opacity: 1;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    z-index: 9999;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeOut 5s forwards;
+    opacity: 1;
 }
 
 .floating-notif.success {
-  background-color: #28a745;
+    background-color: #28a745;
 }
 
 .floating-notif.error {
-  background-color: #dc3545;
+    background-color: #dc3545;
 }
 
 @keyframes fadeOut {
-  0% { opacity: 1; }
-  80% { opacity: 1; }
-  100% { opacity: 0; top: 0px; }
+    0% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        top: 0px;
+    }
 }

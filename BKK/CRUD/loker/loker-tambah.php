@@ -98,8 +98,9 @@ $jurusan = $koneksi->query("SELECT id_jurusan, jurusan FROM jurusan");
 
         <section class="detail-lowongan">
             <form method="POST">
+                <?= csrf_field() ?>
                 <div class="container-detail">
-                    <?= csrf_field() ?>
+                    
 
                     <div class="kotak-satu">
                         <h2><input type="text" name="judul_lowker" placeholder="Masukkan Judul Lowongan" required></h2>

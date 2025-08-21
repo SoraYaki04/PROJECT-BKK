@@ -182,7 +182,7 @@ if (isset($_POST['update'])) {
                                     rows="6" required><?= htmlspecialchars($data['keahlian']) ?></textarea>
                             </div>
 
-                            <div class="forn-input">
+                            <div class="form-input">
                                 <p>Waktu Bekerja :</p>
                                 <input type="text" name="waktu_bekerja" placeholder="Contoh: Senin-Jumat, Shift"
                                     value="<?= htmlspecialchars($data['waktu_bekerja']) ?>">
