@@ -1,0 +1,687 @@
+/* INFORMASI KEGIATAN CSS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-color: #f0f0f5;
+    font-size: 16px;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.header-bar {
+    background-color: #d1f0ff;
+    padding: 10px 20px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.header-bar a {
+    color: #002366;
+    text-decoration: none;
+    margin-right: 40px;
+}
+
+
+/* ? SEARCH */
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    gap: 10px;
+    background-color: #D9D9D9;
+    padding: 5px;
+    border: 1px solid #B0A8A8;
+    user-select: none;
+}
+
+.search select,
+.search option {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    text-align: center;
+    height: 35px;
+}
+
+.search-select,
+.search-input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-input {
+    font-size: 14px;
+    height: 35px;
+    width: 200px;
+}
+
+.search-button {
+    padding: 7px 15px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+
+.perusahaan-list {
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+    padding-bottom: 50px;
+}
+
+
+#tambah-perusahaan {
+    height: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background: #D9D9D9;
+    text-decoration: none;
+    border-radius: 8px;
+    transform: none;
+}
+
+#tambah-perusahaan .tambah-btn {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+#tambah-perusahaan .tambah-btn a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #000;
+}
+
+#tambah-perusahaan p {
+    font-size: 22px;
+    font-family: "Ramabhadra", sans-serif;
+}
+
+.perusahaan-card {
+    position: relative;
+    display: flex;
+    width: 80vw;
+    max-width: 900px;
+    height: 170px;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    transition: opacity 0.9s ease-out, transform 0.6s ease-out;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.perusahaan-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.perusahaan-card:hover {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.perusahaan-img {
+    position: relative;
+    width: 30%;
+    min-width: 220px;
+    height: 100%;
+    overflow: hidden;
+    clip-path: polygon(0 0, 85% 0, 75% 100%, 0% 100%);
+    z-index: 2;
+}
+
+.perusahaan-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(49, 49, 49, 0.7) 0%, rgba(49, 49, 49, 0.1) 100%);
+    mix-blend-mode: multiply;
+    z-index: 1;
+    transition: opacity 0.4s ease;
+}
+
+.perusahaan-card:hover .image-overlay {
+    opacity: 0.5;
+}
+
+.perusahaan-card:hover .perusahaan-img img {
+    transform: scale(1.1);
+}
+
+.perusahaan-content {
+    display: flex;
+    width: 70%;
+    padding: 25px;
+    justify-content: space-between;
+    z-index: 3;
+}
+
+.desc-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(15deg, #f9f9f9 0%, #ffffff 100%);
+    clip-path: polygon(25% 0, 100% 0, 100% 100%, 15% 100%);
+    z-index: 1;
+    transition: all 0.4s ease;
+}
+
+.perusahaan-card:hover .desc-overlay {
+    background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+}
+
+.perusahaan-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 70%;
+}
+
+.perusahaan-nama {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #2c3e50;
+    margin-bottom: 12px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.perusahaan-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+    color: #5a6a7a;
+    position: relative;
+    padding-left: 5px;
+}
+
+.detail-item i {
+    margin-right: 10px;
+    color: #3498db;
+    width: 20px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.perusahaan-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center                                                                                                                 ;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    z-index: 2;
+}
+
+.detail-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 12px 25px;
+    background: #007bff;
+    color: white;
+    width: 100px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-btn i {
+    margin-right: 8px;
+}
+
+.detail-btn:hover {
+    background: #0056b3;
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+.hapus-btn {
+    background: #dc3545;
+}
+
+.hapus-btn:hover {
+    background: #c82333;
+}
+
+.detail-btn i {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+
+
+/* .detail-btn:hover i {
+    transform: translateX(5px);
+} */
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .perusahaan-card {
+        flex-direction: column;
+        height: auto;
+        width: 90vw;
+    }
+
+    .perusahaan-img {
+        width: 100%;
+        height: 180px;
+        min-width: auto;
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+    }
+
+    .perusahaan-content {
+        width: 100%;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .desc-overlay {
+        width: 100%;
+        clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
+    }
+
+    .perusahaan-info {
+        width: 100%;
+    }
+
+    .perusahaan-actions {
+        margin-top: 20px;
+        justify-content: center;
+    }
+}
+
+.no-data {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.2rem;
+    color: #888;
+}
+
+
+/* ? POPUP START */
+.popup {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  z-index: 100000;
+}
+
+.popup .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+  display: none;
+}
+
+.popup.active .overlay {
+  display: block;
+}
+
+.popup.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup.active .company-popup {
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out;
+  pointer-events: auto;
+
+}
+
+.company-popup {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 50%;
+  bottom: 10%;
+  transform: translate(-50%, 20px);
+  width: 80vw;
+  height: 550px;
+  background: #ECF3F6;
+  border: 2px solid #999999;
+  padding: 15px;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  pointer-events: none;
+  overflow: auto;
+}
+
+.company-popup .popup-imgbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 220px;
+  width: 100%;
+}
+
+.img-preview {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  height: 200px;
+  width: 55%;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.img-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 55%;
+  border: 2px solid #5135fa;
+  gap: 20px;
+  opacity: 0.3;
+  font-family: "Ramabhadra", sans-serif;
+  cursor: pointer;
+}
+
+.img-preview img {
+  object-fit: cover;
+  height: 200px;
+  width: auto;
+}
+
+.company-popup input {
+  border: none;
+  width: 100%;
+  border-bottom: 2px solid #ccc;
+  background: transparent;
+  font-size: 16px;
+  outline: none;
+  font-family: inherit;
+}
+
+.company-popup input:focus {
+  border-color: #666
+}
+
+.company-popup .company-header-popup {
+  padding: 20px;
+}
+
+.company-desc-popup {
+  margin-top: 5px;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+}
+
+.company-detail-popup {
+  display: flex;
+  font-size: 20px;
+  padding: 15px 0 15px;
+  margin-left: 25px;
+}
+
+.company-detail-popup textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background: transparent;
+  font-size: 16px;
+  outline: none;
+  font-family: inherit;
+  resize: vertical;
+  padding: 5px 0;
+  box-sizing: border-box;
+
+}
+
+
+.company-detail-popup td {
+  border-bottom: 1px solid #ddd;
+  font-family: 'Franklin Gothic Book';
+  font-size: 21px;
+}
+
+.company-detail-popup .company-detail-left {
+  width: 250px;
+}
+
+.company-detail-popup .company-detail-right {
+  width: 750px;
+}
+
+.company-table-popup {
+  padding: 20px;
+}
+
+.company-table-popup table {
+  text-align: left;
+  width: 100%;
+  border: 2px solid #999999;
+  border-collapse: collapse;
+}
+
+.company-table-popup th {
+  color: #ffffff;
+  background: #093679;
+  padding: 5px;
+}
+
+.company-table-popup td {
+  padding: 2px 0 2px 5px;
+}
+
+.company-table-popup .table-number {
+  text-align: center;
+}
+
+.company-table-popup table tr:nth-child(even) td {
+  background-color: #e0e0e0;
+}
+
+.company-table-popup table tr:nth-child(odd) td {
+  background-color: #ffffff;
+}
+
+.popup .popup-footer {
+  display: flex;
+  justify-content: center;
+  line-height: 40px;
+  width: 100%;
+  height: 50px;
+
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.popup .popup-footer button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  margin: 0 5px;
+  width: 50%;
+  height: 50px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.popup-footer .save-btn {
+  background-color: #4a90fa;
+  transition: background-color 0.3s ease;
+}
+
+.popup-footer .save-btn:hover {
+  background-color: #3b7ee6;
+}
+
+.popup-footer .close-btn {
+  background-color: #ea7427;
+  transition: background-color 0.3s ease;
+}
+
+.popup-footer .close-btn:hover {
+  background-color: #d36117;
+}
+
+
+
+/* ? PAGINATION */
+.pagination-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.pagination-info {
+    text-align: left;
+    font-size: 16px;
+    color: #555;
+    margin-right: 10px;
+}
+
+.pagination {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 0 5px;
+    color: #444;
+    background: #f2f2f2;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.pagination a:hover {
+    background-color: #ddd;
+}
+
+.pagination a.active {
+    background-color: #FB380D;
+    color: #fff;
+}
+
+.pagination .navigate {
+    background: #3376F9;
+    color: white;
+}
+
+.pagination .navigate:hover {
+    background-color: #002366;
+}
+
+
+/* ? NOTIFICATION */
+.floating-notif {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    z-index: 9999;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeOut 5s forwards;
+    opacity: 1;
+}
+
+.floating-notif.success {
+    background-color: #28a745;
+}
+
+.floating-notif.error {
+    background-color: #dc3545;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        top: 0px;
+    }
+}

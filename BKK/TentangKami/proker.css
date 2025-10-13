@@ -1,0 +1,76 @@
+/* PROKER CSS */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #f0f5f5;
+  font-size: 16px;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.content {
+  display: flex;
+  padding: 20px;
+}
+
+.header-bar {
+  background-color: #d1f0ff;
+  padding: 10px 20px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.header-bar a {
+  color: #002366;
+  text-decoration: none;
+  margin-right: 40px;
+}
+
+.proker h2,
+.proker li {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.4s ease-out;
+}
+
+.proker h2.show,
+.proker li.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.proker h2 {
+  font-size: 33px;
+  font-weight: 800;
+  font-family: "Poppins", sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  color: #333;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  margin-left: 30px;
+  margin-top: 29px;
+}
+
+.proker ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #555;
+  margin-left: 30px;
+  margin-right: 20px;
+}
+
+.proker ol li {
+  margin-bottom: 10px;
+}

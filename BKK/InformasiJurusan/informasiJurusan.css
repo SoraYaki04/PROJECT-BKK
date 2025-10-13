@@ -1,0 +1,243 @@
+/* INFORMASI JURUSAN */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #f0f0f5;
+  font-size: 16px;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.header-bar {
+  background-color: #d1f0ff;
+  padding: 10px 20px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.header-bar a {
+  color: #002366;
+  text-decoration: none;
+  margin-right: 40px;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.card {
+  margin: 40px;
+  background-color: #f6f4f3;
+  width: 385px;
+  min-height: 363px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  cursor: pointer;
+}
+
+.card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+  background-color: #3590fa;
+  height: 39px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.card-content .foto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  border-radius: 10px;
+}
+
+.card-content .foto img {
+  width: 241px;
+  height: 146px;
+  object-fit: cover;
+}
+
+.card-content .deskripsi hr {
+  margin-bottom: 5px;
+  border: none;
+  height: 1px;
+  background-color: #000;
+}
+
+.card-content .deskripsi {
+  font-size: 15px;
+  margin-top: 25px;
+  width: 90%;
+  padding-bottom: 10px;
+}
+
+.deskripsi button {
+  border: none;
+  cursor: pointer;
+  color: #3590fa;
+  transition: color 0.3s ease;
+}
+
+.deskripsi button:hover {
+  color: #002366;
+}
+
+
+/* ! POP UP START */
+.popup .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+  display: none;
+}
+
+.popup .card-popup {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  background: #fff;
+  border-radius: 10px;
+  width: 60vw;
+  min-height: 70vh;
+  overflow: hidden;
+  z-index: 2;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+  transform: translate(-50%, -30%) scale(0);
+  opacity: 0;
+}
+
+.popup.active .card-popup {
+  transform: translate(-50%, -30%) scale(1);
+  opacity: 1;
+}
+
+.popup.closing .card-popup {
+  transform: translate(-50%, -30%) scale(0);
+  opacity: 0;
+}
+
+.card-popup .deskripsi p,
+.card-popup .deskripsi li {
+  font-size: 17px;
+}
+
+.card-popup .title {
+  font-size: 25px;
+  height: 50px;
+}
+
+.card-popup .foto-popup {
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+  gap: 20px;
+}
+
+.popup-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  max-height: calc(90vh - 100px);
+}
+
+.card-content .foto-popup img {
+  width: 200px;
+  margin-top: 10px;
+  object-fit: cover;
+}
+
+.popup .deskripsi {
+  font-size: 25px;
+}
+
+.popup .deskripsi li {
+  color: black;
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.popup .close-popup {
+  background-color: #7e7777;
+  display: flex;
+  justify-content: flex-end;
+  line-height: 40px;
+  width: 100%;
+  height: 50px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.popup .close-popup button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border: none;
+  background: none;
+  color: white;
+  font-size: 45px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.popup .close-popup button:hover {
+  color: #bdbdbd;
+}
+
+.popup.active .overlay {
+  display: block;
+}
+
+.popup.active .card-popup {
+  transition: all 0.3s ease-in-out;
+  transform: translate(-50%, -30%) scale(1);
+}
+
+/* ! POP UP END */
+
+.footer {
+  text-align: left;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
