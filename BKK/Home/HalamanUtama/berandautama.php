@@ -43,12 +43,13 @@ require_once __DIR__ . '/../../config/helpers.php';
         <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="video-button" target="_blank">Video Tutorial<i
             class="fa-regular fa-circle-play"></i></a>
 
+        <?php if (!is_logged_in()): ?>
         <div class="login-options">
+          <!-- <a href="../../Login/LoginAdmin/admin-login.php" class="login-card">
+              <img src="../../assets/images/adminlogin.png" alt="Admin Icon" class="icon">
+              <span>Admin BKK</span>
+            </a> -->
           <a href="../../Login/LoginAdmin/admin-login.php" class="login-card">
-            <img src="../../assets/images/adminlogin.png" alt="Admin Icon" class="icon">
-            <span>Admin BKK</span>
-          </a>
-          <a href="../../Login/LoginManagement/management-login.php" class="login-card">
             <img src="../../assets/images/managementlogin.png" alt="Management Icon" class="icon">
             <span>Management</span>
           </a>
@@ -56,11 +57,13 @@ require_once __DIR__ . '/../../config/helpers.php';
             <img src="../../assets/images/siswalogin.png" alt="Siswa/Alumni Icon" class="icon">
             <span>Siswa / Alumni</span>
           </a>
-          <a href="../../Login/LoginUserLain/pengguna-lain-login.html" class="login-card">
-            <img src="../../assets/images/personlogin.png" alt="Pengguna Lain Icon" class="icon">
-            <span>Pengguna Lain</span>
-          </a>
+          <!-- <a href="../../Login/LoginUserLain/pengguna-lain-login.html" class="login-card">
+              <img src="../../assets/images/personlogin.png" alt="Pengguna Lain Icon" class="icon">
+              <span>Pengguna Lain</span>
+            </a> -->
         </div>
+        <?php endif; ?>
+
 
       </div>
     </section>

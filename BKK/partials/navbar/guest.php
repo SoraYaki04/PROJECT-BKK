@@ -36,10 +36,8 @@ require_once __DIR__ . '/../../config/helpers.php';
     <li>
       <a href="#">LOGIN<i class="fa-solid fa-chevron-down"></i></a>
       <ul class="dropdown">
-        <li><a href="<?= base_url('Login/LoginAdmin/admin-login.php') ?>">Admin BKK</a></li>
-        <li><a href="<?= base_url('Login/LoginManagement/management-login.php') ?>">Management</a></li>
+        <li><a href="<?= base_url('Login/LoginAdmin/admin-login.php') ?>">Management</a></li>
         <li><a href="<?= base_url('Login/LoginSiswa/siswa-alumni-login.php') ?>">Siswa / Alumni</a></li>
-        <li><a href="<?= base_url('Login/LoginUserLain/pengguna-lain-login.html') ?>">Partisipan Lain</a></li>
       </ul>
     </li>
     <?php endif; ?>
