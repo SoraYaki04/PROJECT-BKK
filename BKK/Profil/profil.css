@@ -118,8 +118,6 @@ body::-webkit-scrollbar {
     font-weight: 600;
 }
 
-
-
 .profile-description {
     display: flex;
     margin-top: 20px;
@@ -127,41 +125,111 @@ body::-webkit-scrollbar {
 
 .profile-details {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     position: relative;
     font-weight: bold;
     font-size: 15px;
+    width: 100%;
+}
+
+.profile-details-left,
+.profile-details-right {
     background: #F5F5F5;
-    width: 65%;
-    min-height: 200px;
     padding: 10px 15px 10px 15px;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
     border-radius: 7px;
+    min-height: 200px;
+    width: 49%;
 }
 
-.profile-details .edit-profil {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    width: 32px; 
-    height: 32px; 
+.profile-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.btn-logout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background-color: #e74c3c;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-logout:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-logout:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling untuk tombol edit profil agar konsisten */
+.edit-profil {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: #3498db;
+  color: white;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.edit-profil:hover {
+  background-color: #2980b9;
+  transform: scale(1.1);
+}
+
+.edit-title {
+    text-align: center;
+    padding: 10px;
+}
+
+.profile-details-edit {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content:center;
+    position: relative;
+    font-weight: bold;
+    font-size: 15px;
+    width: 100%;
+}
+
+.profile-desc-container {
+    display: flex;
+    flex-direction: row;
     justify-content: center;
-    padding: 5px;
-    border-radius: 50%; 
-    background: transparent;
-    transition: background 0.2s ease;
-    cursor: pointer;
+    padding: 10px 0 0 0;
+    
 }
 
-.profile-details .edit-profil:hover {
-    background: rgba(0,0,0,0.05);
-}
-
-.profile-details .edit-profil i {
-    font-size: 1.2rem; 
-    color: #000;
+.profile-details-left-edit,
+.profile-details-right-edit {
+    display: flex;
+    flex-direction: column;
+    background: #F5F5F5;
+    padding: 15px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 7px;
+    width: 40%;
 }
 
 .profile-details-1 {
@@ -169,52 +237,6 @@ body::-webkit-scrollbar {
     font-size: 17px;
     opacity: 0.6;
     font-weight: 600;
-}
-
-.profile-notification {
-    display: flex;
-    flex-direction: column;
-    margin-left: 20px;
-    background: #F5F5F5;
-    width: 35%;
-    height: 400px;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-    border-radius: 7px;
-}
-
-.profile-notification-title {
-    display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.profile-notification-title i {
-    position: absolute;
-    left: 10px;
-}
-
-.profile-notification-notif {
-    display: flex;
-    margin: 8px 10px 5px 10px;
-    font-size: 15px;
-}
-
-.profile-notification-notif-left {
-    width: 75%;
-    font-weight: 500;
-}
-
-.profile-notification-notif-right {
-    display: flex;
-    align-items: center;
-    width: 25%;
-    font-size: 13px;
-    opacity: 0.6;
-    font-weight: 700;
 }
 
 

@@ -152,45 +152,7 @@ $stmt->close();
 
 <body>
 
-  <header>
-    <div class="rectangle">
-    </div>
-
-    <div class="logo">
-      <div class="logo-header">
-        <img src="../assets/images/logo.png" alt="BKK SMKN 1 Boyolangu Logo">
-      </div>
-      <div class="header-text">
-        <img src="../assets/images/tulisan logo.png" alt="Bursa Kerja Khusus SMKN 1 Boyolangu" id="text-img">
-      </div>
-    </div>
-
-    <div class="contact-info">
-      <div class="contact-phone">
-        <i class="fas fa-phone-alt"></i>
-        <div class="contact-ket">
-          <p>Call Us</p>
-          <p>+6281-xxx-xxx-xxx</p>
-        </div>
-      </div>
-      <div class="contact-email">
-        <i class="fas fa-envelope"></i>
-        <div class="contact-ket">
-          <p>Email Us</p>
-          <p>bkk@smkn1boyolangu@gmail.com</p>
-        </div>
-
-      </div>
-      <div class="contact-map">
-        <i class="fas fa-map-marker-alt"></i>
-        <div class="contact-ket">
-          <p>Located Us</p>
-          <p>Jl. Ki Mangun Sarkoro No.VI/3, Beji, Boyolangu</p>
-        </div>
-
-      </div>
-    </div>
-  </header>
+  <?php include '../partials/navbar/header.php' ?>
 
   <div class="container">
 
@@ -204,7 +166,7 @@ $stmt->close();
         include '../partials/navbar/admin.php';
     }
     ?>
-    
+
     <div class="header-bar">
       <a href="#">Profil</a>
     </div>
@@ -248,74 +210,83 @@ $stmt->close();
       </div>
 
       <?php if ($edit_mode): ?>
-      <div class="profile-description">
-        <div class="profile-details">
-          <h2>Edit Profil</h2>
-          <form method="POST" action="profil.php?edit=true">
-            <?= csrf_field() ?>
-            <div class="form-group">
-              <p class="profile-details-1">Nama Lengkap</p>
-              <input type="text" id="nama" name="nama" value="<?= htmlspecialchars($data['nama'] ?? '') ?>" required>
-            </div>
+      <div class="profile-description-edit">
+        <h2 class="edit-title">Edit Profil</h2>
+        <form method="POST" action="profil.php?edit=true" class="edit-profile-form">
+          <?= csrf_field() ?>
+          <div class="profile-details-edit">
+            <div class="profile-desc-container">
+              <div class="profile-details-left-edit">
+                <div class="form-group">
+                  <p class="profile-details-1">Nama Lengkap</p>
+                  <input type="text" id="nama" name="nama" value="<?= htmlspecialchars($data['nama'] ?? '') ?>"
+                    required>
+                </div>
 
-            <div class="form-row">
-              <div class="form-group">
-                <p class="profile-details-1">Tempat Lahir</p>
-                <input type="text" id="tempat_lahir" name="tempat_lahir"
-                  value="<?= htmlspecialchars($data['tempat_lahir'] ?? '') ?>" required>
+                <div class="form-row">
+                  <div class="form-group">
+                    <p class="profile-details-1">Tempat Lahir</p>
+                    <input type="text" id="tempat_lahir" name="tempat_lahir"
+                      value="<?= htmlspecialchars($data['tempat_lahir'] ?? '') ?>" required>
+                  </div>
+                  <div class="form-group">
+                    <p class="profile-details-1">Tanggal Lahir</p>
+                    <input type="date" id="tanggal_lahir" name="tanggal_lahir"
+                      value="<?= htmlspecialchars($data['tanggal_lahir'] ?? '') ?>" required>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <p class="profile-details-1">RT</p>
+                    <input type="number" id="rt" name="rt" value="<?= htmlspecialchars($data['rt'] ?? '') ?>">
+                  </div>
+                  <div class="form-group">
+                    <p class="profile-details-1">RW</p>
+                    <input type="number" id="rw" name="rw" value="<?= htmlspecialchars($data['rw'] ?? '') ?>">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <p class="profile-details-1">Dusun</p>
+                  <input type="text" id="dusun" name="dusun" value="<?= htmlspecialchars($data['dusun'] ?? '') ?>">
+                </div>
               </div>
-              <div class="form-group">
-                <p class="profile-details-1">Tanggal Lahir</p>
-                <input type="date" id="tanggal_lahir" name="tanggal_lahir"
-                  value="<?= htmlspecialchars($data['tanggal_lahir'] ?? '') ?>" required>
+
+              <div class="profile-details-right-edit">
+                <div class="form-group">
+                  <p class="profile-details-1">Kelurahan</p>
+                  <input type="text" id="kelurahan" name="kelurahan"
+                    value="<?= htmlspecialchars($data['kelurahan'] ?? '') ?>">
+                </div>
+
+                <div class="form-group">
+                  <p class="profile-details-1">Kecamatan</p>
+                  <input type="text" id="kecamatan" name="kecamatan"
+                    value="<?= htmlspecialchars($data['kecamatan'] ?? '') ?>">
+                </div>
+
+                <div class="form-group">
+                  <p class="profile-details-1">Kode Pos</p>
+                  <input type="text" id="kode_pos" name="kode_pos"
+                    value="<?= htmlspecialchars($data['kode_pos'] ?? '') ?>">
+                </div>
+
+                <div class="form-group">
+                  <p class="profile-details-1">No. WhatsApp</p>
+                  <input type="text" id="no_wa" name="no_wa" value="<?= htmlspecialchars($data['no_wa'] ?? '') ?>"
+                    required>
+
+                </div>
               </div>
-            </div>
 
-            <div class="form-row">
-              <div class="form-group">
-                <p class="profile-details-1">RT</p>
-                <input type="number" id="rt" name="rt" value="<?= htmlspecialchars($data['rt'] ?? '') ?>">
-              </div>
-              <div class="form-group">
-                <p class="profile-details-1">RW</p>
-                <input type="number" id="rw" name="rw" value="<?= htmlspecialchars($data['rw'] ?? '') ?>">
-              </div>
             </div>
-
-            <div class="form-group">
-              <p class="profile-details-1">Dusun</p>
-              <input type="text" id="dusun" name="dusun" value="<?= htmlspecialchars($data['dusun'] ?? '') ?>">
-            </div>
-
-            <div class="form-group">
-              <p class="profile-details-1">Kelurahan</p>
-              <input type="text" id="kelurahan" name="kelurahan"
-                value="<?= htmlspecialchars($data['kelurahan'] ?? '') ?>">
-            </div>
-
-            <div class="form-group">
-              <p class="profile-details-1">Kecamatan</p>
-              <input type="text" id="kecamatan" name="kecamatan"
-                value="<?= htmlspecialchars($data['kecamatan'] ?? '') ?>">
-            </div>
-
-            <div class="form-group">
-              <p class="profile-details-1">Kode Pos</p>
-              <input type="text" id="kode_pos" name="kode_pos" value="<?= htmlspecialchars($data['kode_pos'] ?? '') ?>">
-            </div>
-
-            <div class="form-group">
-              <p class="profile-details-1">No. WhatsApp</p>
-              <input type="text" id="no_wa" name="no_wa" value="<?= htmlspecialchars($data['no_wa'] ?? '') ?>" required>
-              <small>Format: 081234567890 (10-15 digit angka)</small>
-            </div>
-
             <div class="form-actions">
-              <button type="submit" class="btn-save">Simpan Perubahan</button>
+              <button type="submit" class="btn-save">💾 Simpan Perubahan</button>
               <a href="profil.php" class="btn-cancel">Batal</a>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
 
       <?php else: ?>
@@ -326,74 +297,53 @@ $stmt->close();
             <i class="fa-solid fa-pen-to-square fa-xl"></i>
           </a>
 
-          <P class="profile-details-1">Nama Lengkap</P>
-          <p><?php echo $data['nama']; ?></p>
+          <div class="profile-details-left">
+            <P class="profile-details-1">NISN</P>
+            <p><?php echo $data['nisn']; ?></p>
 
-          <P class="profile-details-1">NISN</P>
-          <p><?php echo $data['nisn']; ?></p>
+            <p class="profile-details-1">NIK</p>
+            <p><?php echo $data['nik'] ?></p>
 
-          <p class="profile-details-1">Tempat Tanggal Lahir</p>
-          <p><?php echo $data['tempat_lahir'] . ", " . $data['tanggal_lahir']; ?></p>
+            <P class="profile-details-1">Nama Lengkap</P>
+            <p><?php echo $data['nama']; ?></p>
 
-          <p class="profile-details-1">Alamat</p>
-          <p>
-            <?php echo "RT " . $data['rt'] . ", RW " . $data['rw'] . ", " . $data['dusun'] . ", " . $data['kelurahan'] . ", " . $data['kecamatan']; ?>
-          </p>
+            <p class="profile-details-1">Jenis Kelamin</p>
+            <p><?php echo ($data['jenis_kelamin'] ?? '') === 'L' ? 'Laki-Laki' : 'Perempuan' ?></p>
 
-          <p class="profile-details-1">Kode Pos</p>
-          <p><?php echo $data['kode_pos'] ?></p>
+            <p class="profile-details-1">Tempat Tanggal Lahir</p>
+            <p><?php echo $data['tempat_lahir'] . ", " . $data['tanggal_lahir']; ?></p>
+          </div>
 
-          <p class="profile-details-1">Jenis Kelamin</p>
-          <p><?php echo ($data['jenis_kelamin'] ?? '') === 'L' ? 'Laki-Laki' : 'Perempuan' ?></p>
+          <div class="profile-details-right">
 
-          <p class="profile-details-1">Agama</p>
-          <p><?php echo $data['agama'] ?></p>
+            <p class="profile-details-1">Alamat</p>
+            <p>
+              <?php echo "RT " . $data['rt'] . ", RW " . $data['rw'] . ", " . $data['dusun'] . ", " . $data['kelurahan'] . ", " . $data['kecamatan']; ?>
+            </p>
 
-          <p class="profile-details-1">No Tlp / Hp</p>
-          <p><?php echo $data['no_wa'] ?></p>
+            <p class="profile-details-1">Kode Pos</p>
+            <p><?php echo $data['kode_pos'] ?></p>
 
-          <p class="profile-details-1">NIK</p>
-          <p><?php echo $data['nik'] ?></p>
+            <p class="profile-details-1">Agama</p>
+            <p><?php echo $data['agama'] ?></p>
+
+            <p class="profile-details-1">No Tlp / Hp</p>
+            <p><?php echo $data['no_wa'] ?></p>
+
+          </div>
+
+
+
         </div>
 
-        <div class="profile-notification">
-          <div class="profile-notification-title">
-            <i class="fa-regular fa-bell"></i>
-            <p>Semua Notifikasi</p>
-          </div>
-
-          <hr>
-
-          <div class="profile-notification-notif">
-            <div class="profile-notification-notif-left">
-              <p>Anda Belum Mengisi Survey Bulan Juli 2024</p>
-            </div>
-            <div class="profile-notification-notif-right">
-              <p>01 Agt 24</p>
-            </div>
-          </div>
-
-          <div class="profile-notification-notif">
-            <div class="profile-notification-notif-left">
-              <p>Anda Belum Mengisi Survey Bulan Juli 2024</p>
-            </div>
-            <div class="profile-notification-notif-right">
-              <p>01 Agt 24</p>
-            </div>
-          </div>
-
-          <div class="profile-notification-notif">
-            <div class="profile-notification-notif-left">
-              <p>Anda Belum Mengisi Survey Bulan Juli 2024</p>
-            </div>
-            <div class="profile-notification-notif-right">
-              <p>01 Agt 24</p>
-            </div>
-          </div>
-
-        </div>
       </div>
-<a href="../Login/logout.php">Logout</a>
+
+      <div class="profile-actions">
+        <a href="../Login/logout.php" class="btn-logout">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Keluar</span>
+        </a>
+      </div>
 
       <?php endif; ?>
     </div>
@@ -402,7 +352,6 @@ $stmt->close();
   </div>
 
   <script>
-
     document.getElementById('profileImageInput').addEventListener('change', function (e) {
       // ! Validasi file
       const file = e.target.files[0];
