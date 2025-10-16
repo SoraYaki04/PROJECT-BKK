@@ -82,6 +82,17 @@ body::-webkit-scrollbar {
     justify-content: space-between;
     align-items: center;
   }
+  .requirement-box.drag-over {
+    border-color: #2887f4;
+    box-shadow: 0 0 0 3px rgba(40, 135, 244, 0.2);
+    background-color: #f4f9ff;
+  }
+
+  /* Berkas Lamaran lebih besar dan melebar (full width) */
+  .requirement-box.berkas-lamaran {
+    grid-column: 1 / -1; /* span dua kolom */
+    min-height: 200px;
+  }
   
   .optional {
     color: #888;
@@ -150,3 +161,42 @@ body::-webkit-scrollbar {
     background-color: #1c6ed2;
   }
   
+  /* Modal result */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  .modal-content {
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px 28px;
+    width: min(560px, 92vw);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
+    text-align: center;
+  }
+  .modal-close {
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    cursor: pointer;
+    color: #666;
+  }
+  .modal-icon i {
+    font-size: 56px;
+    color: #28a745; /* success */
+  }
+  .modal-content .fa-times-circle { color: #dc3545; }
+  .modal-text h2 {
+    margin-top: 12px;
+    font-size: 18px;
+    color: #333;
+  }
