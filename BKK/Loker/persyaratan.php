@@ -276,6 +276,12 @@ $id_lowker = (int)$_GET['id'] ?? 0;
     </script>
     <?php else: ?>
     <div class="requirement-section">
+      <div class="back-button">
+        <a href="detail-lowker.php?id=<?php echo $id_lowker; ?>" class="back-btn" aria-label="Kembali ke detail lowker">
+          <i class="fas fa-arrow-left"></i>
+          <span>Kembali</span>
+        </a>
+      </div>
       <h2 class="section-title">TAMBAHKAN PERSYARATAN</h2>
 
       <form action="" method="post" enctype="multipart/form-data">
