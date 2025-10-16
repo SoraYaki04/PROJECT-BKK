@@ -74,24 +74,43 @@ body::-webkit-scrollbar {
   }
   
   .requirement-box {
-    border: 1px solid #030303;
-    border-radius: 10px;
-    padding: 18px 22px;
-    background-color: #fff;
+    border: 1px solid rgba(230, 233, 239, 0.8);
+    border-radius: 14px;
+    padding: 22px 24px;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    gap: 16px;
+    box-shadow: 0 10px 24px rgba(23, 43, 77, 0.10), 0 2px 6px rgba(23, 43, 77, 0.06), inset 0 0 0 1px rgba(255,255,255,0.6);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, transform 0.2s ease;
+    position: relative;
+    padding-bottom: 80px; /* ruang untuk tombol di kanan bawah */
+  }
+  .requirement-box:hover {
+    border-color: #cdd6e6;
+    box-shadow: 0 16px 36px rgba(40, 135, 244, 0.18), 0 4px 10px rgba(23, 43, 77, 0.10);
+    transform: translateY(-1px);
   }
   .requirement-box.drag-over {
     border-color: #2887f4;
-    box-shadow: 0 0 0 3px rgba(40, 135, 244, 0.2);
+    box-shadow: 0 0 0 3px rgba(40, 135, 244, 0.25), 0 18px 40px rgba(40, 135, 244, 0.20);
     background-color: #f4f9ff;
   }
 
   /* Berkas Lamaran lebih besar dan melebar (full width) */
   .requirement-box.berkas-lamaran {
     grid-column: 1 / -1; /* span dua kolom */
-    min-height: 200px;
+    min-height: 340px;
+    background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+    border-color: #dfe7f6;
+    box-shadow: 0 18px 48px rgba(23, 43, 77, 0.12), 0 2px 10px rgba(23, 43, 77, 0.06), inset 0 0 0 1px rgba(255,255,255,0.65);
+  }
+  .requirement-box.berkas-lamaran .icon-text i {
+    font-size: 44px;
+    color: #e53935; /* merah khas PDF */
   }
   
   .optional {
@@ -119,6 +138,9 @@ body::-webkit-scrollbar {
   .actions {
     display: flex;
     gap: 10px;
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
   }
   
   .actions .upload-btn,
@@ -126,13 +148,31 @@ body::-webkit-scrollbar {
     font-size: 16px;
     padding: 10px 16px;
     margin-left: 6px;
-    background-color: #fdfbfb;
-    border: 1px solid #d0d0d0;
-    color: #003399;
-    font-weight: bold;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s ease;
+    font-weight: 600;
+  }
+  .actions .upload-btn {
+    background-color: #2887f4;
+    border: 1px solid #2887f4;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(40, 135, 244, 0.25);
+  }
+  .actions .upload-btn:hover {
+    background-color: #1c6ed2;
+    border-color: #1c6ed2;
+    box-shadow: 0 6px 14px rgba(28, 110, 210, 0.25);
+  }
+  .actions .view-btn {
+    background-color: #f9fbff;
+    border: 1px solid #c9d6f0;
+    color: #274b8f;
+  }
+  .actions .view-btn:hover {
+    background-color: #e9f1ff;
+    border-color: #b8c9ee;
+    color: #1f3f7a;
   }
 
   .actions .upload-btn:hover,
@@ -159,6 +199,16 @@ body::-webkit-scrollbar {
   
   .submit-button button:hover {
     background-color: #1c6ed2;
+  }
+
+  /* Nama file yang tampil setelah pilih file */
+  .file-name {
+    display: block;
+    margin-top: 8px;
+    color: #2e7d32;
+    font-size: 14px;
+    font-weight: 600;
+    word-break: break-all;
   }
   
   /* Modal result */
@@ -199,4 +249,27 @@ body::-webkit-scrollbar {
     margin-top: 12px;
     font-size: 18px;
     color: #333;
+  }
+
+  /* Responsif */
+  @media (max-width: 900px) {
+    .requirement-grid {
+      grid-template-columns: 1fr;
+    }
+    .requirement-box {
+      align-items: stretch;
+    }
+    .icon-text {
+      gap: 12px;
+    }
+    .actions {
+      position: static;
+      margin-top: 16px;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+    .actions .upload-btn,
+    .actions .view-btn {
+      margin-left: 0;
+    }
   }
