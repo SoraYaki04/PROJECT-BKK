@@ -1,20 +1,14 @@
 <?php
-session_start();
+require_once __DIR__ . '/../config/helpers.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include '../koneksi.php'; 
+// koneksi sudah dimuat via helpers.php
+global $koneksi;
 if (!isset($koneksi)) {
     die("Database connection not established.");
 }
 
-// Check if admin is logged in and track login status
-$admin_logged_in = false;
-$admin_username = '';
-if (isset($_SESSION['user_id']) && isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
-    $admin_logged_in = true;
-    $admin_username = $_SESSION['username'] ?? '';
-}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $choice = trim($_POST['survey-choice'] ?? '');
@@ -25,13 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die("Pilihan survey tidak boleh kosong.");
     }
 
-    // If admin is logged in, include admin info in description
-    if ($admin_logged_in) {
-        $description = "[ADMIN LOGIN: " . $admin_username . "] " . $description;
-    }
 
-    // Get alumni ID from form
-    $alumni_id = $_POST['alumni_id'] ?? null;
+    // Tentukan alumni ID: jika alumni login, ambil dari session; selain itu ambil dari form
+    if (is_alumni()) {
+        $alumni_id = $_SESSION['user_id'] ?? null;
+    } else {
+        $alumni_id = $_POST['alumni_id'] ?? null;
+    }
     
     if (!$alumni_id) {
         die("Alumni ID is required to save survey data.");
@@ -47,9 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($stmt->execute()) {
         $success_message = "Terima kasih atas tanggapan Anda!";
-        if ($admin_logged_in) {
-            $success_message .= " (Status Admin: Login berhasil)";
-        }
     } else {
         $error_message = "Terjadi kesalahan saat menyimpan data: " . $stmt->error;
     }
@@ -80,8 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include '../partials/navbar/guest.php';
     } elseif (is_alumni()) {
         include '../partials/navbar/alumni.php';
-    } elseif (is_admin()) {
-        include '../partials/navbar/admin.php';
     } else {
         include '../partials/navbar/guest.php';
     }
@@ -89,25 +78,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <div class="header-bar">
         <a href="#">Isi Survey</a>
-        <?php if ($admin_logged_in): ?>
-        <span style="float: right; color: #4CAF50; font-weight: bold;">
-            <i class="fas fa-user-shield"></i> Admin: <?php echo htmlspecialchars($admin_username); ?>
-            <a href="../Login/logout.php" style="margin-left: 15px; color: #dc3545; text-decoration: none;">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
-        </span>
-        <?php endif; ?>
     </div>
 
     <div class="survey-container">
         <?php if (isset($success_message)): ?>
-        <div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
+        <div class="alert alert-success">
             <i class="fas fa-check-circle"></i> <?php echo htmlspecialchars($success_message); ?>
         </div>
         <?php endif; ?>
 
         <?php if (isset($error_message)): ?>
-        <div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
+        <div class="alert alert-error">
             <i class="fas fa-exclamation-triangle"></i> <?php echo htmlspecialchars($error_message); ?>
         </div>
         <?php endif; ?>
@@ -115,31 +96,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form action="" method="POST">
             <div class="survey-title">
                 <p>FORMULIR PENGISIAN SURVEY</p>
-                <?php if ($admin_logged_in): ?>
-                <p style="color: #4CAF50; font-size: 14px; margin-top: 10px;">
-                    <i class="fas fa-info-circle"></i> Anda login sebagai Admin. Status login akan dicatat dalam survey.
-                    <br>
-                    <a href="../TracerStudy/tracer-study.php" style="color: #007bff; text-decoration: none; font-size: 12px;">
-                        <i class="fas fa-chart-line"></i> Lihat Tracer Study
-                    </a>
-                </p>
-                <?php endif; ?>
             </div>
             
             <div class="survey-box">
                 <div class="survey-choice">
-                    <p>Pilih Nama Alumni</p>
-                    <select name="alumni_id" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
-                        <option value="">-- Pilih Nama Alumni --</option>
+                    <?php if (is_alumni()): ?>
                         <?php
-                        // Get all alumni for the dropdown
-                        $alumni_query = "SELECT id, nama FROM alumni ORDER BY nama ASC";
-                        $alumni_result = $koneksi->query($alumni_query);
-                        while ($alumni = $alumni_result->fetch_assoc()) {
-                            echo '<option value="' . $alumni['id'] . '">' . htmlspecialchars($alumni['nama']) . '</option>';
+                        $alumni_id = $_SESSION['user_id'] ?? null;
+                        $alumni_nama = '';
+                        if ($alumni_id) {
+                            $stmtA = $koneksi->prepare("SELECT nama FROM alumni WHERE id = ?");
+                            $stmtA->bind_param("i", $alumni_id);
+                            $stmtA->execute();
+                            $resA = $stmtA->get_result()->fetch_assoc();
+                            $alumni_nama = $resA['nama'] ?? '';
                         }
                         ?>
-                    </select>
+                        <p>Alumni</p>
+                        <div class="alumni-badge">
+                            <i class="fas fa-user-graduate"></i>
+                            <span><?php echo htmlspecialchars($alumni_nama); ?></span>
+                        </div>
+                        <input type="hidden" name="alumni_id" value="<?php echo (int)$alumni_id; ?>">
+                    <?php else: ?>
+                        <p>Pilih Nama Alumni</p>
+                        <select name="alumni_id" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+                            <option value="">-- Pilih Nama Alumni --</option>
+                            <?php
+                            $alumni_query = "SELECT id, nama FROM alumni ORDER BY nama ASC";
+                            $alumni_result = $koneksi->query($alumni_query);
+                            while ($alumni = $alumni_result->fetch_assoc()) {
+                                echo '<option value="' . $alumni['id'] . '">' . htmlspecialchars($alumni['nama']) . '</option>';
+                            }
+                            ?>
+                        </select>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="survey-box">
@@ -180,11 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </div>
 
-<script>
-document.querySelectorAll('input[name="survey-choice"]').forEach((radio) => {
-    radio.addEventListener('change', () => {});
-});
-</script>
+<!-- no inline scripts needed -->
 
 </body>
 </html>
