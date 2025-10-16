@@ -26,11 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_lamaran'])) {
     
     $user_id = $_SESSION['user_id'];
     $id_lowker = (int)$_POST['id_lowker'] ?? 0;
-    $upload_dir = "../uploads/lamaran/";
+    // Gunakan path absolut untuk menyimpan file agar lebih stabil
+    $upload_dir_rel = "../uploads/lamaran/";
+    $upload_dir_fs  = __DIR__ . '/../uploads/lamaran/';
 
-    if (!file_exists($upload_dir)) {
-    mkdir($upload_dir, 0755, true);
-}
+    if (!file_exists($upload_dir_fs)) {
+        mkdir($upload_dir_fs, 0755, true);
+    }
 
     // ! Validasi ID lowongan dengan prepared statement
     $stmt = $koneksi->prepare("SELECT l.*, p.id_perusahaan, p.email, p.nama 
@@ -55,15 +57,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_lamaran'])) {
         } else {
             // TODO Fungsi untuk menyimpan file dengan validasi lebih ketat
             function simpanFile($fieldname) {
-                global $upload_dir;
+                global $upload_dir_fs;
                 if (isset($_FILES[$fieldname])) {
                     // ! Cek error
                     if ($_FILES[$fieldname]['error'] !== UPLOAD_ERR_OK) {
                         return null;
                     }
                     
-                    // ! Validasi ukuran file (maks 5MB)
-                    if ($_FILES[$fieldname]['size'] > 5 * 1024 * 1024) {
+                    // ! Validasi ukuran file (maks 15MB)
+                    $maxBytes = 15 * 1024 * 1024;
+                    if ($fieldname === 'berkas_lamaran') {
+                        // Izinkan sedikit lebih besar untuk berkas gabungan
+                        $maxBytes = 20 * 1024 * 1024;
+                    }
+                    if ($_FILES[$fieldname]['size'] > $maxBytes) {
                         return null;
                     }
                     
@@ -81,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_lamaran'])) {
                     
                     // ! Generate nama unik yang lebih aman
                     $newname = uniqid() . '_' . bin2hex(random_bytes(8)) . "." . $file_ext;
-                    $target_path = $upload_dir . $newname;
+                    $target_path = $upload_dir_fs . $newname;
                     
                     // ! Pindahkan file
                     if (move_uploaded_file($_FILES[$fieldname]['tmp_name'], $target_path)) {
@@ -100,8 +107,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_lamaran'])) {
             $data_lamaran = [
                 'pass_foto'     => null,
                 'ijazah'        => null,
-                'portofolio'    => simpanFile('portofolio'), // opsional tetap terpisah
-                'sertifikat'    => simpanFile('sertifikat'), // opsional tetap terpisah
+                'portofolio'    => null, // Digabung dalam berkas_lamaran (opsional)
+                'sertifikat'    => null, // Digabung dalam berkas_lamaran (opsional)
                 'ktp_kk'        => null,
                 'cv'            => null,
                 'skck'          => null,
@@ -162,12 +169,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_lamaran'])) {
                                          " | Email: " . ($alumni['email'] ?? '-') .
                                          " | Cek dashboard BKK untuk detail.";
 
-                        // Lampirkan hanya berkas lamaran gabungan (PDF)
+                        // Lampirkan berkas lamaran gabungan (PDF) dan file opsional (portofolio, sertifikat)
                         $baseUploadPath = __DIR__ . '/../uploads/lamaran/';
                         if (!empty($data_lamaran['surat_lamaran'])) {
                             $path = $baseUploadPath . $data_lamaran['surat_lamaran'];
                             if (is_file($path)) {
                                 $mail->addAttachment($path, 'berkas_lamaran.pdf');
+                            }
+                        }
+                        if (!empty($data_lamaran['portofolio'])) {
+                            $path = $baseUploadPath . $data_lamaran['portofolio'];
+                            if (is_file($path)) {
+                                $mail->addAttachment($path, 'portofolio.pdf');
+                            }
+                        }
+                        if (!empty($data_lamaran['sertifikat'])) {
+                            $path = $baseUploadPath . $data_lamaran['sertifikat'];
+                            if (is_file($path)) {
+                                $mail->addAttachment($path, 'sertifikat.pdf');
                             }
                         }
 
@@ -263,13 +282,13 @@ $id_lowker = (int)$_GET['id'] ?? 0;
         <input type="hidden" name="id_lowker" value="<?php echo $id_lowker; ?>">
 
         <div class="requirement-grid">
-          <!-- BERKAS LAMARAN GABUNGAN (PDF berisi pass foto, KTP/KK, ijazah, CV, SKCK, surat lamaran) -->
+          <!-- BERKAS LAMARAN GABUNGAN (PDF berisi pass foto, KTP/KK, ijazah, CV, SKCK, surat lamaran, portofolio (opsional), sertifikat (opsional)) -->
           <div class="requirement-box berkas-lamaran">
             <div class="icon-text">
               <i class="fas fa-file-pdf fa-lg"></i>
               <div class="label-text">
                 <p class="label-title">BERKAS LAMARAN (PDF GABUNGAN)</p>
-                <span class="optional">Wajib PDF berisi: Pass Foto, KTP/KK, Ijazah, CV, SKCK, Surat Lamaran</span>
+                <span class="optional">Wajib PDF berisi: Pass Foto, KTP/KK, Ijazah, CV, SKCK, Surat Lamaran. Tambahkan Portofolio dan Sertifikat (opsional) di dalam PDF yang sama.</span>
               </div>
             </div>
             <div class="actions">
@@ -277,40 +296,6 @@ $id_lowker = (int)$_GET['id'] ?? 0;
                 <input type="file" id="berkas_lamaran" name="berkas_lamaran" accept=".pdf" style="display: none;">
               </label>
               <button type="button" class="view-btn" data-target="berkas_lamaran">View</button>
-            </div>
-          </div>
-
-          <!-- PORTOFOLIO -->
-          <div class="requirement-box">
-            <div class="icon-text">
-              <i class="fas fa-folder-open fa-lg"></i>
-              <div class="label-text">
-                <p class="label-title">PORTOFOLIO <span class="optional">(opsional)</span></p>
-                <span class="optional">Tipe file yang diterima adalah PDF</span>
-              </div>
-            </div>
-            <div class="actions">
-              <label for="portofolio" class="upload-btn">Upload
-                <input type="file" id="portofolio" name="portofolio" accept=".pdf" style="display: none;">
-              </label>
-              <button type="button" class="view-btn" data-target="portofolio">View</button>
-            </div>
-          </div>
-
-          <!-- SERTIFIKAT -->
-          <div class="requirement-box">
-            <div class="icon-text">
-              <i class="fas fa-file fa-lg"></i>
-              <div class="label-text">
-                <p class="label-title">SERTIFIKAT <span class="optional">(opsional)</span></p>
-                <span class="optional">Tipe file yang diterima adalah PDF</span>
-              </div>
-            </div>
-            <div class="actions">
-              <label for="sertifikat" class="upload-btn">Upload
-                <input type="file" id="sertifikat" name="sertifikat" accept=".pdf" style="display: none;">
-              </label>
-              <button type="button" class="view-btn" data-target="sertifikat">View</button>
             </div>
           </div>
         </div>
